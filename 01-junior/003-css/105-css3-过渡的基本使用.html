@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>105-css3-过渡的基本使用.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			width: 200px;
+			height: 200px;
+			background: red;
+			
+			transition-property: width;
+			transition-duration: 2s;
+		
+			/*
+			-webkit-transition-property: width;
+			-o-transition-property: width;
+			transition-property: width;
+			-webkit-transition-duration: 2s;
+			-o-transition-duration: 2s;
+			transition-duration: 2s;
+			*/
+		}
+		.box:hover{
+			width: 600px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>133-css3-自定义字体的使用.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		@font-face{
+			font-family: testFont;
+			src:url(fonts/Sansation_Light.ttf),
+				url(fonts/Sansation_Light.eot);
+		}
+		@font-face{
+			font-family: testFont;
+			src:url(fonts/Sansation_Bold.ttf),
+				url(fonts/Sansation_Bold.eot);
+			font-weight: bold;
+		}
+		@font-face{
+			font-family: testFont;
+			src:url(fonts/Sansation_Bold.ttf),
+				url(fonts/Sansation_Bold.eot);
+			font-style: italic;
+		}		
+		p{
+			width: 200px;
+			height: 200px;
+			line-height: 200px;
+			margin: 100px auto;
+			border: 1px solid #000;
+			/*
+			font-family: STSong;
+			font-weight: bold;
+			font-style: italic;
+			*/
+			font-family: testFont;
+			font-style: italic;
+		}
+	</style>
+</head>
+<body>
+	<p>
+		Hello
+	</p>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>100-布局-固定定位的参考元素.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.father{
+			width: 500px;
+			height: 500px;
+			border: 1px solid #000;
+			margin: 50px auto;
+			position: relative;
+		}
+		.son{
+			width: 100px;
+			height: 200px;
+			background: red;
+			position: fixed;
+			left:0;
+			top:50%;
+			margin-top: -100px;
+		}
+		body{
+			height: 3000px;
+		}
+	</style>
+</head>
+<body>
+	<div class="father">
+		<div class="son"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>109-css3-过渡多组属性.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			width: 200px;
+			height: 200px;
+			background-color: red;
+			/*
+			transition: width 1s;
+			transition: background-color 1s;
+			*/
+			transition: width 1s linear 1s,background-color 1s linear 1s;
+		}
+		.box:hover{
+			width: 500px;
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+</body>
+</html>

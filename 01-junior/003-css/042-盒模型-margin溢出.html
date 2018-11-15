@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>042-盒模型-margin溢出.html</title>
+	<style>
+		.father{
+			width: 100px;
+			height: 100px;
+			background: gray;
+			margin-top: 50px;
+			/*padding-top: 1px;*/
+			/*border-top: 1px solid transparent;*/
+			/*overflow: hidden;*/
+			/*float: left;*/
+			display: inline-block;
+		}
+		.son{
+			width: 50px;
+			height: 50px;
+			background: red;
+			margin-top: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="father">
+		<div class="son"></div>
+	</div>
+</body>
+</html>

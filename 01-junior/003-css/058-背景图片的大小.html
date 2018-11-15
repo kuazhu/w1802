@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>058-背景图片的大小.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		li{
+			list-style: none;
+		}
+		ul{
+			width: 600px;
+			margin: 10px auto;
+		}
+		li{
+			width: 200px;
+			height: 200px;
+			border: 1px solid #000;
+			margin-top: 10px;
+			background-image: url(img/bj2.jpg);
+			background-repeat: no-repeat;
+		}
+		li:nth-child(2){
+			background-size: 150px 200px;
+		}
+		li:nth-child(3){
+			background-size: 100% 50%;
+		}
+		li:nth-child(4){
+			width: 600px;
+			height: 400px;
+			background-image: url(img/bj1.jpg);
+		}
+		li:nth-child(5){
+			width: 600px;
+			height: 400px;
+			background-image: url(img/bj1.jpg);
+			background-size:150px auto;
+		}
+		li:nth-child(6){
+			width: 600px;
+			height: 400px;
+			background-image: url(img/bj1.jpg);
+			background-size: cover;
+		}
+		li:nth-child(7){
+			width: 600px;
+			height: 400px;
+			background-image: url(img/bj1.jpg);
+			background-size: contain;
+		}								
+	</style>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</body>
+</html>

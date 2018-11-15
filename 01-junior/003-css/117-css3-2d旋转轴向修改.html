@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>117-css3-2d旋转轴向修改.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			width: 200px;
+			margin: 10px auto;
+			list-style: none;
+		}
+		li{
+			width: 200px;
+			height: 200px;
+			border: 1px solid #000;
+			margin-top: 20px;
+			perspective:500px; 
+		}
+		li img{
+			width: 100%;
+			height: 100%;
+		}
+		li:nth-child(1) img{
+			transform: rotateX(60deg);
+		}
+		li:nth-child(2) img{
+			transform: rotateY(60deg);
+		}
+		li:nth-child(3) img{
+			transform: rotateZ(60deg);
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li><img src="img/x.jpg" alt=""></li>
+		<li><img src="img/y.jpg" alt=""></li>
+		<li><img src="img/z.jpg" alt=""></li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>102-布局-定位元素的显示顺序.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box1{
+			width: 300px;
+			height: 300px;
+			background: blue;
+		}
+			
+		.box2{
+			width: 200px;
+			height: 200px;
+			background: red;
+			/*
+			position: relative;
+			top:40px;
+			left:40px;
+			
+			position: absolute;
+			top:50px;
+			left:50px;
+			
+			position: fixed;
+			top:50px;
+			left:50px;
+			*/
+			position: relative;
+			left:50px;
+			top: 50px;
+			z-index: 2;
+		}
+		.box3{
+			width: 100px;
+			height: 100px;
+			background: yellow;
+			position: relative;
+			left:10px;
+			top: 10px;	
+			z-index: 2;		
+		}	
+	</style>
+</head>
+<body>
+	<div class="box1"></div>
+	<div class="box2"></div>
+	<div class="box3"></div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>028-css的优先级-单一直接选中.html</title>
+	<style>
+		/*
+		#p1{
+			color: yellow;
+		}	
+		.p1{
+			color: tomato;
+		}	
+		*/
+		p{
+			color: purple;
+		}
+			
+		div{
+			color: red;
+		}
+		*{
+			color: pink;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<p class="p1" id="p1">我是段落</p>
+	</div>
+</body>
+</html>

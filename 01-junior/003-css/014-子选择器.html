@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>014-子选择器.html</title>
+	<style>
+		body .son>p{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="father" id="father">
+		<div class="son">
+			我是文字
+			<p>我是段落10</p>
+			<p>我是段落11</p>
+			<div>
+				<p>我是段落00</p>
+			</div>
+		</div>
+		<p>我是段落111</p>
+		<p>我是段落222</p>
+	</div>
+	<div class="son">
+		<p>我是段落2</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>020-序选择器-区分类型.html</title>
+	<style>
+		/*
+		p:first-of-type{
+			color: red;
+		}
+		
+		p:last-of-type{
+			color: red;
+		}
+		
+		p:nth-of-type(2){
+			color: red;
+		}
+		
+		p:nth-of-type(odd){
+			color: red;
+		}
+		
+		p:nth-of-type(even){
+			color: red;
+		}
+		
+		p:nth-of-type(3n+0){
+			color: red;
+		}
+		
+		p:nth-last-of-type(2){
+			color: red;
+		}
+		*/
+		h1:only-of-type{
+			color: red;
+		}						
+	</style>
+</head>
+<body>
+	<div>
+		<h1>h1</h1>
+		<p>p1</p>
+		<h2>h2</h2>
+		<p>p2</p>
+		<p>p3</p>
+		<p>p4</p>
+		<p>p5</p>
+		<h2>h2</h2>
+	</div>
+</body>
+</html>

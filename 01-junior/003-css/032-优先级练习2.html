@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>css的优先级练习1</title>
+    <style>
+	    .box1 .box2 div {
+	        color: blue;
+	    }
+	    div #div3 {
+	        color: green;
+	    }
+	    #div1 div {
+	        color: yellow;
+	    }
+    </style>
+</head>
+
+<body>
+    <div id="div1" class="box1">
+        <div id="div2" class="box2">
+            <div id="div3" class="box3">
+                猜猜我的颜色
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

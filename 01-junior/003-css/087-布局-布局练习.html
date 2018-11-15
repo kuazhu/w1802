@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>087-布局-布局练习.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.container{
+			width: 960px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.clearfix:after{
+			display: block;
+			clear: both;
+			content: '';
+			visibility: hidden;
+			height: 0px;
+		}
+		.clearfix{
+			*zoom:1;
+		}
+		header{
+			margin-bottom: 10px;
+		}
+		.logo{
+			float: left;
+			width: 100px;
+			height: 100px;
+			background: red;
+		}
+		.user-info{
+			float: right;
+			width: 200px;
+			height: 50px;
+			background: tomato;
+		}
+		nav{
+			float: right;
+			width: 800px;
+			height: 50px;
+			background: purple;
+		}
+		section{
+			margin-bottom: 10px;
+		}
+		.left-area{
+			float: left;
+			width: 800px;
+			margin-right: 10px;
+		}
+		.left-area-top{
+			margin-bottom: 10px;
+		}
+		.left-in{
+			float: left;
+			width: 680px;
+		}
+		.left-in-top{
+			width: 100%;
+			height: 270px;
+			margin-bottom: 10px;
+			background: yellow;
+
+		}
+		.left-in-bottom{
+			width: 100%;
+			height: 270px;
+			background: yellow;
+
+		}		
+		.right-in{
+			float: right;
+			width: 100px;
+			height: 550px;
+			background: tomato;
+		}
+		.left-area-bottom{
+			width: 100%;
+			height: 40px;
+			background: red;
+		}
+		.right-area{
+			float: right;
+			width: 150px;
+			height: 600px;
+			background: skyblue;
+		}
+		footer{
+			height: 50px;
+			background: pink;
+		}
+	</style>
+</head>
+<body>
+	<header class="container clearfix">
+		<h1 class="logo"></h1>
+		<div class="user-info"></div>
+		<nav></nav>
+	</header>
+	<section class="container clearfix">
+		<div class="left-area">
+			<div class="left-area-top clearfix">
+				<div class="left-in">
+					<div class="left-in-top"></div>
+					<div class="left-in-bottom"></div>
+				</div>
+				<div class="right-in"></div>
+			</div>
+			<div class="left-area-bottom">
+				
+			</div>
+		</div>
+		<aside class="right-area"></aside>
+	</section>
+	<footer class="container"></footer>
+</body>
+</html>

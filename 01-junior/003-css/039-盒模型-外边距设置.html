@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>039-盒模型-外边距设置.html</title>
+	<style>
+		.father{
+			border: 1px solid #000;
+		}
+		.father div{
+			width: 100px;
+			height: 100px;
+			display: inline-block;
+			vertical-align: bottom;
+		}
+		.son1{
+			background: yellow;
+		}
+		.son2{
+			background: red;
+			/*
+			margin-top: 10px;
+			margin-right: 20px;
+			margin-bottom: 30px;
+			margin-left: 40px;
+			*/
+			/*margin: 10px 20px 30px 40px;*/
+			/*margin: 10px 20px 30px;*/
+			/*margin-left: -50px;*/
+			margin: 50px;
+		}
+		.son3{
+			background: blue;
+		}				
+	</style>
+</head>
+<body>
+	<div class="father">
+		<div class="son1"></div><div class="son2"></div><div class="son3"></div>
+	</div>
+</body>
+</html>

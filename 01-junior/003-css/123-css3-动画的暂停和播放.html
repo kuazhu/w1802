@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>123-css3-动画的暂停和播放.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			width: 200px;
+			height: 200px;
+			background: red;
+			animation-name: sport;
+			animation-duration: 2s;
+			animation-iteration-count: infinite;
+			animation-play-state: running;
+			/*animation-play-state: paused;*/
+
+		}
+		.box:hover{
+			/*animation-play-state: running;*/
+			animation-play-state: paused;
+		}
+		@keyframes sport{
+			form{
+				width: 200px;
+			}
+			to{
+				width: 600px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>019-序选择器-不区分类型.html</title>
+	<style>
+		/*
+		p:first-child{
+			color: red;
+		}
+		
+		h1:first-child{
+			color: red;
+		}
+		
+		h1:last-child{
+			color: red;
+		}
+		
+		p:last-child{
+			color: red;
+		}
+	
+		p:nth-child(5){
+			color: red;
+		}
+		
+		p:nth-child(odd){
+			color: red;
+		}
+		
+		p:nth-child(even){
+			color: red;
+		}
+
+		p:nth-child(3n+0){
+			color: red;
+		}
+		
+		p:nth-last-child(2){
+			color: red;
+		}
+		*/
+		p:only-child{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<h1>h1</h1>
+		<p>p1</p>
+		<h2>h2</h2>
+		<p>p2</p>
+		<span>span1</span>
+		<p>p3</p>
+		<p>p4</p>
+		<p>p5</p>
+	</div>
+	<div>
+		<p>p6</p>
+		<h3>h3</h3>
+	</div>
+</body>
+</html>

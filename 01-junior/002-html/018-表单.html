@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>018-表单.html</title>
+	<style>
+		textarea {
+			resize: none;
+		}
+	</style>
+</head>
+<body>
+	<form action="https://www.kuazhu.com">
+		<h1>用户注册</h1>
+		<p>
+			<label for="username">
+				用户名:
+			</label>
+			<input type="text" name="username" placeholder="请输入用户名" id="username" autocomplete="off">
+		</p>
+		<p>
+			<label for="password">
+				密码:
+			</label>			
+			<input type="password" name="password" id="password">
+		</p>
+		<p>
+			性别: 
+			<input type="radio" name="sex" value="male" checked>男
+			<input type="radio" name="sex" value="female" >女
+			<input type="radio" name="sex" value="none">保密		
+		</p>
+		<p>
+			爱好:
+			<input type="checkbox" name="hobby" value="basketball" checked>篮球
+			<input type="checkbox" name="hobby" value="football" checked>足球
+			<input type="checkbox" name="hobby" value="washfoot">洗脚
+		</p>
+		<p>
+			头像:
+			<input type="file" name="img">
+		</p>
+		<p>
+			邮箱:
+			<input type="email" name="email">
+		</p>
+		<p>
+			年龄:
+			<input type="number" name="age">
+		</p>
+		<p>
+			年龄:
+			<input type="date" name="day">
+		</p>
+		<p>
+			喜欢的颜色:
+			<input type="color" name="color">
+		</p>
+		<p>
+			所在城市:
+			<select name="city">
+				<optgroup label="直辖市">
+					<option value="bj">北京</option>
+					<option value="sh" selected>上海</option>
+				</optgroup>
+				<optgroup label="省会">
+					<option value="zz">郑州</option>
+					<option value="xa">西安</option>
+				</optgroup>
+			</select>
+		</p>
+		<p>
+			自我介绍:
+			<textarea name="intro" cols="60" rows="20"></textarea>
+		</p>						
+		<p>
+			<input type="hidden" value="我是偷偷来的" name="sec">
+			<input type="button" value="按钮">
+			<input type="submit" value="提交">
+			<input type="reset" value="重置">
+			<input type="image" src="resource/1.jpg">
+		</p>
+	</form>
+</body>
+</html>

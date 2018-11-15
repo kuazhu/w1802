@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>108-css3-过渡一组属性复合.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			width: 200px;
+			height: 200px;
+			background: red;
+			/*
+			transition-property: width;
+			transition-duration: 1s;
+			transition-timing-function: linear;
+			*/
+			transition: width 1s linear 1s;
+		}
+		.box:hover{
+			width: 500px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+</body>
+</html>

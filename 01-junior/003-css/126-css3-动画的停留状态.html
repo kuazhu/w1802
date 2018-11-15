@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>126-css3-动画的停留状态.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box{
+			width: 200px;
+			height: 200px;
+			background: blue;
+			margin: 100px auto;
+			animation:sport 2s linear 2s;
+			/*animation-fill-mode: backwards;*/
+			/*animation-fill-mode: forwards;*/
+			animation-fill-mode: both;
+		}
+		@keyframes sport{
+			0%{
+				transform: rotate(10deg);
+			}
+			50%{
+				transform: rotate(30deg);
+			}
+			80%{
+				transform: rotate(60deg);
+			}
+			100%{
+				transform: rotate(75deg);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+</body>
+</html>

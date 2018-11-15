@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>131-css3-长方体.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			list-style: none;
+			width: 200px;
+			height: 200px;
+			margin: 100px auto;
+			position: relative;
+			transform: rotateX(-13deg) rotateY(37deg);
+			transform-style: preserve-3d;
+		}
+		li{
+			width: 200px;
+			height: 200px;
+			line-height: 200px;
+			text-align: center;
+			position: absolute;
+			left:0;
+			top:0;
+		}
+		li:nth-child(1){
+			background: red;
+			transform: rotateX(90deg) translateZ(100px) scale(1.5,1);
+		}
+		li:nth-child(2){
+			background: blue;
+			transform: rotateX(180deg) translateZ(100px) scale(1.5,1);
+		}
+		li:nth-child(3){
+			background: yellow;
+			transform: rotateX(270deg) translateZ(100px) scale(1.5,1);
+		}
+		li:nth-child(4){
+			background: pink;
+			transform: rotateX(360deg) translateZ(100px) scale(1.5,1);
+		}
+		li:nth-child(5){
+			background: purple;
+			transform: rotateY(-90deg) translateZ(150px) ;
+		}
+		li:nth-child(6){
+			background: green;
+			transform: rotateY(90deg) translateZ(150px) ;
+		}										
+	</style>
+</head>
+<body>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+	</ul>
+</body>
+</html>

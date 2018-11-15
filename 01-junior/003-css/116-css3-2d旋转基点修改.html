@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>116-css3-2d旋转基点修改.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			width: 200px;
+			height: 200px;
+			border: 1px solid #000;
+			margin: 50px auto;
+			list-style: none;
+			position: relative;
+		}
+		li{
+			width: 200px;
+			height: 200px;
+			position: absolute;
+			left:0;
+			top:0;	
+			/*transform-origin:0px 0px; 		*/
+			/*transform-origin: 50% 50%;*/
+			/*transform-origin: 100% 100%;*/
+			/*transform-origin: center center;*/
+			/*transform-origin: left top;*/
+			transform-origin: right top;
+		}
+		li:nth-child(1){
+			background: red;
+			transform: rotate(10deg);
+		}
+		li:nth-child(2){
+			background: blue;
+			transform: rotate(30deg);
+		}
+		li:nth-child(3){
+			background: yellow;
+			transform: rotate(45deg);
+		}				
+	</style>
+</head>
+<body>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</body>
+</html>
