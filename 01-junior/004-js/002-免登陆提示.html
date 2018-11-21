@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>002-免登陆提示.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		input{
+			margin-left: 100px;
+		}
+		div{
+			width: 300px;
+			height: 40px;
+			line-height: 40px;
+			background: gray;
+			margin-left: 100px;
+			display: none;
+		}
+		/*
+		input:hover+div{
+			display: block;
+		}
+		*/
+	</style>
+</head>
+<body>
+	<!--
+	<input type="checkbox" 
+		   onmouseover="box.style.display='block'" 
+		   onmouseout="box.style.display='none'"
+	>
+	-->
+	<input type="checkbox" 
+		   onmouseover="document.getElementById('box').style.display='block'" 
+		   onmouseout="document.getElementById('box').style.display='none'"
+	>	
+	7天内免登陆
+	<div id="box">为了你的安全请。。。。。。</div>
+</body>
+</html>

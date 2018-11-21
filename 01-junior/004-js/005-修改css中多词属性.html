@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>005-修改css中多词属性.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#box{
+			width: 100px;
+			height: 100px;
+			border: 1px solid #000;
+			/*border-top-width: 2px;*/
+			/*border-top-color: red;*/
+		}
+	</style>
+</head>
+<body>
+	<input type="button" value="点我" onclick="document.getElementById('box').style.borderTopWidth='2px';document.getElementById('box').style.borderTopColor='red'">
+	<div id="box"></div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>008-换肤.html</title>
+	<link id="skin" rel="stylesheet" href="css/skin1.css">
+	<script>
+		function toSkin1(){
+			document.getElementById('skin').href = "css/skin1.css"
+		}
+		function toSkin2(){
+			document.getElementById('skin').href = "css/skin2.css"
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value="美女皮肤" onclick="toSkin1()">
+	<input type="button" value="野兽皮肤" onclick="toSkin2()">
+</body>
+</html>
