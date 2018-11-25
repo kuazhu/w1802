@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>015-window.onload和DOMContentLoaded.html</title>
+	<script>
+		console.log('in...');
+		window.onload = function(){
+			console.log('onload');
+		}
+		document.addEventListener('DOMContentLoaded',function(){
+			console.log('DOMContentLoaded');
+		})
+	</script>
+</head>
+<body>
+	<p>这是美女吗?</p>
+	<img src="images/mn.jpg" alt="">
+</body>
+</html>

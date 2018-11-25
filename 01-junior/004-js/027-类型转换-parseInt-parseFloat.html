@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>027-类型转换-parseInt-parseFloat.html</title>
+</head>
+<body>
+	<input type="text" id="txt1">
+	<input type="text" id="txt2">
+	<input type="button" id="btn" value="求和">
+</body>
+<script>
+	var oTxt1 = document.getElementById('txt1');
+	var oTxt2 = document.getElementById('txt2');
+	var oBtn = document.getElementById('btn');
+
+	oBtn.onclick = function(){
+		/*
+		var val1 = parseInt(oTxt1.value);
+		var val2 = parseInt(oTxt2.value);
+		*/
+		var val1 = parseFloat(oTxt1.value);
+		var val2 = parseFloat(oTxt2.value);		
+		//NaN 
+		// alert(val1);
+		if(isNaN(val1)){
+			alert('第一个输入不是数字');
+		}else if(isNaN(val2)){
+			alert('第二个输入不是数字');
+		}else{
+			alert(val1 + val2);
+		}
+	
+		// alert(val1 + val2);
+	}
+
+</script>
+</html>

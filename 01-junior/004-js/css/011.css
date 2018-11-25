@@ -1,0 +1,15 @@
+/*
+* @Author: TomChen
+* @Date:   2018-11-22 19:25:48
+* @Last Modified by:   TomChen
+* @Last Modified time: 2018-11-22 19:45:06
+*/
+/*body{
+	background: gray;
+}*/
+.box{
+	width: 100px;
+	height: 100px;
+	background: red;
+	margin:  100px auto;
+}

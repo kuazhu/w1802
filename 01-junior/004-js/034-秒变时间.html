@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>034-秒变时间.html</title>
+	<script>
+		var iSecond = 7670;
+
+		var hour = parseInt(iSecond / 3600);
+
+		var minute = parseInt((iSecond % 3600) / 60);
+
+		var second = (iSecond % 3600) % 60;
+
+		if(hour < 10){
+			hour = '0' + hour;
+		}
+		if(minute < 10){
+			minute = '0' + minute;
+		}
+		if(second < 10){
+			second = '0' + second;
+		}
+
+
+		//10:20:20
+		alert(hour+":"+minute+":"+second);
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
