@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>071-作用域决定2.html</title>
+	<script>
+		var a = 1;
+		function fn1(){
+			console.log(a);
+		}
+
+		function fn2(){
+			var a = 2;
+			fn1();
+		}
+
+		fn2();
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

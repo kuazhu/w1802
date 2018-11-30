@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>066-全局变量1.html</title>
+	<script>
+		var a = 1;
+		function fn(){
+			console.log("fn",a);
+			a = 2;
+			function fn1(){
+				console.log('fn1',a);
+			}
+			fn1();
+		}
+		fn();
+		console.log("global",a);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

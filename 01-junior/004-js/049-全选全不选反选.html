@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>049-全选全不选反选.html</title>
+</head>
+<body>
+	<input type="button" value="全选" id='btn1'>
+	<input type="button" value="全不选" id='btn2'>
+	<input type="button" value="反选" id='btn3'>
+	<div id="container">
+		<input type="checkbox">
+		<input type="checkbox">
+		<input type="checkbox">
+		<input type="checkbox">
+		<input type="checkbox">
+		<input type="checkbox">
+		<input type="checkbox">
+		<input type="checkbox">
+		<input type="checkbox">
+		<input type="checkbox">
+		<input type="checkbox">
+		<input type="checkbox">
+	</div>		
+</body>
+<script>
+	var oBtn1 = document.getElementById('btn1');
+	var oBtn2 = document.getElementById('btn2');
+	var oBtn3 = document.getElementById('btn3');
+	var oContainer = document.getElementById('container');
+
+	var aCheckBox = oContainer.getElementsByTagName('input');
+	// var aCheckBox = document.querySelectorAll('[type="checkbox"]');
+	// var oCheckBox = document.querySelector('[type="checkbox"]');
+
+	//console.log(oCheckBox);
+
+	oBtn1.onclick = function(){
+		for(var i = 0;i<aCheckBox.length;i++){
+			// aCheckBox[i].checked = 'checked';
+			aCheckBox[i].checked = true;
+		}
+	}
+
+	oBtn2.onclick = function(){
+		for(var i = 0;i<aCheckBox.length;i++){
+			// aCheckBox[i].checked = '';
+			aCheckBox[i].checked = false;
+		}
+	}
+	oBtn3.onclick = function(){
+		for(var i = 0;i<aCheckBox.length;i++){
+			// console.log(aCheckBox[i].checked);
+			if(aCheckBox[i].checked){
+				aCheckBox[i].checked = false;
+			}else{
+				aCheckBox[i].checked = true;
+			}
+		}
+	}	
+</script>
+</html>

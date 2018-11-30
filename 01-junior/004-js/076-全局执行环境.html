@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>076-全局执行环境.html</title>
+	<script>
+		// console.log(window);
+
+		var a = 1;
+
+		console.log(window.a);
+		console.log(a);//a == window.a
+
+		//alert('a');
+
+		//window.alert('a');
+
+		function fn(){
+			console.log('fn');
+			function fn1(){
+
+			}
+		}
+		fn();
+		window.fn();
+
+		console.log(window);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

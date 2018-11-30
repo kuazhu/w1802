@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>070-作用域决定1.html</title>
+	<script>
+		var age = 1;
+
+		function getAge(){
+			var age = 2;
+
+			return age;
+		}
+
+		console.log("global1",age);//1
+		console.log("global2",getAge());//2
+		console.log("global3",age);//1
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

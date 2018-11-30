@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>063-匿名函数.html</title>
+
+</head>
+<body>
+	<button id="btn">点我</button>
+</body>
+	<script>
+		var oBtn = document.getElementById('btn');
+
+		/*
+		oBtn.onclick = function(){
+			alert('aa')
+		}
+		*/
+		oBtn.onclick = sayHi;
+
+		function sayHi(){
+			alert('hi')
+		}
+		
+		/*
+		var sayHi = function(){
+			alert('hi')
+		}
+		sayHi();
+		*/
+
+
+
+	</script>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>054-月历.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.clearfix:after{
+			display: block;
+			clear: both;
+			content: '';
+			visibility: hidden;
+			height: 0;
+		}
+		.clearfix{
+			*zoom:1;
+		}
+		.box{
+			width: 380px;
+			height: 600px;
+			border: 1px solid #000;
+			background-color: #ccc;
+			margin: 50px auto;
+		}
+		li{
+			float: left;
+			width: 100px;
+			height: 100px;
+			line-height: 100px;
+			margin: 20px 0 0 20px;
+			background-color: #000;
+			color: #fff;
+			list-style: none;
+			font-size: 30px;
+			text-align: center;
+			cursor: pointer;
+		}
+		.active{
+			background-color: #fff;
+			color: #000;
+		}
+		.plan{
+			width: 100%;
+			height: 100px;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<ul class="clearfix">
+			<li class="active">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+			<li>11</li>
+			<li>12</li>
+		</ul>
+		<div class="plan">
+			<!--
+			<h2>1月</h2>
+			<p>吃饭</p>
+			-->
+		</div>
+	</div>
+</body>
+<script>
+	var aLi = document.getElementsByTagName('li');
+	var oPlan = document.querySelector('.plan');
+	var aPlan = ["睡觉","吃饭","去踏青","洗脚","吃饭","睡觉","去踏青","洗脚","吃饭","睡觉","去踏青","洗脚"];
+	oPlan.innerHTML = "<h2>1月</h2><p>"+aPlan[0]+"</p>";
+	//oPlan.innerHTML = "<h1>h1</h1>"
+
+	for(var i = 0;i<aLi.length;i++){
+		aLi[i].index = i;
+		aLi[i].onmouseover = function(){
+			// console.log(i);
+			for(var j = 0;j<aLi.length;j++){
+				aLi[j].className = '';
+			}
+			this.className = 'active';
+			oPlan.innerHTML = "<h2>"+(this.index+1)+"月</h2><p>"+aPlan[this.index]+"</p>";
+		}
+	}
+
+
+</script>
+</html>

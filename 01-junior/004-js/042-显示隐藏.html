@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>042-显示隐藏.html</title>
+</head>
+<body>
+	<input type="button" value="显示和隐藏" id="btn">
+	<div id="box">
+		我是内容。。。。。
+	</div>
+</body>
+<script>
+	var oBtn = document.getElementById('btn');
+	var oBox = document.getElementById('box');
+	oBtn.onclick = function(){
+		// oBox.style.display = "none";
+		// alert(oBox.style.display);
+		if(oBox.style.display == 'none'){
+			oBox.style.display = "block";
+		}else{
+			oBox.style.display = "none";
+		}
+	}
+</script>
+</html>

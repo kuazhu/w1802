@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>065-递归求阶乘.html</title>
+	<script>
+		/*
+		5! = 5 * 4!;
+		4! = 4 * 3!;
+		3! = 3 * 2!;
+		2! = 2 * 1!;
+		1! = 1;
+		0! = 1;
+		
+		n! = n * (n -1)!;
+
+		*/
+
+		function fact(n){
+		
+			if(n == 1){
+				return 1;
+			}
+			return n * arguments.callee(n-1);
+		
+			// console.log(arguments)
+		}
+
+		// console.log(fact(7));
+
+		var fact2 = fact;
+
+		fact = 1;
+
+		console.log(fact);
+		console.log(fact2);
+
+		console.log(fact2(5));
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

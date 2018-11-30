@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>067-全局变量2.html</title>
+	<script>
+		var a = 1;
+		function fn1(){
+			//var a;
+			console.log("fn1",a);//1 ng
+			a = 2;
+			function fn2(){
+				console.log('fn2',a);//2
+			}
+			fn2();
+		}
+
+		console.log("global1",a);//1
+
+		fn1();
+
+		console.log("global2",a);//2? ng
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>064-函数的返回值.html</title>
+	<script>
+		function sum(){
+			
+
+			if(arguments[0] == 0){
+				return;
+			}
+
+			var result = 0;
+			
+			for(var i = 0;i<arguments.length;i++){
+				result += arguments[i];
+			}
+
+			// alert(result);
+
+			return result;
+			// return;
+			// alert(result);
+
+		}
+		/*
+		var result = sum(1,2,3);
+		alert(result);
+		*/
+		alert(sum(1,2,3))
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
