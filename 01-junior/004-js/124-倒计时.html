@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>124-倒计时.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background-color: #000;
+		}
+		#timer{
+			text-align: center;
+			margin-top: 200px;
+			color: #fff;
+			font-size: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="timer">
+		
+	</div>
+</body>
+<script>
+	var oTimer = document.getElementById('timer');
+
+	var endDate = new Date('2018-12-06 20:07:00');
+
+	var endTimes = endDate.getTime();
+	var timer = 0;
+
+	function to2Str(num){
+		return num < 10 ? '0'+num : ''+num;
+	}
+	function handleTimer(){
+		var allMinSeconds = endTimes - Date.now();
+
+		if(allMinSeconds <= 0){
+			allMinSeconds = 0;
+			clearInterval(timer)
+		}
+		var allSeconds = parseInt(allMinSeconds / 1000);
+
+		var iHour = parseInt(allSeconds / 3600);
+		var iMinute = parseInt((allSeconds % 3600) / 60);
+		var iSecond = (allSeconds % 3600) % 60;
+
+		oTimer.innerHTML = '距离活动结束还有'+to2Str(iHour)+'小时'+to2Str(iMinute)+'分钟'+to2Str(iSecond)+'秒';		
+	}
+	timer = setInterval(handleTimer,500);
+	handleTimer();
+
+</script>
+</html>
+
+
+
+
+
+
+
+

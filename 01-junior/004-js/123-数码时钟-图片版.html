@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>122-数码时钟.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background-color: #000;
+		}
+		#timer{
+			width: 400px;
+			margin: 100px auto;
+			text-align: center;
+			font-size: 60px;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div id="timer">
+		<img src="images/1.png" alt="">
+		<img src="images/9.png" alt="">
+		:
+		<img src="images/3.png" alt="">
+		<img src="images/3.png" alt="">	
+		:
+		<img src="images/5.png" alt="">
+		<img src="images/4.png" alt="">					
+	</div>
+</body>
+<script>
+	var oTimer = document.getElementById('timer');
+	var aImg = oTimer.children;
+	function to2Str(num){
+		return num < 10 ? '0' + num : '' + num;
+	}
+	
+	function handleTimer(){
+		var today = new Date();
+		var iHour = today.getHours(),iMinute = today.getMinutes(),iSecond = today.getSeconds();
+		var sTime = to2Str(iHour) + to2Str(iMinute) + to2Str(iSecond);
+		for(var i = 0;i<aImg.length;i++){
+			aImg[i].src = "images/"+sTime.charAt(i)+".png";
+		}
+	}
+
+	setInterval(handleTimer,1000)
+	handleTimer();
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+

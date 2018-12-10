@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>104-动态9宫格.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#box{
+			position: relative;
+			margin-top: 50px;
+		}
+		.son{
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<button id="btn">生成格子</button>
+	<div id="box">
+		<div class="son"></div>
+	</div>
+</body>
+<script>
+	var oBox = document.getElementById('box');
+	var oBtn = document.getElementById('btn');
+	var aSon = oBox.children;
+	var allCol = 3;
+	var iWidth = 100;
+	var iHeight = 100;
+	var iMargin = 15;
+
+	oBtn.onclick = function(){
+		var newSon = aSon[0].cloneNode(true);
+		oBox.appendChild(newSon);
+
+		for(var i = 0;i<aSon.length;i++){
+			var iCol = i % allCol;
+			var iRow = parseInt(i / allCol);
+			aSon[i].style.left = iCol * (iWidth + iMargin) + "px";
+			aSon[i].style.top = iRow * (iHeight + iMargin) + "px";
+		}		
+	}
+
+
+</script>
+</html>

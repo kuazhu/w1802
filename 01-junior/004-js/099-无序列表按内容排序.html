@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>099-无序列表按内容排序.html</title>
+</head>
+<body>
+	<ul id="ul1">
+		<li>12</li>
+		<li>22</li>
+		<li>10</li>
+		<li>1</li>
+		<li>2</li>
+		<li>20</li>
+	</ul>
+	<input type="button" id="btn" value="排序">
+</body>
+<script>
+	var oUl = document.getElementById('ul1');
+	var oBtn = document.getElementById('btn');
+	oBtn.onclick = function(){
+		var aLi = oUl.children;
+		var aEle = [];
+		// console.log(aLi);
+		for(var i = 0;i<aLi.length;i++){
+			aEle.push(aLi[i]);
+		}
+		aEle.sort(function(oLi1,oLi2){
+			return oLi1.innerHTML - oLi2.innerHTML;
+		});
+		
+		for(var i = 0;i<aEle.length;i++){
+			oUl.appendChild(aEle[i]);
+		}
+	}
+</script>
+</html>

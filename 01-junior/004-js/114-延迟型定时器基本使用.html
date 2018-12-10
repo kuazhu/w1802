@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>114-延迟型定时器基本使用.html</title>
+</head>
+<body>
+	
+
+</body>
+<script>
+	//setTimeout('console.log(1)',5000);
+	//window.setTimeout('console.log(1)',5000);
+	/*
+	function show(){
+		console.log('show something');
+	}
+	setTimeout(show,2000);
+	*/
+	var timer = setTimeout(function(){
+		console.log('haha')
+	},2000);
+
+	clearTimeout(timer);
+	
+	console.log(timer);
+</script>
+</html>

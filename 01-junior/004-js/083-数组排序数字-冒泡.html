@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>083-数组排序数字.html</title>
+	<script>
+		var arr1 = [3,8,10,20,2,11];
+		//[2,8,10,20,3,11]
+		//[2,3,10,20,8,11]
+		//[2,3,8,20,10,11]
+		//[2,3,8,10,20,11]
+		//[2,3,8,10,11,20]
+		console.log("1:::",arr1);
+		//var arr2 = arr1.sort();
+		
+		//冒泡排序
+		var tmp;
+		for(var i = 0;i<arr1.length;i++){
+			for(var j = i + 1;j<arr1.length;j++){
+				if(arr1[i]>arr1[j]){
+					tmp = arr1[i];
+					arr1[i] = arr1[j];
+					arr1[j] = tmp;
+					console.log(arr1);
+				}
+			}
+		}
+		console.log("2:::",arr1);
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

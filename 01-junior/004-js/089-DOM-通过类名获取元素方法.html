@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>089-DOM-通过类名获取元素方法.html</title>
+</head>
+<body>
+	<ul id="ul1">
+		<li class="box">1</li>
+		<li>2</li>
+		<li>3</li>
+		<li class="box">4</li>
+		<li>5</li>
+		<li class="box">6</li>
+	</ul>
+	<div id="div1">
+		<div>1</div>
+		<div class="box">2</div>
+		<div>3</div>
+		<div>4</div>
+		<div class="box">5</div>
+		<div>6</div>
+	</div>
+</body>
+<script>
+	function getElementsByClass(oPraent,sClass){
+		var aEle = oPraent.children;
+		// var aEle = oPraent.childNodes;
+		//var aEle = oPraent.getElementsByTagName('*');
+		var result = [];
+		for(var i = 0;i<aEle.length;i++){
+			if(aEle[i].className == sClass){
+				result.push(aEle[i]);
+			}
+		}
+		return result;
+	}
+	var oUl = document.getElementById('ul1');
+	var oDiv = document.getElementById('div1');
+	//var aBox = oUl.getElementsByClassName('box');
+	//console.log(aBox);
+	var aBox = getElementsByClass(oDiv,'box');
+	console.log(aBox);
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>091-首尾子节点.html</title>
+</head>
+<body>
+	<ul id="ul1">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+	</ul>
+</body>
+<script>
+	
+	var oUl = document.getElementById('ul1');
+
+	console.log(oUl.firstChild == oUl.childNodes[0]);
+	console.log(oUl.lastChild == oUl.childNodes[oUl.childNodes.length - 1]);
+
+	console.log(oUl.firstElementChild == oUl.children[0]);
+	console.log(oUl.lastElementChild ==  oUl.children[oUl.children.length - 1]);
+
+
+
+
+
+
+
+
+</script>
+</html>

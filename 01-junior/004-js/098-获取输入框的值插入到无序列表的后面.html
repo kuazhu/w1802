@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>098-获取输入框的值插入到无序列表的后面.html</title>
+</head>
+<body>
+	<input type="text" id="txt">
+	<input type="button" id="btn" value="生成">
+	<ul id="ul1"></ul>
+</body>
+<script>
+	var oTxt = document.getElementById('txt');
+	var oBtn = document.getElementById('btn');
+	var oUl = document.getElementById('ul1');
+
+	oBtn.onclick = function(){
+		var val = oTxt.value;
+		var oLi = document.createElement('li');
+		oLi.innerHTML = val;
+
+		oUl.appendChild(oLi);
+
+		oTxt.value = '';
+
+	}
+</script>
+</html>

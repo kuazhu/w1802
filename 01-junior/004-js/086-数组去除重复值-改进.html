@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>086-数组去除重复值-改进.html</title>
+	<script>
+		var arr1 = [2,6,7,8,2,6,9,10];
+		//[2,6,7,8,9,10]
+		//1.遍历原数组
+		//2.准备一个目标空数组[]
+		//3.让原数组中的每一项和目标数组总的所有项比较,如果有相同的值不添加,否则添加到目标数组
+
+		//[2]
+		//[2,6]
+		//[2,6,7]
+		//[2,6,7,8]
+		//[2,6,7,8,9]
+		//[2,6,7,8,9,10]
+
+		function uniqueArray(arr){
+			var result = [];
+			for(var i = 0;i<arr.length;i++){
+				/*
+				var isDup = false;
+				for(var j = 0;j<result.length;j++){
+					if(arr[i] == result[j]){
+						isDup = true;
+						break;
+					}
+				}
+				if(!isDup){
+					result.push(arr[i]);
+				}
+				*/
+				if(result.indexOf(arr[i]) == -1){
+					result.push(arr[i])
+				}
+			}
+			return result;	
+		}
+
+		var arr2 = uniqueArray(arr1);
+		console.log("1:::",arr1);
+		console.log("2:::",arr2);
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

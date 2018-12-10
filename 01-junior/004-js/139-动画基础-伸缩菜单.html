@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>139-动画基础-伸缩菜单.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#main{
+			width: 400px;
+			height: 400px;
+			background-color: #ccc;
+			position: absolute;
+			top:0;
+			left:-400px;
+		}
+		.sub{
+			width: 100px;
+			height: 400px;
+			background-color: #f67;
+			position: absolute;
+			top:0;
+			right: -100px;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<div class="sub"></div>
+	</div>
+</body>
+<script>
+	var oMain = document.getElementById('main');
+	var timer = 0;
+	oMain.onmouseover = function(){
+		clearInterval(timer);
+		var iSpeed = 0;
+		timer = setInterval(function(){
+			if(oMain.offsetLeft > 0){
+				iSpeed = -10;
+			}else{
+				iSpeed = 10;
+			}
+			if(Math.abs(0 - oMain.offsetLeft) < Math.abs(iSpeed)){
+				oMain.style.left = '0px';
+				clearInterval(timer);
+			}else{
+				oMain.style.left = oMain.offsetLeft + iSpeed + 'px';
+			}
+		},30)		
+	}
+	oMain.onmouseout = function(){
+		clearInterval(timer);
+		var iSpeed = 0;
+		timer = setInterval(function(){
+			if(oMain.offsetLeft > -400){
+				iSpeed = -10;
+			}else{
+				iSpeed = 10;
+			}
+			if(Math.abs(-400 - oMain.offsetLeft) < Math.abs(iSpeed)){
+				oMain.style.left = '-400px';
+				clearInterval(timer);
+			}else{
+				oMain.style.left = oMain.offsetLeft + iSpeed + 'px';
+			}
+		},30)		
+	}
+</script>
+</html>

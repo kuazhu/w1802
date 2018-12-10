@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>105-BOM-窗口位置.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	console.log("window.screenTop:",window.screenTop);
+	console.log("window.screenLeft:",window.screenLeft);
+	console.log("window.screenY:",window.screenY);
+	console.log("window.screenX:",window.screenX);	
+
+	var iTop = 0;
+
+	/*
+	if(window.screenTop){
+		iTop = window.screenTop;
+	}else{
+		iTop = window.screenY;
+	}
+	
+
+	window.screenTop ? iTop = window.screenTop : iTop = window.screenY;
+	*/
+
+	iTop = window.screenTop || window.screenY;
+
+	console.log(iTop);
+
+
+
+</script>
+</html>

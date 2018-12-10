@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>116-运行原理测试.html</title>
+</head>
+<body>
+	<button id="btn">测试</button>
+</body>
+<script>
+	var oBtn = document.getElementById('btn');
+	var i = 0;
+
+	oBtn.onclick = function(){
+		i++;
+		console.log(i);
+	}
+
+	setTimeout(function(){
+		console.log(i);
+	},2000);
+
+	i++;
+
+</script>
+</html>

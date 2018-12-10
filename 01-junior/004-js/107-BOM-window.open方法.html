@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>107-BOM-window.open方法.html</title>
+</head>
+<body>
+	<button id="btn">打开</button>
+</body>
+<script>
+	var oBtn = document.getElementById('btn');
+	oBtn.onclick = function(){
+		// window.open('https://www.kuazhu.com','_blank');
+		// window.open('https://www.kuazhu.com','_self');
+		// window.open('008-换肤.html');
+		// window.open('about:blank')
+		var newWin =  window.open('about:blank');
+		console.log(newWin);
+	}
+</script>
+</html>

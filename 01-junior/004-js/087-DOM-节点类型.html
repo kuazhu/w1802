@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>087-DOM-节点类型.html</title>
+</head>
+<body>
+	<ul id="ul1">11
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+</body>
+<script>
+	var oUl = document.getElementById('ul1');
+	var aNode = oUl.childNodes;
+	console.log(aNode);
+	for(var i = 0;i<aNode.length;i++){
+		// aNode[i].style.color = 'red';
+		// console.log(aNode[i].nodeType);
+		if(aNode[i].nodeType == 1){
+			aNode[i].style.color = 'red';
+		}
+	}
+
+	console.log(document.nodeType); 
+
+</script>
+</html>

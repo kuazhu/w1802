@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>133-window的相关事件补充.html</title>
+	<style>
+		body{
+			width: 3000px;
+			height: 3000px;
+		}
+	</style>
+</head>
+<body>
+	
+</body>
+<script>
+	var i = 0;
+	window.onload = function(){
+		console.log(i++);
+	}
+	window.onresize = function(){
+		console.log(i++);
+	}
+	window.onscroll = function(){
+		console.log(i++);
+	}
+</script>
+</html>

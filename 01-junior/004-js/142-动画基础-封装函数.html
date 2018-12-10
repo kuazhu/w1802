@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>141-动画基础-多物体同时运动.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.container{
+			width: 400px;
+			margin: 100px auto;
+		}
+		.container div{
+			width: 100px;
+			height: 100px;
+			line-height: 100px;
+			background-color: #f00;
+			margin-top: 10px;
+			opacity: 0.3;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div id="div1">变宽</div>
+		<div id="div2">变高</div>
+		<div id="div3">变红</div>
+	</div>
+</body>
+<script>
+	var oDiv1 = document.getElementById('div1');
+	var oDiv2 = document.getElementById('div2');
+	var oDiv3 = document.getElementById('div3');
+	/**
+	 * @param  {object} obj    [DOM节点对象]
+	 * @param  {string} attr   [属性名称]
+	 * @param  {number} target [目标值]
+	 */
+	function animate(obj,attr,target){
+		clearInterval(obj.timer);
+		var iSpeed = 0;
+		obj.timer = setInterval(function(){
+			var current = parseFloat(getComputedStyle(obj,false)[attr]);
+			if(attr == 'opacity'){
+				current = Math.round(current * 100);
+			}
+			if(current > target){
+				iSpeed = -10;
+			}else{
+				iSpeed = 10;
+			}
+			if(Math.abs(target - current) < Math.abs(iSpeed)){
+				if(attr == 'opacity'){
+					obj.style.opacity = target / 100;
+				}else{
+					obj.style[attr] = target + 'px';
+				}
+				clearInterval(obj.timer);
+			}else{
+				if(attr == 'opacity'){
+					obj.style.opacity = (current + iSpeed)/100;	
+				}else{
+					obj.style[attr] = current + iSpeed + 'px';
+				}
+			}
+		},30)
+	}
+
+	oDiv1.onmouseover = function(){
+		animate(oDiv1,'width',300);	
+	}
+	oDiv1.onmouseout = function(){
+		animate(oDiv1,'width',100);	
+	}	
+	oDiv2.onmouseover = function(){
+		animate(oDiv2,'height',300);		
+	}
+	oDiv2.onmouseout = function(){
+		animate(oDiv2,'height',100);		
+	}	
+	oDiv3.onmouseover = function(){
+		animate(oDiv3,'opacity',100);	
+	}
+	oDiv3.onmouseout = function(){
+		animate(oDiv3,'opacity',30);	
+	}			
+</script>
+</html>
+
+
+
+
+
+
+
+
