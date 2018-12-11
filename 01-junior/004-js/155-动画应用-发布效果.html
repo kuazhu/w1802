@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>155-动画应用-发布效果.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.container{
+			width: 600px;
+			margin: 100px auto;
+		}
+		li{
+			width: 100%;
+			height: 40px;
+			border-bottom: 1px dashed #ccc;
+			list-style: none;
+			font-size: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<input type="text" id="txt">
+		<input type="button" value="发布" id="btn">
+		<ul id="ul1">
+		</ul>
+	</div>
+</body>
+<script src="js/util.js"></script>
+<script>
+	var oTxt = document.getElementById('txt');
+	var oBtn = document.getElementById('btn');
+	var oUl = document.getElementById('ul1');
+	oBtn.onclick = function(){
+
+		var oLi = document.createElement('li');
+		oLi.innerHTML = oTxt.value;
+
+		// oUl.appendChild(oLi);
+		oUl.insertBefore(oLi,oUl.firstChild);
+		oTxt.value = '';
+
+		oLi.style.height = 0;
+		oLi.style.opacity = 0;
+
+		animate(oLi,{height:40},true,function(){
+			animate(oLi,{opacity:100})
+		})
+	}
+</script>
+</html>
+
+
+
+
+
+
