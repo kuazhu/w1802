@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>183-事件-事件对象属性type.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#box{
+			width: 300px;
+			height: 300px;
+			border: 1px solid #000;
+			margin: 100px auto;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script>
+	var oBox = document.getElementById('box');
+
+	function handleEvent(ev){
+		if(ev.type == 'mouseover'){
+			oBox.style.background = 'red';
+		}else if(ev.type == 'click'){
+			oBox.style.background = 'blue';
+		}
+	}
+
+	oBox.addEventListener('mouseover',handleEvent,false);
+
+	oBox.addEventListener('click',handleEvent,false);
+
+</script>
+
+
+
+
+
+</html>

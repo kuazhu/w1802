@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>161-跟随鼠标的物体.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			width: 3000px;
+			height: 3000px;
+		}
+		#box{
+			position: absolute;
+			top:0;
+			left:0;
+			width: 100px;
+			height: 100px;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script src="js/util.js"></script>
+<script>
+	var oBox = document.getElementById('box');
+	document.onmousemove = function(ev){
+		console.log(ev.clientX,ev.clientY);
+
+		oBox.style.left = getScrollLeft() + ev.clientX + 'px';
+		oBox.style.top =getScrollTop() + ev.clientY + 'px';
+
+	}
+</script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>182-事件-事件对象的currentTarget和target属性.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#father{
+			width: 400px;
+			height: 400px;
+			background-color: #ccc;
+			border: 1px solid #000;
+		}
+		.son{
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			margin: 150px auto;
+		}
+	</style>
+</head>
+<body>
+	<div id="father">
+		<div class="son"></div>
+	</div>
+</body>
+<script>
+	var oFather = document.getElementById('father');
+	oFather.addEventListener('click',function(ev){
+		console.log(ev.currentTarget);
+		console.log(ev.target);
+	},false)
+</script>
+
+
+
+
+
+</html>

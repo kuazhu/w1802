@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>162-跟随鼠标的物体多个.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			width: 3000px;
+			height: 3000px;
+		}
+		div{
+			position: absolute;
+			top:0;
+			left:0;
+			width: 50px;
+			height: 50px;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+</body>
+<script src="js/util.js"></script>
+<script>
+	var aDiv = document.getElementsByTagName('div');
+	document.onmousemove = function(ev){
+
+		aDiv[0].style.left = getScrollLeft() + ev.clientX + 'px';
+		aDiv[0].style.top =getScrollTop() + ev.clientY + 'px';
+
+		for(var i = aDiv.length - 1;i>0;i--){
+			aDiv[i].style.left = aDiv[i - 1].offsetLeft + 10 + 'px';
+			aDiv[i].style.top = aDiv[i - 1].offsetTop + 10 + 'px';
+		}
+	}
+</script>
+</html>

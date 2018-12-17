@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>158-事件-事件流-捕获.html</title>
+	<style>
+		#box{
+			width: 200px;
+			height: 200px;
+			border: 1px solid #000;
+			margin: 100px auto;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script>
+	var oBox = document.getElementById('box');
+	oBox.addEventListener('click',function(){
+		console.log('obox click');
+	},true);
+	document.body.addEventListener('click',function(){
+		console.log('body click');
+	},true);
+	document.addEventListener('click',function(){
+		console.log('document click');
+	},true);		
+	window.addEventListener('click',function(){
+		console.log('window click');
+	},true);
+	document.documentElement.addEventListener('click',function(){
+		console.log('html click');
+	},true);
+
+</script>
+</html>

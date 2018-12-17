@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>180-事件-事件委托-删除元素.html</title>
+</head>
+<body>
+	<button id="btn">添加</button>
+	<ul id="ul1">
+		<li>li1<a href="javascript:;" class="del">删除</a></li>
+		<li>li2<a href="javascript:;" class="del">删除</a></li>
+		<li>li3<a href="javascript:;" class="del">删除</a></li>
+		<li>li4<a href="javascript:;" class="del">删除</a></li>
+		<li>li5<a href="javascript:;" class="del">删除</a></li>
+		<li>li6<a href="javascript:;" class="del">删除</a></li>
+		<li>li7<a href="javascript:;" class="del">删除</a></li>
+		<li>li8<a href="javascript:;" class="del">删除</a></li>
+		<li>li9<a href="javascript:;" class="del">删除</a></li>
+		<li>li10<a href="javascript:;" class="del">删除</a></li>
+	</ul>
+</body>
+<script>
+	var oUl = document.getElementById('ul1');
+	var oBtn = document.getElementById('btn');
+	oBtn.addEventListener('click',function(){
+		var oLi = document.createElement('li');
+		oLi.innerHTML = 'new data';
+
+		var oA = document.createElement('a');
+		oA.innerHTML = '删除';
+		oA.href = "javascript:;";
+		oA.className = 'del';
+		
+		oLi.appendChild(oA);
+
+		oUl.appendChild(oLi);
+	},false);
+	/*
+	var aA = oUl.getElementsByTagName('a');
+	for(var i = 0;i<aA.length;i++){
+		aA[i].onclick = function(){
+			oUl.removeChild(this.parentNode);
+		}
+	}
+	*/
+	
+	oUl.addEventListener('click',function(ev){
+		if(ev.target.className == 'del'){
+			oUl.removeChild(ev.target.parentNode);
+		}
+	},false)
+	
+</script>
+</html>

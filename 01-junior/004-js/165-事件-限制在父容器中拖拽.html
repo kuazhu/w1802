@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>165-事件-限制在父容器中拖拽.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#father{
+			width: 500px;
+			height: 500px;
+			background-color: #ccc;
+			position: relative;
+			margin: 100px auto;
+		}
+		#box{
+			position: absolute;
+			top:100px;
+			left:100px;
+			width: 200px;
+			height: 200px;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="father">
+		<div id="box"></div>
+	</div>
+</body>
+<script>
+	var oBox = document.getElementById('box');
+	var oFather = document.getElementById('father');
+	var disX = 0,disY = 0;
+	oBox.onmousedown = function(ev){
+		disX = ev.clientX - oBox.offsetLeft;
+		disY = ev.clientY - oBox.offsetTop;
+		document.onmousemove = function(ev){
+			var l = ev.clientX - disX;
+			var t = ev.clientY - disY;
+			if(l < 0){
+				l = 0;
+			}else if(l > oFather.offsetWidth - oBox.offsetWidth){
+				l = oFather.offsetWidth - oBox.offsetWidth;
+			}
+			if(t < 0){
+				t = 0;
+			}else if(t > oFather.offsetHeight - oBox.offsetHeight){
+				t = oFather.offsetHeight - oBox.offsetHeight;
+			}
+
+			oBox.style.left = l + 'px';
+			oBox.style.top = t + 'px';
+		}
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+		}
+	}
+</script>
+</html>
+
+
+
+
+
+
+
+

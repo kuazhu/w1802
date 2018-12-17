@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>177-事件-表单事件综合.htmlx</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.wrap{
+			width: 600px;
+			margin: 50px auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<form action="https://www.kuazhu.com/" id="form1">
+			<input type="text" id="txt">
+			<input type="submit" id="sub">
+			<input type="reset" id="res">
+			<p id="msg"></p>
+		</form>
+	</div>
+</body>
+<script>
+	var oFrom = document.getElementById('form1');
+	var oTxt = document.getElementById('txt');
+	var oSub = document.getElementById('sub');
+	var oRes = document.getElementById('res');
+	var oMsg = document.getElementById('msg');
+	var isCheckOk = false; 
+	oTxt.onfocus = function(){
+		oMsg.style.color = 'green';
+		oMsg.innerHTML = '请输入3-6位用户名';
+	}
+	oTxt.onblur = function(){
+		var len = oTxt.value.length;
+		if(len < 3 || len > 6){
+			oMsg.style.color = 'red';
+			oMsg.innerHTML = '用户名不合法';	
+			isCheckOk = false;		
+		}else{
+			oMsg.style.color = 'green';
+			oMsg.innerHTML = '输入正确';	
+			isCheckOk = true;		
+		}
+	}
+	oTxt.onchange = function(){
+		console.log('改动了')
+	}
+	oTxt.oninput = function(){
+		var len = oTxt.value.length;
+		if(len < 3 || len > 6){
+			oMsg.style.color = 'red';
+			oMsg.innerHTML = '用户名不合法';			
+		}else{
+			oMsg.style.color = 'green';
+			oMsg.innerHTML = '输入正确';			
+		}
+	}
+	oFrom.onsubmit = function(){
+		console.log(isCheckOk);
+		console.log('submit...');
+		if(!isCheckOk){
+			return false;
+		}
+	}
+	oFrom.onreset = function(){
+		console.log('reset...');
+	}
+	oSub.onclick = function(){
+		console.log('aa');
+		return false;
+	}
+	oRes.onclick = function(){
+		console.log('bb');
+	}
+
+</script>
+
+
+
+
+
+
+
+</html>

@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2018-12-09 17:11:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2018-12-11 18:46:30
+* @Last Modified time: 2018-12-11 20:48:46
 */
 
 
@@ -92,6 +92,9 @@ function animate(obj,options,isLinear,fnEnd){
 }
 function getScrollTop(){
 	return  window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;	
+}
+function getScrollLeft(){
+	return  window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft;	
 }
 
 

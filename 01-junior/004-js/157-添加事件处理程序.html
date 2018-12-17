@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>157-添加事件处理程序.html</title>
+</head>
+<body>
+	<!--
+	<button onclick="alert('haha')">点我</button>
+	
+	<button onclick="show();">点我</button>
+	-->
+	<button id="btn">点我</button>
+	<button id="btn1">移除事件</button>
+</body>
+<script>
+
+	function show(){
+		alert('haha');
+		// alert('hi');
+	}
+	function sayHi(){
+		alert('hi');
+	}
+	var oBtn = document.getElementById('btn');	
+	var oBtn1 = document.getElementById('btn1');	
+	/*
+	oBtn.onclick = show;
+	oBtn.onclick = sayHi;
+	*/
+	oBtn.addEventListener('click',sayHi,false);
+	oBtn.addEventListener('click',show,false);
+	oBtn.addEventListener('click',function(){
+		alert('hehe');
+	},false);
+
+	oBtn1.addEventListener('click',function(){
+		oBtn.removeEventListener('click',sayHi,false);
+		oBtn.removeEventListener('click',show,false);
+		oBtn.removeEventListener('click',function(){
+			alert('hehe');
+		},false);
+	},false)
+
+
+
+</script>
+</html>
+
+
+
+

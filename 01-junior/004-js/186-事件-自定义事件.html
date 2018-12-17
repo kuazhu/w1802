@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>186-事件-自定义事件.html</title>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+<script>
+	var oBox = document.getElementById('box');
+
+	var testEvent = new Event('test');
+
+	// console.log(testEvent);
+	oBox.addEventListener('test',function(){
+		console.log('test event handle');
+	},false);
+
+	oBox.dispatchEvent(testEvent);
+
+</script>
+</html>
