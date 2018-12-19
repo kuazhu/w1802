@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>195-对象-用new关键字和工厂函数创建对象.html</title>
+	<script>
+		function Person(name,age){
+			this.name = name;
+			this.age = age;
+			this.sayHi = function(){
+				console.log('Hi I am '+this.name);
+			}
+			this.sayAge = function(){
+				console.log('I am '+this.age+' years old');
+			}
+		}
+
+		var person = new Person('Tom',18);
+		console.log(person);
+		person.sayHi();
+		person.sayAge();
+
+		var person2 = new Person('Leo',98);
+		person2.sayHi();
+		person2.sayAge();
+
+		console.log(person.sayHi == person2.sayHi);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

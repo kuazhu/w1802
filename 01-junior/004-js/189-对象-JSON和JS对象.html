@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>189-对象-JSON和JS对象.html</title>
+	<script>
+		var json = '{"name":"Tom","age":18}';
+		var json2 = "{'name':'Tom','age':18}";
+		var obj = {
+			name:"Tom",
+			age:18
+		}
+		console.log(json);
+		console.log(obj);
+		console.log(json.name);
+		console.log(obj.name);
+
+		var json2Obj  = JSON.parse(json);
+		var json2Obj2 = JSON.parse(json2);
+		var obj2Json = JSON.stringify(obj);
+		console.log(json2Obj.name);
+		console.log(typeof obj2Json);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

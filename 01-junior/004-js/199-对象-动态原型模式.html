@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>199-对象-动态原型模式.html</title>
+	<script>
+		function Person(name,age){
+			this.name = name;
+			this.age = age;
+			console.log(this.sayHi)
+			if(!this.sayHi){
+				console.log('Person.prototype.sayHi');
+				Person.prototype.sayHi = function(){
+					console.log('Hi I am '+this.name);
+				}
+			}
+			if(!this.sayAge){
+				Person.prototype.sayAge = function(){
+					console.log('I am '+this.age+' years old');
+				}	
+			}
+		}
+
+		var person = new Person('Tom',18);
+		person.sayHi();
+		person.sayAge();
+
+		var person2 = new Person('Leo',98);
+		person2.sayHi();
+		person2.sayAge();
+
+		console.log(person.sayHi == person2.sayHi);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

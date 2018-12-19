@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>187-对象-字面量创建对象</title>
+	<script>
+		var obj = 	{
+						name:"Tom",
+						// name:'Leo', 属性无序唯一
+						age:18,
+						friends:["Leo","Amy"],
+						sayHi:function(){
+							console.log('Hi I am '+this.name);
+						}
+					}
+		console.log(obj);
+		console.log(obj.name);
+		obj.name = 'Leo';
+		console.log(obj.name);
+		console.log(obj);
+		obj.sex = 'male';
+		console.log(obj);
+		console.log(obj.friends);
+		obj.sayHi();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

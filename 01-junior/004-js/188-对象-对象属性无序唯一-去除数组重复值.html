@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>188-对象-对象属性无序唯一-去除数组重复值.html</title>
+	<script>
+		var arr = [11,22,33,44,33,22,77,88];
+
+		function uniqueArray(arr){
+			var result = [];
+			var obj = {};
+			for(var i = 0;i<arr.length;i++){
+				obj[arr[i]] = '';
+			}
+			// console.log(obj);
+			for(var attr in obj){
+				result.push(attr);
+			}
+
+			return result;
+		}
+
+		console.log(uniqueArray(arr));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
