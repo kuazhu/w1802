@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串处理</title>
+	<script>
+		var str = '   你好abcABC 123   ';
+		console.log(str);
+		console.log(str.charAt(1)); //根据位置返回字符
+		console.log(str.charCodeAt(0));
+		console.log(str.indexOf('ac'));
+		console.log(str.lastIndexOf('2'));
+		console.log(encodeURIComponent('https://www.kuazhu.com/?abc=123'));
+		console.log(decodeURIComponent('https%3A%2F%2Fwww.kuazhu.com%2F%3Fabc%3D123'))
+		console.log('abc'.concat('123'));
+		console.log(str.slice(-5,-1));
+		console.log(str.substr(-5,3));
+		console.log(str.substring(2,5));
+		console.log(str.toLowerCase());
+		console.log(str.toUpperCase());
+		console.log(str.trim());
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

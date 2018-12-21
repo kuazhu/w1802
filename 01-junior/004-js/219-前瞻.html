@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>前瞻</title>
+	<script>
+		var str = 'a&b2c3d%e&';
+		var reg1 = /[a-z](?=\d)/g;
+		var reg2 = /[a-z](?!\d)/g;
+		console.log(str);
+		console.log(str.replace(reg1,'*'));
+		console.log(str.replace(reg2,'*'));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

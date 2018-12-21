@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>216-url解析.html</title>
+	<script>
+		var str = 'this is a website https://www.kuazhu.com';
+
+		var reg = /([a-z]+):\/\/([a-z]+)\.([a-z0-9-]+)\.([a-z0-9]{2,5})/;
+
+		// console.log(str.replace(reg,'*'));
+		
+		console.log(str.match(reg));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

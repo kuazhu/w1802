@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>210-检验手机号.html</title>
+</head>
+<body>
+	<input type="text" id="txt">
+	<button id="btn">检查</button>
+</body>
+<script>
+	var oTxt = document.getElementById('txt');
+	var oBtn = document.getElementById('btn');
+	oBtn.onclick = function(){
+		//1[3|5|7|8]\d{9}
+		var reg = /^1[3|5|7|8]\d{9}$/;
+		if(reg.test(oTxt.value)){
+			alert('合法')
+		}else{
+			alert('不合法')
+		}
+	}
+
+</script>
+</html>

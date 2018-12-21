@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>212-检验密码.html</title>
+</head>
+<body>
+	<input type="text" id="txt">
+	<button id="btn">检查</button>
+</body>
+<script>
+	var oTxt = document.getElementById('txt');
+	var oBtn = document.getElementById('btn');
+	oBtn.onclick = function(){
+		//密码(以字母开头,长度在6~12之间,只能包含字母、数字和下划线)
+		var reg = /^[a-z]\w{5,11}$/;
+		if(reg.test(oTxt.value)){
+			alert('合法')
+		}else{
+			alert('不合法')
+		}
+	}
+
+</script>
+</html>

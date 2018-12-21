@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单元素方法</title>
+</head>
+<body>
+	<form action="https://www.kuazhu.com" id="form1">
+		<div>
+			用户名:<input type="text" name="username" value="tom">
+		</div>
+		<div>
+			密码:<input type="password" name="password">
+		</div>
+		<div>
+			性别:
+			<input type="radio" value="male" name="sex">男
+			<input type="radio" value="female" name="sex">女
+		</div>
+		<div>
+			爱好:
+			<input type="checkbox" name="hobby" value="basketball">篮球
+			<input type="checkbox" name="hobby" value="football">足球
+		</div>
+		<div>
+			城市:
+			<select name="city" id="city">
+				<option value="bj">北京</option>
+				<option value="sh">上海</option>
+			</select>
+		</div>
+		<div>
+			<input type="submit" value="提交">
+			<input type="button" value="测试"  id='btn'>
+		</div>
+	</form>
+</body>
+<script>
+	var oBtn = document.getElementById('btn');
+	var oFrom = document.forms[0];
+	var oUsername = oFrom.username;
+	oUsername.focus();
+	oUsername.blur();
+</script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>209-量词.html</title>
+	<script>
+		var str = 'abc 123 rrrr 124 ttt 12 f 1';
+		var reg1 = /\d/;
+		var reg2 = /\d{3}/g;
+		var reg3 = /\d{2,}/g;
+		var reg4 = /\d{1,2}/g;
+		var reg5 = /\d+/g;//{1,}
+		var reg6 = /\d?/g;
+		var reg7 = /\d*/g;
+		console.log(str);
+		console.log(str.replace(reg1,"*"));
+		console.log(str.replace(reg2,"*"));
+		console.log(str.replace(reg3,"*"));
+		console.log(str.replace(reg4,"*"));
+		console.log(str.replace(reg5,"*"));
+		console.log(str.replace(reg6,"*"));
+		console.log(str.replace(reg7,"*"));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

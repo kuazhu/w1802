@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>207-原子筛选-取反.html</title>
+	<script>
+		var str = 'abc123def234';
+		var reg1 = /[a-z]/g;
+		var reg2 = /[^a-z]/g;
+		var reg3 = /[^abc]/g;
+		console.log(str);
+		console.log(str.replace(reg1,'*'));
+		console.log(str.replace(reg2,'*'));
+		console.log(str.replace(reg3,'*'));
+	</script>
+</head>
+<body>
+	<textarea  id="txt1" cols="30" rows="10"></textarea>
+	<button id="btn">过滤</button>
+	<textarea  id="txt2" cols="30" rows="10"></textarea>
+	<a>a</a>
+</body>
+<script>
+	var oTxt1 = document.getElementById('txt1');
+	var oTxt2 = document.getElementById('txt2');
+	var oBtn = document.getElementById('btn');
+	oBtn.onclick = function(){
+		//HTML标签的规则
+		//<不能有<>的任意字符>
+		var reg = /<[^<>]+>/g;
+		oTxt2.value = oTxt1.value.replace(reg,'');
+	}
+</script>
+</html>

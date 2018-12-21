@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>exec方法</title>
+	<script>
+		var str = 'a2018-12-20b2018-12-21';
+		var reg = /\d{4}-\d{2}-\d{2}/g;
+		var reg2 = /(\d{4})-(\d{2})-(\d{2})/g;
+		var reg3 = /(?<years>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
+		console.log(str);
+		/*
+		console.log(reg.lastIndex);
+		console.log(reg.exec(str));
+		console.log(reg.lastIndex);
+		console.log(reg.exec(str));
+		console.log(reg.lastIndex);
+		
+		console.log(reg2.lastIndex);
+		console.log(reg2.exec(str));
+		console.log(reg2.lastIndex);
+		console.log(reg2.exec(str));
+		console.log(reg2.lastIndex);
+		*/	
+		console.log(reg3.lastIndex);
+		console.log(reg3.exec(str));
+		console.log(reg3.lastIndex);
+		console.log(reg3.exec(str));
+		console.log(reg3.lastIndex);	
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

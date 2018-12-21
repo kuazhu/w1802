@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>223-字符串处理-正则相关.html</title>
+	<script>
+		var str1 = "this is a cat";
+		var reg1 = /f/;
+		console.log(str1.search(reg1));
+		console.log(str1.search('a'));
+
+		var str2 = 'a2018-12-20bbb2019-12-23ccc';
+		var reg2 = /(\d{4})-(\d{2})-(\d{2})/g;
+		var reg3 = /(\d{4})-(\d{2})-(\d{2})/;
+		console.log(str2.match(reg2));
+		console.log(str2.match(reg3));
+		console.log(reg3.exec(str2));
+
+		var str3 = 'abc dsf dfds    sdfd    dsfds';
+		console.log(str3)
+		console.log(str3.split(/\s+/));
+
+		//判断是否回文 aabaa cbbc
+		var str4 = 'aabbaa';
+		function isH(str){
+			return str == str.split('').reverse().join('');
+		}
+		console.log(isH(str4));
+
+
+		var str5 = '11a1b2c3';
+		var reg = /\d/g;
+		console.log(str5.replace(reg,function(match,index,origin){
+			console.log(match,index,origin);
+			if(index%2){
+				return '$';
+			}else{
+				return '&';
+			}
+		}));
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
