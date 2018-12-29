@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>009-对象属性-属性的判断.html</title>
+	<script>
+		function Person(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		Person.prototype.showName = function(){
+			console.log('I am '+this.name);
+		}
+		Person.prototype.showAge = function(){
+			console.log('I am '+this.age + ' years old');
+		}
+		Person.prototype.LEGS = 2;
+
+		var p1 = new Person('Tom',18);
+
+		/*
+		if(p1.name){
+			console.log(p1.name);
+		}else{
+			console.log('nothing...');
+		}
+		*/
+		// console.log(p1.hasOwnProperty('name'));
+		/*
+		if(p1.hasOwnProperty('name')){
+			console.log(p1.name);
+		}else{
+			console.log('nothing...');
+		}
+		
+		console.log(p1.LEGS);
+
+		if(p1.hasOwnProperty('LEGS')){
+			console.log(p1.LEGS);
+		}else{
+			console.log('nothing...');
+		}
+
+		if("LEGS" in p1){
+			console.log(p1.LEGS);
+		}else{
+			console.log('nothing...');
+		}
+
+		if("name" in p1){
+			console.log(p1.name);
+		}else{
+			console.log('nothing...');
+		}
+		*/
+		if(hasOwnPrototype(p1,"LEGS")){
+			console.log(p1.LEGS);
+		}
+		if(hasOwnPrototype(p1,"name")){
+			console.log(p1.name);
+		}
+				
+		function hasOwnPrototype(obj,attr){
+			return !obj.hasOwnProperty(attr) && (attr in obj)
+		}				
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

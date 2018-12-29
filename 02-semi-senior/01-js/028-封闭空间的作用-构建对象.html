@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>028-封闭空间的作用-构建对象.html</title>
+	<script>
+		/*
+		function Person(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		Person.prototype.showName = function(){
+			console.log('I am '+this.name);
+		}
+		Person.prototype.showAge = function(){
+			console.log('I am '+this.age + ' years old');
+		}
+		Person.prototype.LEGS = 2;
+		*/
+		(function(w){
+			function Person(name,age){
+				this.name = name;
+				this.age = age;
+			}
+			/*
+			Person.prototype.showName = function(){
+				console.log('I am '+this.name);
+			}
+			Person.prototype.showAge = function(){
+				console.log('I am '+this.age + ' years old');
+			}
+			Person.prototype.LEGS = 2;
+			*/
+			
+			Person.prototype = {
+				constructor:Person,
+				LEGS:2,
+				showName:function(){
+					console.log('I am '+this.name);
+				},
+				showAge:function(){
+					console.log('I am '+this.age + ' years old');
+				}
+			}
+		
+			console.log(Person.prototype);
+			console.log({});
+			w.Person = Person;			
+
+		})(window);	
+
+		var p1 = new Person('Tom',18);	
+		p1.showAge();
+		p1.showName();	
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

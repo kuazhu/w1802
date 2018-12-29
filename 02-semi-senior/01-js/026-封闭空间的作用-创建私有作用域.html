@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>026-封闭空间的作用-创建私有作用域.html</title>
+	<script>
+		//var a = 1;//window.a = 1;
+		//var a = 2;//window.a = 2;
+		var a = 0;
+		(function(){
+			var a = 1;
+			console.log(a);
+
+		})();
+
+		(function(){
+			var a = 2;
+			console.log(a);
+
+		})();	
+		console.log(a);	
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

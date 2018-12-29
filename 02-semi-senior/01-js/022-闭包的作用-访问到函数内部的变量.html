@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>022-闭包的作用-访问到函数内部的变量.html</title>
+	<script>
+		function fn(){
+			var n = 1;
+			add = function(){
+				n++;
+			}
+			return function(){
+				return n;
+			}
+		}
+		// console.log(n);
+		// console.log(fn()());
+		var result = fn();
+		console.log(result());
+		add();
+		console.log(result());
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

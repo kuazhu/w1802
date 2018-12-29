@@ -251,9 +251,9 @@
                     <input type="password" autocomplete="off" name="password" placeholder="请设置登录密码"/>
                     <span class="cancel"  style="display: none;"></span>
                     <span class="msg"></span>
-                    <div id="pwdChecklist" class="pwd-checklist" style="display:none">
+                    <div id="pwdChecklist" class="pwd-checklist" style="display:none;">
                         <ul>
-                            <li class="pwd-checklist-item">长度为6~14个字符</li>
+                            <li class="pwd-checklist-item">长度为8~14个字符</li>
                             <li class="pwd-checklist-item">支持数字,大小写字母和标点符号</li>
                             <li class="pwd-checklist-item ">不允许有空格</li>
                         </ul>
@@ -281,4 +281,322 @@
         <div class="left-box"></div>
     </div>
 </body>
+<script>
+    //公共函数
+    function getLen(str){
+        return str.replace(/[\u4e00-\u9fa5]/g,'aa').length;
+    }
+    function setError(oMsg,sMsg,oInput){
+        oMsg.className = 'err';
+        oMsg.innerHTML = sMsg;
+        oInput.className = 'input-err';          
+    }
+    function setOk(oMsg,oInput){
+        oMsg.className = 'ok';
+        oMsg.innerHTML = '';
+        oInput.className = '';            
+    }
+    //1.获取元素
+    var oForm = document.forms[0];
+    var oUsername = oForm.username;
+    var oPhone = oForm.phone;
+    var oPwd = oForm.password;
+    var oVerify = oForm.verify;
+    var oAgree = oForm.isAgree;
+    var oPwdChecklist = document.getElementById('pwdChecklist');
+    var aPwdLi = oPwdChecklist.getElementsByTagName('li');
+    var oSmsBtn = document.getElementById('smsBtn');
+    var oSubBtn = document.getElementById('subBtn');
+    var aMsg = document.querySelectorAll('.msg');
+    var aCancel = document.querySelectorAll('.cancel');
+
+    //全局验证变量
+    var bUsername=false,bPhone = false,bPwd=false,bVerify=false;
+
+    init();
+    checkUsername();
+    checkPhone();
+    checkPwd();
+    checkVerify();
+    handleSubmit();
+    //2.初始化
+    function init(){
+        oUsername.focus();
+        aMsg[0].className = 'tiptext';
+        aMsg[0].innerHTML = '设置后不可更改<br>中英文均可,最长14个英文或7个汉字';
+
+        //事件委托处理显示隐藏取消按钮
+        oForm.oninput = function(ev){
+            var oInput = ev.target;
+            var oCancel = oInput.nextElementSibling;
+            if(oInput.value.length > 0){
+                oCancel.style.display = 'block';
+            }else{
+                oCancel.style.display = 'none';
+            }
+        }
+        //事件委托处理点击取消按钮事件
+        oForm.onclick = function(ev){
+            var oCancel = ev.target;
+            var oInput = oCancel.previousElementSibling;
+            if(oInput){
+                switch(oInput.name){
+                    case 'username':
+                    case 'phone':
+                    case 'password':
+                    case 'verify':
+                        oInput.value = '';
+                        oCancel.style.display = 'none';
+                        oInput.focus();  
+                        break;                  
+                }
+            }           
+        }
+    }
+    //4.验证用户名
+    function checkUsername(){
+        oUsername.onblur = function(){
+            var sVal = oUsername.value;
+            var reg1 = /^\s+$/;
+            //用户名仅支持中英文、数字和下划线,且不能为纯数字
+            var reg2 = /[^a-z\u4e00-\u9fa5_\d]/i
+            var reg3 = /^\d+$/;
+
+            //什么都没有输入
+            if(sVal == ''){
+                aMsg[0].className = 'msg';
+                //解决上一次如果验证失败后,再变为什么都没有输入,但是显示错误框的问题
+                oUsername.className = '';
+                bUsername = false;
+            }
+            //全空验证
+            else if(reg1.test(sVal)){
+                setError(aMsg[0],'请输入用户名',oUsername); 
+                bUsername = false;         
+            }
+            //长度验证:用户名不能超过7个汉字或14个字符
+            else if(getLen(sVal) > 14){
+                setError(aMsg[0],'用户名不能超过7个汉字或14个字符',oUsername);
+                bUsername = false;               
+            }
+            else if(reg2.test(sVal) || reg3.test(sVal)){
+                setError(aMsg[0],'用户名仅支持中英文、数字和下划线,且不能为纯数字',oUsername);
+                bUsername = false;  
+            }
+            else{
+                setOk(aMsg[0],oUsername);  
+                bUsername = true;           
+            }
+        }
+        oUsername.onfocus = function(){
+            aMsg[0].className = 'tiptext';
+            aMsg[0].innerHTML = '设置后不可更改<br>中英文均可,最长14个英文或7个汉字'; 
+        }
+    }
+    //5.验证手机号
+    function checkPhone(){
+        oPhone.onblur = function(){
+            var sVal = oPhone.value;
+            var reg1 = /^\s+$/;
+            var reg2 = /^1[35789]\d{9}$/;
+            //什么都没有输入
+            if(sVal == ''){
+                aMsg[1].className = 'msg';
+                //解决上一次如果验证失败后,再变为什么都没有输入,但是显示错误框的问题
+                oPhone.className = '';
+                bPhone = false;
+            }
+            //全空验证
+            else if(reg1.test(sVal)){
+                setError(aMsg[1],'请输入手机号',oPhone); 
+                bPhone = false;         
+            }
+            else if(!reg2.test(sVal)){
+                setError(aMsg[1],'手机号码格式不正确',oPhone);
+                bPhone = false;  
+            }
+            else{
+                setOk(aMsg[1],oPhone);  
+                bPhone = true;           
+            }
+        }
+        oPhone.onfocus = function(){
+            aMsg[1].className = 'tiptext';
+            aMsg[1].innerHTML = '请输入中国大陆手机号,其他用户不可见'; 
+        }
+        //输入限制
+        oPhone.onkeydown = function(ev){
+            var oEvent = ev || event;
+            if((
+                oEvent.keyCode < 48 
+                || oEvent.keyCode > 57 
+                || oPhone.value.length > 10
+                ) 
+                && oEvent.keyCode != 8 
+                && oEvent.keyCode != 37  
+                && oEvent.keyCode != 39 ){
+                return false;
+            }
+        }
+    }
+    //6.验证密码
+    function checkPwd(){
+        var bPwd1 = false,bPwd2 = false,bPwd3=false;
+        oPwd.onfocus = function(){
+            oPwdChecklist.style.display = 'block';
+            aMsg[2].className = 'msg';
+        }
+        //输入密码时实时验证
+        oPwd.oninput = function(){
+            var sVal = oPwd.value;
+            var sErrorClass = 'pwd-checklist-item pwd-checklist-item-error';
+            var sSuccClass = 'pwd-checklist-item pwd-checklist-item-success';
+            //长度为8~14个字符
+            var reg1 = /^.{8,14}$/;
+            //支持数字,大小写字母和标点符号
+            var reg2 = /[^0-9a-z@#%\*\!\$\\\[\]\(\)\s]/i;
+            //不允许有空格
+            var reg3 = /\s/;
+
+            if(!reg1.test(sVal)){
+                aPwdLi[0].className = sErrorClass;
+                bPwd1 = false;
+            }else{
+                aPwdLi[0].className = sSuccClass;
+                bPwd1 = true;
+            }
+
+            if(reg2.test(sVal)){
+                aPwdLi[1].className = sErrorClass;
+                bPwd2 = false;
+            }else{
+                aPwdLi[1].className = sSuccClass;
+                bPwd2 = true;
+            }
+
+            if(reg3.test(sVal)){
+                aPwdLi[2].className = sErrorClass;
+                bPwd3 = false;
+            }else{
+                aPwdLi[2].className = sSuccClass;
+                bPwd3 = true;
+            }
+        }
+        //密码取消按钮特殊处理
+        aCancel[2].onclick = function(){
+            aPwdLi[0].className = 'pwd-checklist-item';
+            aPwdLi[1].className = 'pwd-checklist-item';
+            aPwdLi[2].className = 'pwd-checklist-item';
+            bPwd1 = false;
+            bPwd2 = false;
+            bPwd3 = false;
+        }
+        //失去焦点验证
+        oPwd.onblur = function(){
+            var sVal = oPwd.value;
+
+            //什么都没有输入
+            if(sVal == ''){
+                oPwdChecklist.style.display = 'none';
+                bPwd = false;
+            }
+            //验证成功
+            else if(bPwd1 && bPwd2 && bPwd3){
+                oPwdChecklist.style.display = 'none';
+                setOk(aMsg[2],oPwd);
+                bPwd = true;
+            }else{
+               bPwd = false; 
+            }           
+        }    
+    }
+    function checkVerify(){
+        oSmsBtn.onclick = function(){
+            //1.检查手机号是否输入
+            if(oPhone.value == ''){
+                setError(aMsg[1],'请输入手机号',oPhone);  
+                return false;
+            }
+            //2.检查手机号是否合法
+            if(!bPhone){
+                return false;
+            }
+            //发送获取验证码....
+            alert('验证码请求发送...')
+        }
+        oVerify.onblur = function(){
+            var sVal = oVerify.value;
+            var reg = /^[a-z0-9]{6}$/i;
+             //什么都没有输入
+            if(sVal == ''){
+                aMsg[3].className = 'msg';
+                //解决上一次如果验证失败后,再变为什么都没有输入,但是显示错误框的问题
+                oVerify.className = '';
+                bVerify = false;
+            }
+            else if(!reg.test(sVal)){
+                setError(aMsg[3],'验证码格式错误',oVerify);
+                bVerify = false;
+            }
+            else{
+                setOk(aMsg[3],oVerify);
+                bVerify = true;
+            }           
+        }
+        oVerify.onkeydown = function(ev){
+             var oEvent = ev || event;
+            if(oVerify.value.length > 5  
+                && oEvent.keyCode != 8 
+                && oEvent.keyCode != 37  
+                && oEvent.keyCode != 39){
+                return false;
+            }
+        }
+        oVerify.onfocus = function(){
+            aMsg[3].className = 'msg';
+        }        
+    }
+    function handleSubmit(){
+        oSubBtn.onclick = function(){
+            //什么都不输入时的处理
+            if(oUsername.value == ''){
+                setError(aMsg[0],'请输入用户名',oUsername); 
+            }
+            if(oPhone.value == ''){
+                setError(aMsg[1],'请输入手机号',oPhone); 
+            }
+            if(oPwd.value == ''){
+                setError(aMsg[2],'请输入密码',oPwd); 
+            }
+            if(oVerify.value == ''){
+                setError(aMsg[3],'请输入验证码',oVerify); 
+            } 
+            if(!oAgree.checked){
+                aMsg[4].style.display = 'inline'; 
+            }else{
+                aMsg[4].style.display = 'none'; 
+            }
+            if(bUsername && bPhone && bPwd && bVerify && oAgree.checked){
+                oForm.submit();
+            }                                      
+        }
+    }         
+</script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

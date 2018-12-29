@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>031-内存管理-垃圾回收策略.html</title>
+	<script>
+		/*
+		var obj = {
+			name:'Tom'
+		}
+		obj = {
+			name:'Leo';
+		}
+		*/
+		var obj1 = {
+			name:'Tom';
+		}
+		var obj2 = {
+			name:'Leo';
+		}
+		obj1.p1 = obj2;
+		obj2.p1 = obj1;
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>003-逻辑错误.html</title>
+</head>
+<body>
+	<input type="text" id="txt">
+	<button id="btn">测试</button>
+</body>
+<script>
+	var oTxt = document.getElementById('txt');
+	var oBtn = document.getElementById('btn');
+	//根据参数求1到参数的和
+	function sum(num){
+		try{
+			if(isNaN(parseInt(num))){
+				//抛出异常
+				throw new Error('not a number');
+			}
+			var result = 0;
+			for(var i = 0;i<=num;i++){
+				result += i;
+			}
+			return result;
+		}
+		catch(e){
+			//处理异常
+			console.log(e);
+		}
+		finally{
+			console.log('finally...');
+		}
+	}
+
+	function handleNum(num){
+		console.log(num*10)
+	}
+
+	oBtn.onclick  = function(){
+		var val = oTxt.value;
+		var total = sum(val);
+		handleNum(total);
+	}
+
+</script>
+</html>

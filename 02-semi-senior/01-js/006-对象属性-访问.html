@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>006-对象属性-访问</title>
+	<script>
+		function Person(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		Person.prototype.showName = function(){
+			console.log('I am '+this.name);
+		}
+		Person.prototype.showAge = function(){
+			console.log('I am '+this.age + ' years old');
+		}
+		Person.prototype.LEGS = 2;
+
+		var p1 = new Person('Tom',18);
+		console.log('p1.name::',p1.name);
+		console.log('p1.showName::',p1.showName);
+		console.log('p1.LEGS::',p1.LEGS);
+		console.log('p1.toString::',p1.toString);
+		console.log('p1.test::',p1.test);
+		p1.test();
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

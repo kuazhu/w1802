@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>032-内存泄漏举例.html</title>
+	<style>
+		#box1{
+			width: 200px;
+			height: 200px;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="box1"></div>
+</body>
+<script>
+	bindEvent();
+
+	function bindEvent(){
+		var oBox = document.getElementById('box1');
+		var id = oBox.id;
+		oBox.onclick = function(){
+			// alert(oBox.id);
+			alert(id);
+		}
+		oBox = null;
+	}
+</script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>014-改变this.html</title>
+	<script>
+		function show(n1,n2){
+			console.log(this,n1,n2);
+		}
+		//show();//window
+		//window.show()//window
+		//new show();//show的一个实例
+		//show(1,2);
+		// show.call(1,2,3);
+		/*
+		show.call({name:'Tom'},1,2);
+		show.apply({name:'Tom'},[1,2]);
+		var fn = show.bind({name:'Tom'});
+		console.log(fn);
+		fn(1,2);
+		*/
+		show.call(null,1,2);
+		show.apply(null,[1,2]);
+		var fn = show.bind(null);
+		console.log(fn);
+		fn(1,2);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

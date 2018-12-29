@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>017-面向对象-继承三.html</title>
+	<script>
+		function Person(name,age){
+			console.log('p:::')
+			this.name = name;
+			this.age = age;
+		}
+		Person.prototype.showName = function(){
+			console.log('I am '+this.name);
+		}
+		Object.defineProperty(Person.prototype,'showAge',{
+			value:function(){
+				console.log('I am '+this.age + ' years old');
+			},
+			enumerable:false
+		})
+		Person.prototype.LEGS = 2;	
+
+		function Student(name,age,major){
+
+			Person.call(this,name,age);
+			this.major = major;
+		}
+
+		// console.log(Student.prototype);
+		Student.prototype = new Person();
+		Student.prototype.constructor = Student;
+		console.log(Student.prototype)
+		Student.prototype.showMajor = function(){
+			console.log('I am from '+this.major);
+		}
+
+		var s1 = new Student('Tom',18,'computer');
+
+		console.log(s1);
+		s1.showName();
+		s1.showAge();
+		s1.showMajor();	
+		/*
+		var p1 = new Person('Leo',88);
+		p1.showName();
+		p1.showAge();
+		*/
+		// p1.showMajor();
+
+	</script>		
+</head>
+<body>
+	
+</body>
+</html>

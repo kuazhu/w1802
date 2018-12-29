@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>023-闭包的作用-函数节流throttle.html</title>
+	<style>
+		body{
+			width: 3000px;
+			height: 3000px;
+		}
+	</style>
+</head>
+<body>
+	
+</body>
+<script>
+	var i = 0;
+	
+	function throttle(fn,wait){
+		var lastTime = Date.now();
+		return function(){
+			var currentTime = Date.now();
+			if(currentTime - lastTime > wait){
+				fn();
+				lastTime = Date.now();
+			}
+		}
+	}
+
+	/*
+	window.onscroll = function(){
+		console.log(i++);
+	}
+	*/
+	window.onscroll = throttle(function(){
+		console.log(i++);
+	},500)
+</script>
+</html>
