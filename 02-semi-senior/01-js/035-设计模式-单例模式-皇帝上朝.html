@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>035-设计模式-单例模式-皇帝上朝.html</title>
+	<script>
+		/*
+		(function(w){
+			function King(name){
+				this.name = name;
+				this.id = Math.random();
+			}
+			King.prototype = {
+				constructor:King,
+				work:function(){
+					console.log(this.name + this.id + '说:有本早奏,无本退朝')
+				}
+			}
+			w.King = King;
+		})(window);
+		*/
+		(function(w){
+			var king = null;
+			function King(name){
+				if(!king){
+					this.name = name;
+					this.id = Math.random();
+					king = this;
+				}
+				return king;
+			}
+			King.prototype = {
+				constructor:King,
+				work:function(){
+					console.log(this.name + this.id + '说:有本早奏,无本退朝')
+				}
+			}
+			w.King = King;
+		})(window);	
+		for(var i = 1;i<=5;i++){
+			// console.log(new King('康熙'));
+			new King('康熙').work(); 
+		}
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

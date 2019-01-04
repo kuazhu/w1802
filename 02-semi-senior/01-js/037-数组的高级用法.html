@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>037-数组的高级用法.html</title>
+	<script>
+		var arr = [1,2,5,7,10,30,50];
+		console.log(arr);
+		/*
+		var arr1 = arr.forEach(function(value,index){
+			console.log('value,index',value,index);
+		});
+		console.log(arr1);
+		*/
+		/*
+		var arr1 = arr.map(function(value,index){
+			console.log('value,index',value,index);
+			return value * 10;
+		});
+		console.log(arr1);
+		*/
+		/*
+		var arr1 = arr.filter(function(value,index){
+			console.log('value,index',value,index);
+			return value > 10;
+		});
+		console.log(arr1);
+		*/
+		/*
+		var isAllTrue = arr.every(function(value,index){
+			console.log('value,index',value,index);
+			return value > 0;
+		});
+		console.log(isAllTrue);
+		*/
+		var isHasTrue = arr.some(function(value,index){
+			console.log('value,index',value,index);
+			return value > 1000;
+		});
+		console.log(isHasTrue);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

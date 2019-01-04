@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<!--
+	发送基本ajax请求
+-->
+<body>
+	<button id="btn">获取数据</button>
+</body>
+<script>
+	var oBtn = document.getElementById('btn');
+	oBtn.onclick = function(){
+		//1.生成ajax对象(购买电话)
+		var oAjax = new XMLHttpRequest();
+		console.log('after new::',oAjax.readyState);//0 没有初始化,还没有调用open方法
+		//2.建立连接(拨号)
+		oAjax.open('GET','http://127.0.0.1:3000/getData?name=Tom',true);
+		console.log('after open::',oAjax.readyState);//1 启动,已调用open方法但是还没有调用send方法
+		
+		//可选,设置请求头
+		oAjax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+
+		//3.发送信息(说话)
+		oAjax.send();
+		//4.监听事件接收数据(听)
+		oAjax.onreadystatechange = function(){
+			console.log('in onreadystatechange::',oAjax.readyState);
+			//2 发送,已调用send方法但还没有返回数据
+			//3 接收,返回了部分数据
+			//4 完成,数据完全返回
+			if(oAjax.readyState == 4){//数据完全返回
+				if(oAjax.status == 200){//请求成功
+					try{
+						var obj = JSON.parse(oAjax.responseText);
+						console.log(obj.name);
+					}catch(e){
+						console.log(e);
+					}
+				}else{
+					console.log('failed request,status code = '+oAjax.status)
+				}
+			}
+		}
+	}
+</script>
+</html>
