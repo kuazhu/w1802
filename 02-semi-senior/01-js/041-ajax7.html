@@ -7,6 +7,7 @@
 <!--
 	发送基本ajax请求-POST
 	封装函数
+	跨域-简单请求
 -->
 <body>
 	<button id="btn">测试</button>
@@ -37,6 +38,11 @@
 		oAjax.onreadystatechange = function(){
 
 			if(oAjax.readyState == 4){//数据完全返回
+				console.log(oAjax.getResponseHeader('Date'));
+				console.log(oAjax.getResponseHeader('Access-Control-Allow-Origin'));
+				console.log(oAjax.getResponseHeader('Content-Type'));
+				console.log(oAjax.getResponseHeader('Kuazhu-Test'));
+
 				if(oAjax.status == 200){//请求成功
 					try{
 						var obj = JSON.parse(oAjax.responseText);
@@ -48,6 +54,9 @@
 					typeof fnFailed == 'function' && fnFailed(oAjax.status);
 				}
 			}
+		}
+		oAjax.onerror = function(){
+			console.log('error....');
 		}
 	}
 	var oBtn = document.getElementById('btn');
@@ -66,7 +75,7 @@
 			);
 		*/
 		ajax(	'get',
-				'http://127.0.0.1:3000/042-data.json',
+				'http://127.0.0.1:3001/042-data.json',
 				'',
 				function(arr){
 					var oUl = document.createElement('ul');

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>042-jsonp</title>
+</head>
+<body>
+	<button id="btn">测试</button>
+	<input type="text" id="txt">
+</body>
+<script>
+	function HandleCallback(obj){
+		console.log(obj);
+	}
+</script>
+<script>
+	var oBtn = document.getElementById('btn');
+	var oTxt = document.getElementById('txt');
+	oTxt.oninput = function(){
+		var script = document.createElement('script');
+		script.src = "https://suggest.taobao.com/sug?code=utf-8&q="+oTxt.value+"&_ksTS=1546679450096_1039&callback=HandleCallback&k=1&area=c2c&bucketid=1";
+		document.body.appendChild(script);
+
+	}
+</script>
+
+</html>

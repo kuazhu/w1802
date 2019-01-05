@@ -7,6 +7,7 @@
 <!--
 	发送基本ajax请求-POST
 	封装函数
+	跨域-复杂请求
 -->
 <body>
 	<button id="btn">测试</button>
@@ -21,6 +22,7 @@
 			oAjax.open(method,url,true);
 			//可选,设置请求头
 			oAjax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			//oAjax.setRequestHeader('Kuazhu-Test-Header','Kuazhu-Test-Header-Content');
 			//3.发送信息(说话)
 			oAjax.send(data);
 		}else if(method.toUpperCase()  == 'GET'){
@@ -32,11 +34,22 @@
 
 			//3.发送信息(说话)
 			oAjax.send();
+		}else{
+			//2.建立连接(拨号)
+			oAjax.open(method,url,true);
+			oAjax.setRequestHeader('Kuazhu-Test-Header','Kuazhu-Test-Header-Content');
+			//3.发送信息(说话)
+			oAjax.send();			
 		}
 		//4.监听事件接收数据(听)
 		oAjax.onreadystatechange = function(){
 
 			if(oAjax.readyState == 4){//数据完全返回
+				console.log(oAjax.getResponseHeader('Date'));
+				console.log(oAjax.getResponseHeader('Access-Control-Allow-Origin'));
+				console.log(oAjax.getResponseHeader('Content-Type'));
+				console.log(oAjax.getResponseHeader('Kuazhu-Test'));
+
 				if(oAjax.status == 200){//请求成功
 					try{
 						var obj = JSON.parse(oAjax.responseText);
@@ -49,33 +62,17 @@
 				}
 			}
 		}
+		oAjax.onerror = function(){
+			console.log('error....');
+		}
 	}
 	var oBtn = document.getElementById('btn');
 	oBtn.onclick = function(){
-		/*
-		ajax(	'POST',
-				'http://127.0.0.1:3000/',
-				'{"name":"Tom","age":88}',
+		ajax(	'delete',
+				'http://127.0.0.1:3001/edit',
+				'',
 				function(obj){
 					console.log(obj);
-				},
-				function(status){
-					console.log(status);
-				}
-
-			);
-		*/
-		ajax(	'get',
-				'http://127.0.0.1:3000/042-data.json',
-				'',
-				function(arr){
-					var oUl = document.createElement('ul');
-					for(var i = 0;i<arr.length;i++){
-						var oLi = document.createElement('li');
-						oLi.innerHTML = '姓名:'+arr[i].name+" 年龄:"+arr[i].age;
-						oUl.appendChild(oLi);
-					}
-					document.body.appendChild(oUl);
 				},
 				function(status){
 					console.log(status);
