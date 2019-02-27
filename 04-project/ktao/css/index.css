@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:17:16
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-02-26 19:36:55
+* @Last Modified time: 2019-02-27 20:42:55
 */
 /*顶部导航开始*/
 	.nav-side{
@@ -58,9 +58,11 @@
 		border-left: 1px solid #f3f5f7;
 		border-right: 1px solid #f3f5f7;
 	}
+	/*
 	.menu-active .dropdown-layer{
 		display: block;
 	}
+	*/
 /*顶部导航结束*/
 
 /*头部开始*/

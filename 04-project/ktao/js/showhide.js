@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-27 19:40:19
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-02-27 20:01:50
+* @Last Modified time: 2019-02-27 20:19:36
 */
 ;(function($){
 	function init($elem,hiddenCb){
@@ -194,7 +194,7 @@
 		showHide:function(options){
 			//console.log(this);
 			//1.隐式迭代
-			this.each(function(){
+			return this.each(function(){
 				// console.log(this) DOM对象
 				var $elem = $(this);
 				

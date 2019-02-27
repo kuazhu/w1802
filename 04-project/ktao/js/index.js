@@ -2,18 +2,11 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-02-26 19:41:36
+* @Last Modified time: 2019-02-27 20:44:38
 */
 ;(function($){
-	$('.dropdown')
-	.hover(function(){
-		//$(this).addClass('menu-active');
-		var $this = $(this);
-		var activeClass = $this.data('active')+'-active';
-		$this.addClass(activeClass)
-	},function(){
-		var $this = $(this);
-		var activeClass = $this.data('active')+'-active';		
-		$this.removeClass(activeClass);
-	})
+	$('.dropdown').dropdown();
+	$('.dropdown').on('dropdown-show dropdown-shown dropdown-hide dropdown-hidden',function(ev){
+		console.log("!:::",ev.type);
+	});
 })(jQuery);
