@@ -2,13 +2,8 @@
 * @Author: TomChen
 * @Date:   2019-01-03 20:43:06
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-02-17 11:12:05
+* @Last Modified time: 2019-02-24 14:36:28
 */
-
-/*
-	可以响应并返回文件
-	处理GET请求+POST请求
- */
 
 var http = require('http');
 var fs   = require('fs');
@@ -38,11 +33,6 @@ var server = http.createServer(function(req,res){
 			//根据数据做处理....
 			var json = JSON.stringify(parm);
 			res.end(json);
-		}
-		if(/\.css$/.test(urlStr)){
-			res.setHeader("Content-Type",'text/css;');
-			res.setHeader("Expires",new Date(Date.now()+10000));
-			res.setHeader("Cache-Control",'max-age=10');
 		}
 		var filePath = './'+urlStr;
 		fs.readFile(filePath,function(err,data){

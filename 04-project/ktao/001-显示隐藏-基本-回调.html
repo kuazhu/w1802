@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>001-显示隐藏-基本-回调.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		button{
+			width: 50px;
+			height: 30px;
+		}
+		#box{
+			width: 200px;
+			height: 200px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<button>显示</button>
+	<button>隐藏</button>
+	<div id="box"></div>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+var slient = {
+
+	show:function($elem,cb){
+		$elem.show();
+		cb();
+	},
+
+	hide:function($elem){
+		$elem.hide();
+	}
+
+}
+
+var $elem = $('#box');
+
+$('button').eq(0).on('click',function(){
+	slient.show($elem,function(){
+		console.log('show...');
+	});
+});
+
+$('button').eq(1).on('click',function(){
+	slient.hide($elem);
+});
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+</html>

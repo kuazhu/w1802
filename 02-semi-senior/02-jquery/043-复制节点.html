@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>043-复制节点.html</title>
+	<style>
+		div{
+			width: 200px;
+			height: 200px;
+			border: 1px solid #000;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<button>复制1</button>
+	<button>复制2</button>
+	<div>我是div</div>
+	<div>我是div</div>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		$('div').on('click',function(){
+			console.log('div click');
+		});
+		$('button').eq(0).on('click',function(){
+			// console.log($('div').clone());
+			var $dom = $('div').clone(false);
+			$('body').append($dom);
+		});
+		$('button').eq(1).on('click',function(){
+			var $dom = $('div').clone(true);
+			$('body').append($dom);
+		});		
+	})
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

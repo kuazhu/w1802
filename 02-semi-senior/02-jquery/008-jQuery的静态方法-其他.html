@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>008-jQuery的静态方法-其他.html</title>
+</head>
+<body>
+	
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	var str = "  abc d  ";
+	console.log(str);
+	console.log($.trim(str));
+	console.log($.isWindow(window));
+	console.log($.isWindow({}));
+	console.log($.isArray([1,2,3]));
+	console.log($.isArray({0:"aa",1:"bbb",length:2}));
+	console.log($.isFunction(function(){}));
+	console.log($.isFunction({}));
+
+	var obj1 = {name:"Tom",age:18};
+	var obj2 = {name:"Amy"};
+
+	/*
+	var obj3 = $.extend(obj1,obj2);
+
+	console.log(obj3);
+	console.log(obj1);
+	console.log(obj1 === obj3);
+	*/
+
+	var obj4 = $.extend({},obj1,obj2);
+	console.log(obj4);
+	console.log(obj1);
+
+
+</script>
+</html>

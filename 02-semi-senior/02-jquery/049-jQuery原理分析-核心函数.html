@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>049-jQuery原理分析-核心函数.html</title>
+</head>
+<body>
+	<div id="box">div1</div>
+	<div>div2</div>
+	<div>div3</div>
+</body>
+<!-- <script src="js/jquery-1.12.4.js"></script> -->
+<script src="js/kquery-1.0.0.js"></script>
+<script>
+	//1.布尔值是false
+	//console.log("1::",$(false));
+	//console.log("1::",$(''));
+	//console.log("1::",$(0));
+	//console.log("1::",$(undefined));
+	//console.log("1::",$(null));
+	//console.log("1::",$(NaN));
+	//2.函数
+	console.log("2::",$(function(){}))
+	/*
+	window.onload = function(){
+		console.log('onload');
+	}
+	window.onload = function(){
+		console.log('onload');
+	}
+	
+	$(function(){
+		console.log('2:::');
+	});
+	
+	$(function(){
+		console.log('2:::');
+	});	
+	window.addEventListener('DOMContentLoaded',function(){
+		console.log('3:::');
+	})
+	*/
+	//3.字符串
+	//3.1 html代码
+	//console.log("3.1::",$("<h1>我是标题</h1><div><span></span></div>"))
+	//3.2 选择器
+	//console.log("3.2::",$('div'));
+	//4.数组
+	//4.1真数组
+	var arr = [1,2,5,6,8];
+	console.log("4.1::",$(arr));
+	//4.2假数组
+	var arrLike = {0:'aa',1:'bb',length:2};
+	console.log("4.2::",$(arrLike));
+	//5.对象
+	//5.1 普通对象
+	var obj = {name:"Tom",age:18};
+	console.log("5.1::",$(obj));
+	//5.2 DOM对象
+	var dom = document.getElementById('box');
+	console.log("5.2::",$(dom));
+
+
+
+
+</script>
+</html>

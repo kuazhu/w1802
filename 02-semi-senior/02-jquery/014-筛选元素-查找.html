@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>014-筛选元素-查找.html</title>
+</head>
+<body>
+	<ul id="ul1">
+		<li class="item1">ul1--item1</li>
+		<li class="item1">ul1--item1</li>
+		<li class="item1">ul1--item1</li>
+		<li class="item1">ul1--item1</li>
+		<li class="item1">ul1--item1</li>
+		<li class="item2">ul1--item2</li>
+		<li class="item2">ul1--item2</li>
+		<li class="item2">ul1--item2</li>
+		<li class="item2">ul1--item2</li>
+		<li class="item2">ul1--item2</li>
+	</ul>
+	<ul id="ul2">
+		<li class="item1">ul2--item1</li>
+		<li class="item1">ul2--item1</li>
+		<li class="item1">ul2--item1</li>
+		<li class="item1">ul2--item1</li>
+		<li class="item1">ul2--item1</li>
+		<li class="item2">ul2--item2</li>
+		<li class="item2">ul2--item2</li>
+		<li class="item2">ul2--item2</li>
+		<li class="item2">ul2--item2</li>
+		<li class="item2">ul2--item2</li>
+	</ul>	
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		// console.log($('#ul1>.item2'));
+		console.log($('#ul1').find('.item2'));
+	})
+</script>
+</html>

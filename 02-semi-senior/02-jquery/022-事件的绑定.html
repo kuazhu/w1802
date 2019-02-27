@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>022-事件的绑定.html</title>
+	<style>
+		div{
+			width: 100px;
+			height: 100px;
+			border: 1px solid #000;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		/*
+		function fn(){
+			alert('click fn');
+		}
+		$('div').click(function(){
+			alert('click 1');
+		});
+		$('div').click(fn);	
+		$('div').mouseover(function(){
+			alert('mouseover');
+		})
+		*/
+	
+		function fn(){
+			alert('click fn');
+		}	
+		$('div').on('click',fn);
+		$('div').on('click',function(){
+			alert('click 1');
+		});
+		
+		/*
+		$('div').one('click',function(){
+			alert('one')
+		})
+		*/
+	})
+</script>
+</html>
+
+
+
+
+
+
+
+
+

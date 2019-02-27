@@ -1,0 +1,55 @@
+/*
+* @Author: TomChen
+* @Date:   2019-02-26 18:17:05
+* @Last Modified by:   TomChen
+* @Last Modified time: 2019-02-26 19:36:03
+*/
+body{
+	font-size: 12px;
+}
+.container{
+	width: 1200px;
+	margin-left:auto;
+	margin-right: auto;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+.clearfix{
+	*zoom:1;
+}
+a{
+	text-decoration: none;
+	color: #4d555d;
+}
+.link:hover{
+	color: #ea675a;
+}
+.transition{
+	transition: all 0.5s;
+}
+
+.dropdown{
+	position: relative;
+}
+.dropdown-layer{
+	display: none;
+	position: absolute;
+}
+[class *= '-active']  .dropdown-arrow{
+	transform: rotate(180deg);
+}
+
+
+
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>031-事件的委托.html</title>
+</head>
+<body>
+	<button id="btn">生成li</button>
+	<ul>
+		<li>li1</li>
+		<li>li2</li>
+		<li>li3</li>
+		<li>li4</li>
+		<li>li5</li>
+		<li>li6</li>
+	</ul>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		/*
+		$('li').on('click',function(){
+			console.log(this);
+		});
+		*/
+		/*
+		$('ul').delegate('li','click',function(){
+			console.log(this);
+		});
+		*/
+		$('ul').on('click','li',function(){
+			console.log(this);
+		});
+
+		$('#btn').on('click',function(){
+			var oLi = document.createElement('li');
+			oLi.innerHTML = '我是创建的';
+			$('ul')[0].appendChild(oLi);
+		});
+	})
+</script>
+</html>
+
+
+
+

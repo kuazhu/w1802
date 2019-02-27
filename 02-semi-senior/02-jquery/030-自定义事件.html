@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>030-自定义事件.html</title>
+	<style>
+		div{
+			width: 200px;
+			height: 200px;
+			background: red;
+			margin: 100px auto;
+		}
+	</style>
+</head>
+<body>
+	<div></div>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		/*
+		$('div').on('click',function(){
+			console.log('click');
+		})
+		*/
+		/*
+		$('div').on('myClick',function(){
+			console.log('myClick');
+		});	
+		console.log("-----");
+		$('div').trigger('myClick');
+		*/
+		$('div').on('myClick',function(ev,arg){
+			console.log(ev);
+			console.log('myClick',arg);
+		});	
+		// $('div').trigger('myClick','abc');	
+		$('div').trigger('myClick',{name:"tom"});	
+	})
+</script>
+</html>
+
+
+
+
+
+
+
+

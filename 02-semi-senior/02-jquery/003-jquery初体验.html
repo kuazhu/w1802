@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>003-jquery初体验.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			width: 100px;
+			height: 100px;
+			border: 1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	<button>点我</button>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	/*
+	var oBtn = document.getElementsByTagName('button')[0];
+	var aDiv = document.getElementsByTagName('div');
+	oBtn.onclick = function(){
+		for(var i = 0;i<aDiv.length;i++){
+			aDiv[i].style.background = "red";
+		}
+	}
+	*/
+	$(function(){
+		$('button').click(function(){
+			$('div').css({
+				background:'red'
+			})
+		})
+	});
+</script>
+</html>

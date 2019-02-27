@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>049-jQuery原理分析-核心函数.html</title>
+</head>
+<body>
+	<div id="box">div1</div>
+	<div>div2</div>
+	<div>div3</div>
+</body>
+<!-- <script src="js/jquery-1.12.4.js"></script> -->
+<script src="js/kquery-1.0.0.js"></script>
+<script>
+
+	console.log($('div').get(1));
+	console.log($('div').get(-2));
+	console.log($('div').get());
+	console.log($('div').get('a'));
+	
+	// console.log($('div'));
+</script>
+</html>

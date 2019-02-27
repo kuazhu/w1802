@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>051-extend测试.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	function kQuery(){
+
+	}
+	kQuery.prototype.extend = kQuery.extend = function(options){
+		console.log(this);
+		for(key in options){
+			this[key] = options[key]// kQuery.prototype.test1  = function....
+		}
+	}
+	/*
+	kQuery.extend = function(options){
+		console.log('1::',this);
+		for(key in options){
+			this[key] = options[key]
+		}
+	}
+	*/
+	kQuery.prototype.extend({
+		test1:function(){
+			console.log('test1')
+		}
+	})
+	kQuery.extend({
+		test2:function(){
+			console.log('test2')
+		}
+	})
+	kQuery.test2();
+
+	var k = new kQuery();
+	k.test1();
+
+
+
+</script>
+</html>

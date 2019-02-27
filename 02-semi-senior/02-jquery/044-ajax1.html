@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>044-ajax1</title>
+</head>
+<body>
+	<button>获取数据</button>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		$('button').on('click',function(){
+			$.ajax({
+				url:"044-data.json",
+				type:"POST",
+				// dataType:"text",
+				data:{name:"Amy",age:18},
+				success:function(data,statusMsg,jqXHR){
+					// console.log(JSON.parse(data).name);
+					console.log("1:::");
+					console.log(data);
+					console.log(statusMsg)
+					console.log(jqXHR)
+				},
+				error:function(jqXHR,statusMsg){
+					console.log("2:::");
+					console.log(jqXHR);
+					console.log(statusMsg);
+				},
+				complete:function(jqXHR,statusMsg){
+					console.log("3:::");
+					console.log(jqXHR);
+					console.log(statusMsg);					
+				},
+				timeout:3000,
+				statusCode:{
+					404:function(){
+						console.log("4:::: not found");
+					}
+				},
+				headers:{test:'test'}
+			});
+		});
+	});
+</script>
+</html>

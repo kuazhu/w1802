@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>044-ajax4</title>
+</head>
+<body>
+	<button>获取数据</button>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		$('button').on('click',function(){
+			var jqXHR = $.ajax({
+				url:"044-data.json",
+				type:"GET",
+				dataType:"json",
+				/*
+				success:function(data,statusMsg,jqXHR){
+					console.log("1:::");
+					console.log(data);
+					console.log(statusMsg)
+					console.log(jqXHR)
+				},
+				error:function(jqXHR,statusMsg){
+					console.log("2:::");
+					console.log(jqXHR);
+					console.log(statusMsg);
+				},
+				complete:function(jqXHR,statusMsg){
+					console.log("3:::");
+					console.log(jqXHR);
+					console.log(statusMsg);					
+				},
+				*/
+			});
+			// jqXHR.abort();
+			// console.log(jqXHR);
+			jqXHR.done(function(data,statusMsg,jqXHR){
+				console.log("1:::");
+				console.log(data);
+				console.log(statusMsg);
+				console.log(jqXHR);				
+			});
+			jqXHR.fail(function(jqXHR,statusMsg){
+				console.log("2:::");
+				console.log(jqXHR);
+				console.log(statusMsg);				
+			});
+			jqXHR.always(function(jqXHR,statusMsg){
+				console.log("3:::");
+				console.log(jqXHR);
+				console.log(statusMsg);					
+			});
+		});
+	});
+</script>
+</html>

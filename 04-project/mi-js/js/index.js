@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2018-12-23 16:23:34
 * @Last Modified by:   TomChen
-* @Last Modified time: 2018-12-26 15:38:49
+* @Last Modified time: 2019-01-30 17:12:23
 */
 handleCart();
 handleNav();
@@ -138,14 +138,12 @@ function handleCate(){
 			loadData(this.index);
 		}
 	}
-	/*
 	oCateBox.onmouseleave = function(){
 		oCateContent.style.display = 'none';
 		for(var j = 0 ;j<aCateItem.length;j++){
 			aCateItem[j].className = 'cate-item';
 		}		
 	}
-	*/
 	function loadData(index){
 		var data = aCateItemData[index];
 		var html = '<ul>';
@@ -268,9 +266,3 @@ function handleElecProduct(){
 
 	}
 }
-
-
-
-
-
-

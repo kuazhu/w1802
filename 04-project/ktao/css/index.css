@@ -1,0 +1,91 @@
+/*
+* @Author: TomChen
+* @Date:   2019-02-26 18:17:16
+* @Last Modified by:   TomChen
+* @Last Modified time: 2019-02-26 19:36:55
+*/
+/*顶部导航开始*/
+	.nav-side{
+		height: 44px;
+		background: #f3f5f7;
+	}
+	.nav-login{
+		color: #ea675a;
+	}
+	.nav-left li{
+		height: 44px;
+		line-height: 44px;
+		margin-right: 5px;
+	}
+	.nav-side .dropdown-toggle{
+		display: block;
+		height: 44px;
+		line-height: 44px;
+		padding: 0 5px;
+	}
+	.nav-side .dropdown-layer{
+		top:44px;
+		left:0;
+		background: #fff;
+		border: 1px solid #f3f5f7;
+		border-top: none;
+	}
+	.nav-side .menu-item{
+		display: block;
+		height: 30px;
+		line-height: 30px;
+		white-space: nowrap;
+		padding: 0 5px;
+	}
+	.nav-side .menu-item:hover{
+		background:#f3f5f7; 
+	}
+	/*
+	.dropdown:hover .dropdown-toggle{
+		background: #fff;
+		border-left: 1px solid #f3f5f7;
+		border-right: 1px solid #f3f5f7;
+	}
+	.dropdown:hover  .dropdown-arrow{
+		transform: rotate(180deg);
+	}
+	.dropdown:hover .dropdown-layer{
+		display: block;
+	}
+	*/
+	.menu-active .dropdown-toggle{
+		background: #fff;
+		border-left: 1px solid #f3f5f7;
+		border-right: 1px solid #f3f5f7;
+	}
+	.menu-active .dropdown-layer{
+		display: block;
+	}
+/*顶部导航结束*/
+
+/*头部开始*/
+	.header{
+		height: 100px;
+		background: yellow;
+	}
+/*头部结束*/
+
+/*焦点开始*/
+	.focus{
+		height: 500px;
+		background: pink;
+	}
+/*焦点结束*/
+
+/*今日热销开始*/
+	.todays{
+		height: 100px;
+		background: tomato;
+	}
+/*今日热销结束*/
+
+/*楼层开始*/
+	.floor{
+		height: 200px;
+		background: purple;
+	}

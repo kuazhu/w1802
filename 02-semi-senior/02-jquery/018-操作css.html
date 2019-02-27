@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>018-操作css.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.box1{
+			width: 100px;
+			height: 100px;
+			background: red;
+		}
+		.box2{
+			width: 200px;
+			height: 200px;
+			background: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1">box1</div>
+	<div class="box2">box2</div>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		console.log($('div').css("width"));
+		console.log($('div').css("height"));
+		
+		//console.log($('div').css("width","400px"));
+		//console.log($('div').css("width","400px").css("height","400px").addClass("box3"));
+		console.log($('div').css({
+			width:"400px",
+			height:"400px"
+		}))
+	})
+</script>
+</html>
+
+
+
+
+
+
+

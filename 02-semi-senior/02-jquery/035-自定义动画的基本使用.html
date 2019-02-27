@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>035-自定义动画的基本使用.html</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			width: 100px;
+			height: 100px;
+			background: red;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<button>开始动画</button>
+	<div></div>
+	<div></div>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	$(function(){
+		$("button").on('click',function(){
+			/*
+			$("div").animate({
+				width:"200px",
+				height:"200px"
+			},1000,function(){
+				alert("animate done");
+			});
+			*/
+			$("div").animate({
+				width:"+=200",
+				height:"-=50"
+			},1000,function(){
+				alert("animate done");
+			});		
+		});
+	})
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
