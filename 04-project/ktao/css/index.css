@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:17:16
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-01 20:32:04
+* @Last Modified time: 2019-03-01 20:50:57
 */
 /*顶部导航开始*/
 	.nav-side{
@@ -37,14 +37,6 @@
 		background: #fff;
 		border: 1px solid #f3f5f7;
 		border-top: none;
-	}
-	.nav-side .dropdown-loading{
-		width: 32px;
-		height: 32px;
-		background-image: url(../images/loading.gif);
-		background-repeat: no-repeat;
-		background-position: center center;
-		margin: 19px;
 	}
 	.nav-side .menu-item{
 		display: block;

@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:17:05
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-01 20:27:18
+* @Last Modified time: 2019-03-01 20:51:06
 */
 body{
 	font-size: 12px;
@@ -51,6 +51,14 @@ a.link:hover{
 }
 .dropdown-right{
 	right: 0;
+}
+.dropdown-loading{
+	width: 32px;
+	height: 32px;
+	background-image: url(../images/loading.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	margin: 19px;
 }
 [class *= '-active']  .dropdown-arrow{
 	transform: rotate(180deg);
