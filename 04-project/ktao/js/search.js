@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-27 20:22:10
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-01 20:04:03
+* @Last Modified time: 2019-03-01 20:25:21
 */
 ;(function($){
 
@@ -32,8 +32,8 @@ function Search($elem,options){
 	this.jqXHR = null;
 	//2.初始化
 	this.init();
-	if(this.options.autocompelete){
-		this.autocompelete();
+	if(this.options.autocomplete){
+		this.autocomplete();
 	}
 }
 Search.prototype = {
@@ -52,7 +52,7 @@ Search.prototype = {
 	getInputVal:function(){
 		return $.trim(this.$searchInput.val());
 	},
-	autocompelete:function(){
+	autocomplete:function(){
 		//1.初始化显示隐藏插件
 		this.$searchLayer.showHide(this.options);
 		//2.监听输入框input事件
@@ -138,7 +138,7 @@ Search.prototype = {
 }
 
 Search.DEFAULTS = {
-	autocompelete:true,
+	autocomplete:true,
 	// url:"https://suggest.taobao.com/sug?&q="
 	url:"http://127.0.0.1:3001/?&q=",
 	js:true,
