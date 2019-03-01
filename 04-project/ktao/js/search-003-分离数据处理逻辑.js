@@ -2,21 +2,9 @@
 * @Author: TomChen
 * @Date:   2019-02-27 20:22:10
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-01 20:04:03
+* @Last Modified time: 2019-03-01 19:16:36
 */
 ;(function($){
-
-var cache = {
-	data:{},
-	count:0,
-	addData:function(key,val){
-		this.data[key] = val;
-		this.count++;
-	},
-	getData:function(key){
-		return this.data[key];
-	}
-}
 
 function Search($elem,options){
 	//1.罗列属性
@@ -28,8 +16,6 @@ function Search($elem,options){
 	this.$searchLayer = $elem.find('.search-layer');
 
 	this.isLoaded = false;
-	this.timer = 0;
-	this.jqXHR = null;
 	//2.初始化
 	this.init();
 	if(this.options.autocompelete){
@@ -56,17 +42,7 @@ Search.prototype = {
 		//1.初始化显示隐藏插件
 		this.$searchLayer.showHide(this.options);
 		//2.监听输入框input事件
-		this.$searchInput.on('input',function(){
-			//防止快速输入多次请求
-			if(this.options.getDataDelay){
-				clearTimeout(this.timer);
-				this.timer = setTimeout(function(){
-					this.getData();
-				}.bind(this),this.options.getDataDelay)
-			}else{
-				this.getData();
-			}
-		}.bind(this));
+		this.$searchInput.on('input',$.proxy(this.getData,this));
 		//3.点击页面其它地方隐藏下拉层
 		$(document).on('click',$.proxy(this.hideLayer,this));
 		//4.input获取焦点时显示下拉层
@@ -74,16 +50,6 @@ Search.prototype = {
 		//5.阻止input上的click事件冒泡到document上触发隐藏
 		this.$searchInput.on('click',function(ev){
 			ev.stopPropagation();
-		});
-		//6.用事件代理处理下拉层中每一项的点击事件
-		var _this = this;
-		this.$searchLayer.on('click','.search-item',function(){
-			//1.获取下拉层中每一项的值
-			var val = $(this).html();
-			//2.设置input
-			_this.setInputVal(val);
-			//3.提交
-			_this.submit();
 		});
 	},
 	getData:function(){
@@ -95,30 +61,38 @@ Search.prototype = {
 			this.hideLayer();
 			return;
 		}
-		// console.log('cache',cache);
-		if(cache.getData(inputVal)){
-			this.$elem.trigger('getData',[cache.getData(inputVal)]);
-			return;
-		}
-		console.log('will trigger ajax....');
 
-		if(this.jqXHR){
-			this.jqXHR.abort();
-		}
-		this.jqXHR = $.ajax({
+		$.ajax({
 			url:this.options.url+this.getInputVal(),
 			dataType:"jsonp",
 			jsonp:"callback"
 		})
 		.done(function(data){
+			/*
+			console.log(data);
+			//1.根据数据生成html
+			var html = '';
+			for(var i = 0;i<data.result.length;i++){
+				html += '<li class="search-item">'+data.result[i][0]+'</li>'
+			}
+
+			//2.加载html到下拉层
+			this.appendHtml(html);
+			if(html == ''){
+				this.hideLayer();
+			}else{
+				this.showLayer();
+			}
+			*/
 			this.$elem.trigger('getData',[data])			
-			cache.addData(inputVal,data);
+			
 		}.bind(this))
 		.fail(function(err){
 			this.$elem.trigger('getNoData')	
-		}.bind(this))
-		.always(function(){
-			this.jqXHR = null;
+			/*
+			this.appendHtml('');
+			this.hideLayer();
+			*/
 		}.bind(this))
 	},
 	showLayer:function(){
@@ -131,10 +105,7 @@ Search.prototype = {
 	},
 	hideLayer:function(){
 		this.$searchLayer.showHide('hide');
-	},
-	setInputVal:function(val){
-		this.$searchInput.val(val.replace(/<[^<>]+>/g,''));
-	}	
+	},	
 }
 
 Search.DEFAULTS = {
@@ -142,8 +113,7 @@ Search.DEFAULTS = {
 	// url:"https://suggest.taobao.com/sug?&q="
 	url:"http://127.0.0.1:3001/?&q=",
 	js:true,
-	mode:"slideDownUp",
-	getDataDelay:200
+	mode:"slideDownUp"
 }
 
 $.fn.extend({

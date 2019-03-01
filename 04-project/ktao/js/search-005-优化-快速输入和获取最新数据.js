@@ -2,21 +2,9 @@
 * @Author: TomChen
 * @Date:   2019-02-27 20:22:10
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-01 20:04:03
+* @Last Modified time: 2019-03-01 19:55:09
 */
 ;(function($){
-
-var cache = {
-	data:{},
-	count:0,
-	addData:function(key,val){
-		this.data[key] = val;
-		this.count++;
-	},
-	getData:function(key){
-		return this.data[key];
-	}
-}
 
 function Search($elem,options){
 	//1.罗列属性
@@ -95,12 +83,6 @@ Search.prototype = {
 			this.hideLayer();
 			return;
 		}
-		// console.log('cache',cache);
-		if(cache.getData(inputVal)){
-			this.$elem.trigger('getData',[cache.getData(inputVal)]);
-			return;
-		}
-		console.log('will trigger ajax....');
 
 		if(this.jqXHR){
 			this.jqXHR.abort();
@@ -112,7 +94,7 @@ Search.prototype = {
 		})
 		.done(function(data){
 			this.$elem.trigger('getData',[data])			
-			cache.addData(inputVal,data);
+			
 		}.bind(this))
 		.fail(function(err){
 			this.$elem.trigger('getNoData')	

@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-02-28 20:39:44
+* @Last Modified time: 2019-03-01 19:32:03
 */
 ;(function($){
 	var $menuDropdown = $('.dropdown');
@@ -30,6 +30,29 @@
 	});
 
 	var $search = $('.header .search');
+	$search.on('getData',function(ev,data){
+		var html = getSearchLayerHtml(data,5);
+		$search.search('appendHtml',html)
+		if(html == ''){
+			$search.search('hideLayer');
+		}else{
+			$search.search('showLayer');
+		}
+	});
+	$search.on('getNoData',function(){
+		$search.search('appendHtml','');
+		$search.search('hideLayer');
+	});	
+
+	function getSearchLayerHtml(data,maxNum){
+		var html = '';
+		for(var i = 0;i<data.result.length;i++){
+			if(i >= maxNum) break;
+			html += '<li class="search-item">'+data.result[i][0]+'</li>'
+		}
+		return html;		
+	}
+
 	$search.search();
 
 })(jQuery);
