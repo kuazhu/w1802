@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:17:05
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-02-26 19:36:03
+* @Last Modified time: 2019-02-28 18:31:16
 */
 body{
 	font-size: 12px;
@@ -45,6 +45,12 @@ a{
 .dropdown-layer{
 	display: none;
 	position: absolute;
+}
+.dropdown-left{
+	left: 0;
+}
+.dropdown-right{
+	right: 0;
 }
 [class *= '-active']  .dropdown-arrow{
 	transform: rotate(180deg);
