@@ -31,42 +31,32 @@
 <script>
 ;(function($){
 	
-	function init($elem){
+	function Slient($elem){
 		this.$elem = $elem;
 		this.$elem.removeClass('transition');
 		this.currentX = parseFloat(this.$elem.css('left'));
-		this.currentY = parseFloat(this.$elem.css('top'));		
-	}
-	function to(x,y,cb){
-		//处理参数为了x和y的方法
-		x = (typeof x == 'number') ? x : this.currentX;
-		y = (typeof y == 'number') ? y : this.currentY;
-		//防止到达目标后继续执行
-		if(this.currentX == x && this.currentY == y) return;
-		
-		this.$elem.trigger('move');
-
-		typeof cb == 'function' && cb();
-
-		this.currentX = x;
-		this.currentY = y;		
-	}
-
-
-	function Slient($elem){
-		init.call(this,$elem);
+		this.currentY = parseFloat(this.$elem.css('top'));
 	}
 
 	Slient.prototype = {
 		constructor:Slient,
 		to:function(x,y){
-			to.call(this,x,y,function(){
-				this.$elem.css({
-					left:x,
-					top:y
-				});
-				this.$elem.trigger('moved');				
-			}.bind(this));
+			//处理参数为了x和y的方法
+			x = (typeof x == 'number') ? x : this.currentX;
+			y = (typeof y == 'number') ? y : this.currentY;
+			//防止到达目标后继续执行
+			if(this.currentX == x && this.currentY == y) return;
+			
+			this.$elem.trigger('move');
+
+			this.$elem.css({
+				left:x,
+				top:y
+			});
+
+			this.$elem.trigger('moved');
+			this.currentX = x;
+			this.currentY = y;
 		},
 		x:function(x){
 			this.to(x);
@@ -79,22 +69,42 @@
 
 
 	function Js($elem){
-		init.call(this,$elem);
+		this.$elem = $elem;
+		this.$elem.removeClass('transition');
+		this.currentX = parseFloat(this.$elem.css('left'));
+		this.currentY = parseFloat(this.$elem.css('top'));
 	}
 
 	Js.prototype = {
 		constructor:Js,
 		to:function(x,y){
-			to.call(this,x,y,function(){
-				this.$elem
-				.stop()
-				.animate({
-					left:x,
-					top:y				
-				},function(){
-					this.$elem.trigger('moved');
-				}.bind(this));
+			//处理参数为了x和y的方法
+			x = (typeof x == 'number') ? x : this.currentX;
+			y = (typeof y == 'number') ? y : this.currentY;
+			//防止到达目标后继续执行
+			if(this.currentX == x && this.currentY == y) return;
+			
+			this.$elem.trigger('move');
+
+			/*
+			this.$elem.css({
+				left:x,
+				top:y
+			});
+
+			this.$elem.trigger('moved');
+			*/
+			this.$elem
+			.stop()
+			.animate({
+				left:x,
+				top:y				
+			},function(){
+				this.$elem.trigger('moved');
 			}.bind(this));
+
+			this.currentX = x;
+			this.currentY = y;
 		},
 		x:function(x){
 			this.to(x);
