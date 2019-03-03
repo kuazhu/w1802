@@ -40,6 +40,10 @@
 	Slient.prototype = {
 		constructor:Slient,
 		to:function(x,y){
+			//处理参数为了x和y的方法
+			x = (typeof x == 'number') ? x : this.currentX;
+			y = (typeof y == 'number') ? y : this.currentY;
+			//防止到达目标后继续执行
 			if(this.currentX == x && this.currentY == y) return;
 			
 			this.$elem.trigger('move');
@@ -52,12 +56,64 @@
 			this.$elem.trigger('moved');
 			this.currentX = x;
 			this.currentY = y;
+		},
+		x:function(x){
+			this.to(x);
+		},
+		y:function(y){
+			this.to(null,y)
 		}
 
 	}
 
+
+	function Js($elem){
+		this.$elem = $elem;
+		this.currentX = parseFloat(this.$elem.css('left'));
+		this.currentY = parseFloat(this.$elem.css('top'));
+	}
+
+	Js.prototype = {
+		constructor:Js,
+		to:function(x,y){
+			//处理参数为了x和y的方法
+			x = (typeof x == 'number') ? x : this.currentX;
+			y = (typeof y == 'number') ? y : this.currentY;
+			//防止到达目标后继续执行
+			if(this.currentX == x && this.currentY == y) return;
+			
+			this.$elem.trigger('move');
+
+			/*
+			this.$elem.css({
+				left:x,
+				top:y
+			});
+
+			this.$elem.trigger('moved');
+			*/
+			this.$elem
+			.stop()
+			.animate({
+				left:x,
+				top:y				
+			},function(){
+				this.$elem.trigger('moved');
+			}.bind(this));
+
+			this.currentX = x;
+			this.currentY = y;
+		},
+		x:function(x){
+			this.to(x);
+		},
+		y:function(y){
+			this.to(null,y)
+		}
+
+	}
 	var $elem = $('.box');
-	var move = new Slient($elem)
+	var move = new Js($elem)
 
 	$elem.on('move moved',function(ev){
 		console.log(ev.type)
@@ -65,9 +121,13 @@
 
 	$('button').eq(0).on('click',function(){//复原
 		move.to(0,100)
+		// move.x(0);
+		// move.y(100);
 	});
 	$('button').eq(1).on('click',function(){//移动
 		move.to(200,200)
+		// move.x(100);
+		// move.y(200);
 	});
 })(jQuery);
 </script>
