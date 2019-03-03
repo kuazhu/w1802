@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>跨淘网</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/fontawesome-all.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/index.css">
+	<style>
+		button{
+			width: 80px;
+			height: 40px;
+		}
+		.box{
+			position: absolute;
+			left:0;
+			top:100px;
+			width: 100px;
+			height: 100px;
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<button>复原</button><button>移动</button>
+	<div class="box"></div>
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+
+<script>
+;(function($){
+	
+	function Slient($elem){
+		this.$elem = $elem;
+		this.currentX = parseFloat(this.$elem.css('left'));
+		this.currentY = parseFloat(this.$elem.css('top'));
+	}
+
+	Slient.prototype = {
+		constructor:Slient,
+		to:function(x,y){
+			if(this.currentX == x && this.currentY == y) return;
+			
+			this.$elem.trigger('move');
+
+			this.$elem.css({
+				left:x,
+				top:y
+			});
+
+			this.$elem.trigger('moved');
+			this.currentX = x;
+			this.currentY = y;
+		}
+
+	}
+
+	var $elem = $('.box');
+	var move = new Slient($elem)
+
+	$elem.on('move moved',function(ev){
+		console.log(ev.type)
+	});
+
+	$('button').eq(0).on('click',function(){//复原
+		move.to(0,100)
+	});
+	$('button').eq(1).on('click',function(){//移动
+		move.to(200,200)
+	});
+})(jQuery);
+</script>
+
+
+
+</html>

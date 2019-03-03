@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-27 20:22:10
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-03 11:55:48
+* @Last Modified time: 2019-03-03 15:58:39
 */
 ;(function($){
 
@@ -94,7 +94,7 @@ Carousel.prototype = {
 Carousel.DEFAULTS = {
 	js:true,
 	mode:'fade',
-	slide:false,
+	slide:true,
 	activeIndex:1,
 	interval:1000
 }
