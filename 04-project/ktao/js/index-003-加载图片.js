@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-04 20:00:38
+* @Last Modified time: 2019-03-04 19:26:47
 */
 ;(function($){
 	function loadHtmlOnce($elem,cb){
@@ -25,10 +25,8 @@
 		image.onerror = function(){
 			typeof error == 'function' && error(imgUrl);
 		}
-		//模拟网络延时
-		setTimeout(function(){
-			image.src = imgUrl;	
-		},500)	
+
+		image.src = imgUrl;		
 	}
 
 
@@ -110,64 +108,34 @@
 	});
 
 	//焦点区域轮播图
-	/*
 	var $focusCarousel = $('.focus .carousel-wrap');
-	var item = {};//{0:'loaded',1:'loaded'}
-	var totalItemNum = $focusCarousel.find('.carousel-img').length;
-	var totalLoadedItemNum = 0;
-	var loadFn = null;
-	$focusCarousel.on('carousel-show',loadFn = function(ev,index,elem){
-		console.log('carousel-show trigger....');
-		if(item[index] != 'loaded'){
-			console.log('will load img::',index);
-			var $img = $(elem).find('.carousel-img');
-			var imgUrl = $img.data('src');
-			loadImage(imgUrl,function(imgUrl){
-				$img.attr('src',imgUrl);
-			},function(imgUrl){
-				$img.attr('src',"images/focus-carousel/placeholder.png");
-			});
-			item[index] = 'loaded';
-			totalLoadedItemNum++;
-			if(totalItemNum == totalLoadedItemNum){
-				$focusCarousel.off('carousel-show',loadFn);
-			}
-		}
-	});
-	*/
-	
-	var $focusCarousel = $('.focus .carousel-wrap');
-	$focusCarousel.item = {};//{0:'loaded',1:'loaded'}
-	$focusCarousel.totalItemNum = $focusCarousel.find('.carousel-img').length;
-	$focusCarousel.totalLoadedItemNum = 0;
-	$focusCarousel.loadFn = null;
-	//1.开始加载
-	$focusCarousel.on('carousel-show',$focusCarousel.loadFn = function(ev,index,elem){
-		console.log('carousel-show trigger....');
-		if($focusCarousel.item[index] != 'loaded'){
-			$focusCarousel.trigger('carousel-load',[index,elem])
-		}
-	});
-	//2.执行加载
-	$focusCarousel.on('carousel-load',function(ev,index,elem){
-		console.log('will load img::',index);
+	$focusCarousel.on('carousel-show',function(ev,index,elem){
 		var $img = $(elem).find('.carousel-img');
 		var imgUrl = $img.data('src');
+		//直接赋值的缺点
+		//1.网络慢的时候容易卡顿
+		//2.获取失败的情况不容易处理
+		//$img.attr('src',imgUrl);
+		/*
+		var image = new Image();
+
+		image.onload = function(){
+			$img.attr('src',imgUrl);
+		}
+		image.onerror = function(){
+			$img.attr('src',"images/focus-carousel/placeholder.png");		
+		}
+
+		image.src = imgUrl;
+		*/
 		loadImage(imgUrl,function(imgUrl){
 			$img.attr('src',imgUrl);
 		},function(imgUrl){
 			$img.attr('src',"images/focus-carousel/placeholder.png");
-		});
-		$focusCarousel.item[index] = 'loaded';
-		$focusCarousel.totalLoadedItemNum++;
-		if($focusCarousel.totalItemNum == $focusCarousel.totalLoadedItemNum){
-			$focusCarousel.trigger('carousel-loaded');
-		}
-	});
-	//3.加载结束
-	$focusCarousel.on('carousel-loaded',function(){
-		$focusCarousel.off('carousel-show',$focusCarousel.loadFn);
-	});
+		})
+
+
+	})
 	$focusCarousel.carousel({});
 
 })(jQuery);
