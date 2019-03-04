@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-27 20:22:10
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-04 19:14:13
+* @Last Modified time: 2019-03-04 18:57:01
 */
 ;(function($){
 
@@ -23,24 +23,13 @@ Carousel.prototype = {
 	constructor:Carousel,
 	init:function(){
 		var _this = this;
-		this.$elem.trigger('carousel-show',[this.now,this.$carouselItem[this.now]]);
+
 		if(this.options.slide){//划入划出
 			//隐藏所有的页面
 			this.$elem.addClass('slide');
 			//显示默认的第一张
 			this.$carouselItem.eq(this.now).css({left:0});
 			this.itemWidth = this.$carouselItem.eq(this.now).width();	
-			/*
-			this.$carouselItem.on('move moved',function(ev){
-				console.log(_this.$carouselItem.index(this),ev.type);
-			})
-			*/
-			this.$carouselItem.on('move',function(ev){
-				var index = _this.$carouselItem.index(this);
-				if(_this.now != index){
-					_this.$elem.trigger('carousel-show',[index,this])
-				}
-			})					
 			//初始化移动插件
 			this.$carouselItem.move(this.options);
 
@@ -51,15 +40,6 @@ Carousel.prototype = {
 			this.$elem.addClass('fade');
 			//显示默认的第一张
 			this.$carouselItem.eq(this.now).show();
-			/*
-			this.$carouselItem.on('show shown hide hidden',function(ev){
-				console.log(_this.$carouselItem.index(this),ev.type);
-			})
-			*/
-			this.$carouselItem.on('show',function(ev){
-				//console.log(_this.$carouselItem.index(this),ev.type);
-				_this.$elem.trigger('carousel-show',[_this.$carouselItem.index(this),this])
-			});					
 			//初始化显示隐藏插件
 			this.$carouselItem.showHide(this.options);
 			
@@ -151,7 +131,7 @@ Carousel.DEFAULTS = {
 	mode:'fade',
 	slide:true,
 	activeIndex:9,
-	interval:0
+	interval:1000
 }
 
 $.fn.extend({

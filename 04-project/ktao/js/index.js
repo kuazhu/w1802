@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-03 11:05:45
+* @Last Modified time: 2019-03-04 19:26:47
 */
 ;(function($){
 	function loadHtmlOnce($elem,cb){
@@ -15,6 +15,19 @@
 		})		
 	}
 
+	//加载图片
+	function loadImage(imgUrl,success,error){
+		var image = new Image();
+
+		image.onload = function(){
+			typeof success == 'function' && success(imgUrl);
+		}
+		image.onerror = function(){
+			typeof error == 'function' && error(imgUrl);
+		}
+
+		image.src = imgUrl;		
+	}
 
 
 	//顶部下拉菜单
@@ -96,6 +109,33 @@
 
 	//焦点区域轮播图
 	var $focusCarousel = $('.focus .carousel-wrap');
+	$focusCarousel.on('carousel-show',function(ev,index,elem){
+		var $img = $(elem).find('.carousel-img');
+		var imgUrl = $img.data('src');
+		//直接赋值的缺点
+		//1.网络慢的时候容易卡顿
+		//2.获取失败的情况不容易处理
+		//$img.attr('src',imgUrl);
+		/*
+		var image = new Image();
+
+		image.onload = function(){
+			$img.attr('src',imgUrl);
+		}
+		image.onerror = function(){
+			$img.attr('src',"images/focus-carousel/placeholder.png");		
+		}
+
+		image.src = imgUrl;
+		*/
+		loadImage(imgUrl,function(imgUrl){
+			$img.attr('src',imgUrl);
+		},function(imgUrl){
+			$img.attr('src',"images/focus-carousel/placeholder.png");
+		})
+
+
+	})
 	$focusCarousel.carousel({});
 
 })(jQuery);
