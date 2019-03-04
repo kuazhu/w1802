@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-04 20:21:20
+* @Last Modified time: 2019-03-04 20:00:38
 */
 ;(function($){
 	function loadHtmlOnce($elem,cb){
@@ -109,7 +109,33 @@
 		mode:"fade"
 	});
 
-	//焦点区域轮播图	
+	//焦点区域轮播图
+	/*
+	var $focusCarousel = $('.focus .carousel-wrap');
+	var item = {};//{0:'loaded',1:'loaded'}
+	var totalItemNum = $focusCarousel.find('.carousel-img').length;
+	var totalLoadedItemNum = 0;
+	var loadFn = null;
+	$focusCarousel.on('carousel-show',loadFn = function(ev,index,elem){
+		console.log('carousel-show trigger....');
+		if(item[index] != 'loaded'){
+			console.log('will load img::',index);
+			var $img = $(elem).find('.carousel-img');
+			var imgUrl = $img.data('src');
+			loadImage(imgUrl,function(imgUrl){
+				$img.attr('src',imgUrl);
+			},function(imgUrl){
+				$img.attr('src',"images/focus-carousel/placeholder.png");
+			});
+			item[index] = 'loaded';
+			totalLoadedItemNum++;
+			if(totalItemNum == totalLoadedItemNum){
+				$focusCarousel.off('carousel-show',loadFn);
+			}
+		}
+	});
+	*/
+	
 	var $focusCarousel = $('.focus .carousel-wrap');
 	$focusCarousel.item = {};//{0:'loaded',1:'loaded'}
 	$focusCarousel.totalItemNum = $focusCarousel.find('.carousel-img').length;
@@ -144,10 +170,6 @@
 	});
 	$focusCarousel.carousel({});
 
-
-	//今日热销域轮播图	
-	var $todaysCarousel = $('.todays .carousel-wrap');
-	$todaysCarousel.carousel({});
 })(jQuery);
 
 
