@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-05 20:22:55
+* @Last Modified time: 2019-03-05 20:09:05
 */
 ;(function($){
 	function loadHtmlOnce($elem,cb){
@@ -110,15 +110,15 @@
 	});
 
 	//轮播图图片懒加载函数
-	function carouselImgLazyLoad($elem){
-		var item = {};//{0:'loaded',1:'loaded'}
-		var totalItemNum = $elem.find('.carousel-img').length;
-		var totalLoadedItemNum = 0;
-		var loadFn = null;
+	function carouselLazyLoad($elem){
+		$elem.item = {};//{0:'loaded',1:'loaded'}
+		$elem.totalItemNum = $elem.find('.carousel-img').length;
+		$elem.totalLoadedItemNum = 0;
+		$elem.loadFn = null;
 		//1.开始加载
-		$elem.on('carousel-show',loadFn = function(ev,index,elem){
+		$elem.on('carousel-show',$elem.loadFn = function(ev,index,elem){
 			console.log('carousel-show trigger....');
-			if(item[index] != 'loaded'){
+			if($elem.item[index] != 'loaded'){
 				$elem.trigger('carousel-load',[index,elem])
 			}
 		});
@@ -134,9 +134,9 @@
 				},function(imgUrl){
 					$img.attr('src',"images/focus-carousel/placeholder.png");
 				});
-				item[index] = 'loaded';
-				totalLoadedItemNum++;
-				if(totalItemNum == totalLoadedItemNum){
+				$elem.item[index] = 'loaded';
+				$elem.totalLoadedItemNum++;
+				if($elem.totalItemNum == $elem.totalLoadedItemNum){
 					$elem.trigger('carousel-loaded');
 				}
 			});
@@ -144,32 +144,32 @@
 		});
 		//3.加载结束
 		$elem.on('carousel-loaded',function(){
-			$elem.off('carousel-show',loadFn);
+			$elem.off('carousel-show',$elem.loadFn);
 		});			
 	}
 	//焦点区域轮播图	
 	var $focusCarousel = $('.focus .carousel-wrap');
-	carouselImgLazyLoad($focusCarousel);
+	carouselLazyLoad($focusCarousel);
 	$focusCarousel.carousel({});
 
 
 	//今日热销域轮播图	
 	var $todaysCarousel = $('.todays .carousel-wrap');
 	
-	carouselImgLazyLoad($todaysCarousel);
+	carouselLazyLoad($todaysCarousel);
 	$todaysCarousel.carousel({});
 
 
 	//楼层图片懒加载函数
-	function floorImgLazyLoad($elem){
-		var item = {};//{0:'loaded',1:'loaded'}
-		var totalItemNum = $elem.find('.floor-img').length;
-		var totalLoadedItemNum = 0;
-		var loadFn = null;
+	function floorLazyLoad($elem){
+		$elem.item = {};//{0:'loaded',1:'loaded'}
+		$elem.totalItemNum = $elem.find('.floor-img').length;
+		$elem.totalLoadedItemNum = 0;
+		$elem.loadFn = null;
 		//1.开始加载
-		$elem.on('tab-show',loadFn = function(ev,index,elem){
+		$elem.on('tab-show',$elem.loadFn = function(ev,index,elem){
 			console.log('tab-show trigger....');
-			if(item[index] != 'loaded'){
+			if($elem.item[index] != 'loaded'){
 				$elem.trigger('tab-load',[index,elem])
 			}
 		});
@@ -185,9 +185,9 @@
 				},function(imgUrl){
 					$img.attr('src',"images/floor/placeholder.png");
 				});
-				item[index] = 'loaded';
-				totalLoadedItemNum++;
-				if(totalItemNum == totalLoadedItemNum){
+				$elem.item[index] = 'loaded';
+				$elem.totalLoadedItemNum++;
+				if($elem.totalItemNum == $elem.totalLoadedItemNum){
 					$elem.trigger('tab-loaded');
 				}
 			});
@@ -195,54 +195,27 @@
 		});
 		//3.加载结束
 		$elem.on('tab-loaded',function(){
-			$elem.off('tab-show',loadFn);
+			$elem.off('tab-show',$elem.loadFn);
 		});			
-	}	
+	}
 	//楼层
 	var $floor = $('.floor');
 
+	/*
+	$floor.each(function(){
+		floorLazyLoad($(this));
+	});
+	*/
 	//判断元素是否进入可视区
 	var $win = $(window);
 	var $doc = $(document);
-	//楼层HTML懒加载函数
-	function floorHtmlLazyLoad(){
-		var item = {};//{0:'loaded',1:'loaded'}
-		var totalItemNum = $floor.find('.floor-img').length;
-		var totalLoadedItemNum = 0;
-		var loadFn = null;
-		//1.开始加载
-		$doc.on('floor-show',loadFn = function(ev,index,elem){
-			console.log('floor-show trigger....');
-			if(item[index] != 'loaded'){
-				$doc.trigger('floor-load',[index,elem])
-			}
-		});
-		//2.执行加载
-		$doc.on('floor-load',function(ev,index,elem){
-			console.log('will load floor html::',index);
-			//加载HTML
-			//1.生成HTML
-			//2.加载HTML
-			//3.图片懒加载
-			//4.激活选项卡
-			item[index] = 'loaded';
-			totalLoadedItemNum++;
-			if(totalItemNum == totalLoadedItemNum){
-				$elem.trigger('floor-loaded');
-			}			
-
-		});
-		//3.加载结束
-		$doc.on('floor-loaded',function(){
-			$doc.off('floor-show',loadFn);
-		});			
-	}
-
-	floorHtmlLazyLoad();	
-	
 	function isVisible($elem){
 		return ($win.height() + $win.scrollTop() > $elem.offset().top) && ($win.scrollTop() < $elem.offset().top+$elem.height());
 	}
+	$doc.on('floor-show',function(ev,index,elem){
+		console.log(index,elem)
+	});
+
 	function timeToShow(){
 		$floor.each(function(index,elem){
 			if(isVisible($(elem))){
@@ -250,6 +223,7 @@
 			}
 		});		
 	}
+
 	$win.on('scroll resize load',function(){
 		clearTimeout($floor.showFloorTimer);
 		$floor.showFloorTimer = setTimeout(timeToShow,200);
