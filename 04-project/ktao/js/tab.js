@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-27 20:22:10
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-05 18:41:14
+* @Last Modified time: 2019-03-05 19:09:30
 */
 ;(function($){
 
@@ -25,6 +25,15 @@ Tab.prototype = {
 		//1.初始化显示
 		this.$tabItems.eq(this.now).addClass('tab-item-active');
 		this.$tabPanels.eq(this.now).show();
+		/*
+		this.$tabPanels.on('show shown hide hidden',function(ev){
+			console.log(_this.$tabPanels.index(this),ev.type);
+		});
+		*/
+		this.$elem.trigger('tab-show',[this.now,this.$tabPanels[this.now]]);
+		this.$tabPanels.on('show',function(ev){
+			_this.$elem.trigger('tab-show',[_this.$tabPanels.index(this),this]);
+		});
 		//2.初始化显示隐藏插件
 		this.$tabPanels.showHide(this.options);
 		//3.监听事件
@@ -69,7 +78,7 @@ Tab.DEFAULTS = {
 	js:false,
 	mode:'fade',
 	activeIndex:0,
-	interval:1000,
+	interval:0,
 	eventName:''
 }
 

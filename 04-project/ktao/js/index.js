@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-05 18:20:10
+* @Last Modified time: 2019-03-05 19:15:25
 */
 ;(function($){
 	function loadHtmlOnce($elem,cb){
@@ -159,8 +159,57 @@
 	carouselLazyLoad($todaysCarousel);
 	$todaysCarousel.carousel({});
 
+
+	//楼层图片懒加载函数
+	function floorLazyLoad($elem){
+		$elem.item = {};//{0:'loaded',1:'loaded'}
+		$elem.totalItemNum = $elem.find('.floor-img').length;
+		$elem.totalLoadedItemNum = 0;
+		$elem.loadFn = null;
+		//1.开始加载
+		$elem.on('tab-show',$elem.loadFn = function(ev,index,elem){
+			console.log('tab-show trigger....');
+			if($elem.item[index] != 'loaded'){
+				$elem.trigger('tab-load',[index,elem])
+			}
+		});
+		//2.执行加载
+		$elem.on('tab-load',function(ev,index,elem){
+			console.log('will load floor img::',index);
+			var $imgs = $(elem).find('.floor-img');
+			$imgs.each(function(){
+				var $img = $(this);
+				var imgUrl = $img.data('src');
+				loadImage(imgUrl,function(imgUrl){
+					$img.attr('src',imgUrl);
+				},function(imgUrl){
+					$img.attr('src',"images/floor/placeholder.png");
+				});
+				$elem.item[index] = 'loaded';
+				$elem.totalLoadedItemNum++;
+				if($elem.totalItemNum == $elem.totalLoadedItemNum){
+					$elem.trigger('tab-loaded');
+				}
+			});
+
+		});
+		//3.加载结束
+		$elem.on('tab-loaded',function(){
+			$elem.off('tab-show',$elem.loadFn);
+		});			
+	}
 	//楼层
 	var $floor = $('.floor');
+	/*
+	$floor.on('tab-show',function(ev,index,elem){
+		console.log(index,elem);
+	});
+	*/
+	//floorLazyLoad($floor);
+	$floor.each(function(){
+		floorLazyLoad($(this));
+	});
+
 	$floor.tab({});
 })(jQuery);
 
