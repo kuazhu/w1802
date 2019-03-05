@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-05 19:52:16
+* @Last Modified time: 2019-03-05 19:15:25
 */
 ;(function($){
 	function loadHtmlOnce($elem,cb){
@@ -200,31 +200,15 @@
 	}
 	//楼层
 	var $floor = $('.floor');
-
 	/*
+	$floor.on('tab-show',function(ev,index,elem){
+		console.log(index,elem);
+	});
+	*/
+	//floorLazyLoad($floor);
 	$floor.each(function(){
 		floorLazyLoad($(this));
 	});
-	*/
-	//判断元素是否进入可视区
-	var $win = $(window);
-	var $doc = $(document);
-	function isVisible($elem){
-		return ($win.height() + $win.scrollTop() > $elem.offset().top) && ($win.scrollTop() < $elem.offset().top+$elem.height());
-	}
-	$doc.on('floor-show',function(ev,index,elem){
-		console.log(index,elem)
-	});
-
-	function timeToShow(){
-		$floor.each(function(index,elem){
-			if(isVisible($(elem))){
-				$doc.trigger('floor-show',[index,elem]);
-			}
-		});		
-	}
-
-	$win.on('scroll resize load',timeToShow);
 
 	$floor.tab({});
 })(jQuery);
