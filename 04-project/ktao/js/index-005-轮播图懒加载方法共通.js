@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-05 18:20:10
+* @Last Modified time: 2019-03-04 20:45:31
 */
 ;(function($){
 	function loadHtmlOnce($elem,cb){
@@ -147,21 +147,89 @@
 			$elem.off('carousel-show',$elem.loadFn);
 		});			
 	}
+
+
+
 	//焦点区域轮播图	
 	var $focusCarousel = $('.focus .carousel-wrap');
+	/*
+	$focusCarousel.item = {};//{0:'loaded',1:'loaded'}
+	$focusCarousel.totalItemNum = $focusCarousel.find('.carousel-img').length;
+	$focusCarousel.totalLoadedItemNum = 0;
+	$focusCarousel.loadFn = null;
+	//1.开始加载
+	$focusCarousel.on('carousel-show',$focusCarousel.loadFn = function(ev,index,elem){
+		console.log('carousel-show trigger....');
+		if($focusCarousel.item[index] != 'loaded'){
+			$focusCarousel.trigger('carousel-load',[index,elem])
+		}
+	});
+	//2.执行加载
+	$focusCarousel.on('carousel-load',function(ev,index,elem){
+		console.log('will load img::',index);
+		var $img = $(elem).find('.carousel-img');
+		var imgUrl = $img.data('src');
+		loadImage(imgUrl,function(imgUrl){
+			$img.attr('src',imgUrl);
+		},function(imgUrl){
+			$img.attr('src',"images/focus-carousel/placeholder.png");
+		});
+		$focusCarousel.item[index] = 'loaded';
+		$focusCarousel.totalLoadedItemNum++;
+		if($focusCarousel.totalItemNum == $focusCarousel.totalLoadedItemNum){
+			$focusCarousel.trigger('carousel-loaded');
+		}
+	});
+	//3.加载结束
+	$focusCarousel.on('carousel-loaded',function(){
+		$focusCarousel.off('carousel-show',$focusCarousel.loadFn);
+	});
+	*/
 	carouselLazyLoad($focusCarousel);
 	$focusCarousel.carousel({});
 
 
 	//今日热销域轮播图	
 	var $todaysCarousel = $('.todays .carousel-wrap');
-	
+	/*
+	$todaysCarousel.item = {};//{0:'loaded',1:'loaded'}
+	$todaysCarousel.totalItemNum = $todaysCarousel.find('.carousel-img').length;
+	$todaysCarousel.totalLoadedItemNum = 0;
+	$todaysCarousel.loadFn = null;
+	//1.开始加载
+	$todaysCarousel.on('carousel-show',$todaysCarousel.loadFn = function(ev,index,elem){
+		console.log('carousel-show trigger....');
+		if($todaysCarousel.item[index] != 'loaded'){
+			$todaysCarousel.trigger('carousel-load',[index,elem])
+		}
+	});
+	//2.执行加载
+	$todaysCarousel.on('carousel-load',function(ev,index,elem){
+		console.log('will load img::',index);
+		var $imgs = $(elem).find('.carousel-img');
+		$imgs.each(function(){
+			var $img = $(this);
+			var imgUrl = $img.data('src');
+			loadImage(imgUrl,function(imgUrl){
+				$img.attr('src',imgUrl);
+			},function(imgUrl){
+				$img.attr('src',"images/focus-carousel/placeholder.png");
+			});
+			$todaysCarousel.item[index] = 'loaded';
+			$todaysCarousel.totalLoadedItemNum++;
+			if($todaysCarousel.totalItemNum == $todaysCarousel.totalLoadedItemNum){
+				$todaysCarousel.trigger('carousel-loaded');
+			}
+		});
+
+	});
+	//3.加载结束
+	$todaysCarousel.on('carousel-loaded',function(){
+		$todaysCarousel.off('carousel-show',$todaysCarousel.loadFn);
+	});	
+	*/
 	carouselLazyLoad($todaysCarousel);
 	$todaysCarousel.carousel({});
-
-	//楼层
-	var $floor = $('.floor');
-	$floor.tab({});
 })(jQuery);
 
 
