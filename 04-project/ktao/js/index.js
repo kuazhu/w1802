@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-06 19:50:53
+* @Last Modified time: 2019-03-06 20:11:34
 */
 ;(function($){
 	function loadHtmlOnce($elem,cb){
@@ -339,7 +339,7 @@
 	//设置电梯
 	var $elevator = $('#elevator');
 	var $elevatorItems = $elevator.find('.elevator-item');
-	
+	//根据楼层设置电梯
 	function setElevator(){
 		var num = getFloorNum();
 		if(num == -1){
@@ -354,6 +354,30 @@
 		clearTimeout($elevator.showElevatorTimer);
 		$elevator.showElevatorTimer = setTimeout(setElevator,200);
 	});
+	//点击电梯到达指定楼层
+	$elevator.on('click','.elevator-item',function(){
+		var num = $elevatorItems.index(this);
+		$('html,body')
+		.animate({
+			scrollTop:$floor.eq(num).offset().top
+		})
+	});
+
+	//共具条-回到顶部
+	$('#backToTop').on('click',function(){
+		$('html,body')
+		.animate({
+			scrollTop:0
+		})		
+	})
+
+
+
+
+
+
+
+
 
 })(jQuery);
 

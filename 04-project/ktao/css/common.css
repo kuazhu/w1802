@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:17:05
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-04 20:19:20
+* @Last Modified time: 2019-03-06 20:12:26
 */
 body{
 	font-size: 12px;
@@ -45,6 +45,7 @@ a.link:hover{
 .dropdown-layer{
 	display: none;
 	position: absolute;
+	z-index: 999;
 }
 .dropdown-left{
 	left: 0;
