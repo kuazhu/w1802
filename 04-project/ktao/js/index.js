@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-06 18:26:00
+* @Last Modified time: 2019-03-06 18:54:49
 */
 ;(function($){
 	function loadHtmlOnce($elem,cb){
@@ -346,6 +346,20 @@
 		return html;
 	}	
 
+	$floor.on('tab-load',function(ev,index,elem,success){
+		var $imgs = $(elem).find('.floor-img');
+		$imgs.each(function(){
+			var $img = $(this);
+			var imgUrl = $img.data('src');
+			loadImage(imgUrl,function(imgUrl){
+				$img.attr('src',imgUrl);
+			},function(imgUrl){
+				$img.attr('src',"images/floor/placeholder.png");
+			});
+			success();
+		});
+	});
+	/*
 	function floorHtmlLazyLoad(){
 		var item = {};//{0:'loaded',1:'loaded'}
 		var totalItemNum = $floor.length;
@@ -364,13 +378,20 @@
 			//加载HTML
 			//1.生成HTML
 			getDataOnce($doc,'data/floor/floorData.json',function(data){
+				var $elem = $(elem);
 				var html = buildFloorHtml(data[index]);
 				//2.加载HTML
-				$(elem).html(html);
+				$elem.html(html);
 				//3.图片懒加载
-				floorImgLazyLoad($(elem));
+				//floorImgLazyLoad($(elem));
+				lazyLoad({
+					totalItemNum:$elem.find('.floor-img').length,
+					$elem:$elem,
+					eventName:'tab-show',
+					eventPerfix:'tab'	
+				});
 				//4.激活选项卡
-				$(elem).tab({});
+				$elem.tab({});
 			});
 			item[index] = 'loaded';
 			totalLoadedItemNum++;
@@ -384,8 +405,36 @@
 			$doc.off('floor-show',loadFn);
 		});			
 	}
-
-	floorHtmlLazyLoad();	
+	*/
+	$doc.on('floor-load',function(ev,index,elem,success){
+		//1.生成HTML
+		getDataOnce($doc,'data/floor/floorData.json',function(data){
+			var $elem = $(elem);
+			var html = buildFloorHtml(data[index]);
+			//2.加载HTML
+			$elem.html(html);
+			//3.图片懒加载
+			lazyLoad({
+				totalItemNum:$elem.find('.floor-img').length,
+				$elem:$elem,
+				eventName:'tab-show',
+				eventPerfix:'tab'	
+			});
+			//4.激活选项卡
+			$elem.tab({});
+		});
+		success();		
+	});
+	$doc.on('floor-loaded',function(){
+		$win.off('scroll resize',$floor.showFloorFn);
+	});		
+	//floorHtmlLazyLoad();	
+	lazyLoad({
+		totalItemNum:$floor.length,
+		$elem:$doc,
+		eventName:'floor-show',
+		eventPerfix:'floor'
+	});
 	
 	function isVisible($elem){
 		return ($win.height() + $win.scrollTop() > $elem.offset().top) && ($win.scrollTop() < $elem.offset().top+$elem.height());
@@ -397,7 +446,7 @@
 			}
 		});		
 	}
-	$win.on('scroll resize load',function(){
+	$win.on('scroll resize load',$floor.showFloorFn = function(){
 		clearTimeout($floor.showFloorTimer);
 		$floor.showFloorTimer = setTimeout(timeToShow,200);
 	});
