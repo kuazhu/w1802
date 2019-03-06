@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:17:16
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-05 20:53:56
+* @Last Modified time: 2019-03-06 19:21:00
 */
 /*顶部导航开始*/
 	.nav-side{
@@ -406,3 +406,31 @@
 		z-index: 2;
 	}
 /*楼层结束*/
+/*电梯开始*/
+	.elevator{
+		position: fixed;
+		top:50%;
+		left:50%;
+		margin-left: -660px;
+	}
+	.elevator-item{
+		display: block;
+		width: 40px;
+		height: 35px;
+		line-height: 35px;
+		text-align: center;
+		border-top: 1px solid #ccc;
+	}
+	.elevator-item:hover .elevator-item-num,
+	.elevator-active .elevator-item-num{
+		display: none;
+	}
+	.elevator-item:hover .elevator-item-text,
+	.elevator-active .elevator-item-text{
+		display: block;
+		color: #ea675a;
+	}
+	.elevator-item-text{
+		display: none;
+	}
+/*电梯结束*/
