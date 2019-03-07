@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-01-03 20:43:06
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-07 18:22:18
+* @Last Modified time: 2019-03-07 18:55:31
 */
 
 /*
@@ -21,8 +21,11 @@ var server = http.createServer(function(req,res){
 	
 	console.log("cookie::",req.headers.cookie);
 	
-	res.setHeader('Set-Cookie',["username=tom"]);
+	//var oDate = new Date('2019-03-07 18:53:00').toUTCString();
+	//res.setHeader('Set-Cookie',["username=tom;expires="+oDate]);
 	
+	//res.setHeader('Set-Cookie',["username=tom;max-age=10"]);
+
 	if(urlStr == '/favicon.ico'){
 		res.end('favicon.ico');
 	}
