@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-02-26 18:15:35
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-06 20:11:34
+* @Last Modified time: 2019-03-06 21:11:21
 */
 ;(function($){
 	function loadHtmlOnce($elem,cb){
@@ -98,6 +98,7 @@
 
 	$menuDropdown.dropdown({
 		delay:200,
+		eventName:'click'
 	});
 
 
