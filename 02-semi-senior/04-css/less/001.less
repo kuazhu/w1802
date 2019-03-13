@@ -1,0 +1,175 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+div{
+	margin-bottom: 10px;
+}
+//我是注释一 编译被删除
+/*我是注释二 编译被保留*/
+@color:#faa;
+@width:400px;
+@height:100px;
+
+.box1{
+	color:@color;
+	width: @width;
+	height: @height;
+	background: gray;
+}
+.box2{
+	/*
+	color:@color;
+	width: @width;
+	height: @height;
+	background: gray;	
+	*/
+	//基本混合,直接把选择器写在另外一个选择中
+	.box1;
+}
+
+.boder-radius(@r){
+	-webkit-border-radius:@r;
+	-ms-border-radius:@r;
+	-o-border-radius:@r;
+	border-radius: @r; 
+}
+
+.boder-radius-def(@r:20px){
+	-webkit-border-radius:@r;
+	-ms-border-radius:@r;
+	-o-border-radius:@r;
+	border-radius: @r; 
+}
+.box3{
+	.box1;
+	//.boder-radius(10px);
+	.boder-radius-def;
+}
+
+/*
+.triangle{
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border-style: solid;
+	border-width: 10px;
+	border-color: transparent  transparent  transparent red;
+}
+*/
+.triangle(top,@w,@c){
+	/*
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border-style: solid;
+	*/
+	border-width: @w;
+	border-color: @c transparent  transparent  transparent;	
+}
+.triangle(right,@w,@c){
+	/*
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border-style: solid;
+	*/
+	border-width: @w;
+	border-color:  transparent @c  transparent  transparent;	
+}
+.triangle(bottom,@w,@c){
+	/*
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border-style: solid;
+	*/
+	border-width: @w;
+	border-color:  transparent  transparent @c  transparent;	
+}
+.triangle(left,@w,@c){
+	/*
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border-style: solid;
+	*/
+	border-width: @w;
+	border-color:  transparent  transparent   transparent @c;	
+}
+.triangle(@_,@w,@c){
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	border-style: solid;	
+}
+.box4{
+	.triangle(top,100px,pink);
+}
+
+.list{
+	width: 600px;
+	li{
+		width: 100%;
+		height: 30px;
+		line-height: 30px;
+		list-style: none;
+		border-bottom: 1px dashed #ccc;
+		span{
+			float: left;
+		}
+		a{
+			float: right;
+			text-decoration: none;
+		}
+		&:hover{
+			background: @color;
+		}
+	}
+}
+
+.fs(@val){
+	// font-size: @val - 10px;
+	// font-size: @val + 10px;
+	// font-size: @val * 10px;
+	font-size: @val / 10px;
+}
+
+.box5{
+	.fs(50px)
+}
+
+.box6{
+	font-size: ~'calc(30px - 10px)';
+}
+.box7{
+	.box1 !important;
+}
+
+.set(@attr,@val){
+	//@attr:@val;
+	// @{attr}:@val + px;
+	@{attr}:unit(@val / 10,px);
+}
+.box8{
+	.set(width,100);//width:100px;
+	color:red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+@rem:32;
+
+.rem(@attr,@px1){
+	@{attr}:unit(@px1 / @rem,rem);
+}
+.rem(@attr,@px1,@px2){
+	@{attr}:unit(@px1 / @rem,rem) unit(@px2 / @rem,rem);
+}
+.rem(@attr,@px1,@px2,@px3){
+	@{attr}:unit(@px1 / @rem,rem) unit(@px2 / @rem,rem) unit(@px3 / @rem,rem);
+}
+.rem(@attr,@px1,@px2,@px3,@px4){
+	@{attr}:unit(@px1 / @rem,rem) unit(@px2 / @rem,rem) unit(@px3 / @rem,rem) unit(@px4 / @rem,rem);
+}
+img{
+	float: left;
+	.rem(width,160);// width:5rem;
+	//margin:10px 20px 30px 40px;//margin: 0.11rem 0.123rem;
+	.rem(margin,10,20,30,40);
+	.rem(padding-left,20);
+}
+h4{
+	.rem(font-size,10);
+}
