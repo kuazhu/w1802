@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>011-map的基本使用.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	let obj = {age:18};
+
+	let obj1 = {id:100};
+	let obj2 = {id:101};
+	/*
+	obj.name = "Tom";
+	obj[obj1] = "Teacher";
+	obj[obj2] = "Student";
+
+	console.log(obj);
+
+	for(let key in obj){
+		console.log(key,typeof key);
+	}
+	*/
+
+	let map = new Map();
+	map.set('age',18);
+	map.set(obj1,"Teacher");
+	map.set(obj2,"Student");
+	
+	/*
+	console.log("map.get('age')",map.get('age'));
+	console.log("map.get(obj1)",map.get(obj1));
+	console.log("map.get(obj2)",map.get(obj2));
+	console.log("map.get('xx')",map.get('xx'));
+	console.log("map.delete('age')",map.delete('age'));
+	console.log("map.delete(obj1)",map.delete(obj1));
+	*/
+	/*
+	console.log("map.has('age')",map.has('age'));	
+	console.log("map.has('age2')",map.has('age2'));	
+	console.log("map.has(obj1)",map.has(obj1));	
+	*/
+	console.log("map.clear()",map.clear());
+
+
+	console.log(map);
+	console.log('size of map:',map.size);
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

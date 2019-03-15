@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>016-结构解析和默认参数结合.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	function show(url,{method="get",body="hello"}={}){
+		console.log(url,method,body);
+	}
+
+	//show("http://www.kuazhu.com/api");
+	show("http://www.kuazhu.com/api",{method:"post",body:"good"});
+	show("http://www.kuazhu.com/api",{method:"post"});
+	
+
+
+
+</script>
+
+
+</html>

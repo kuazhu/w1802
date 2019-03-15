@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>013-Symbol.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	/*
+	let s = new Symbol();
+	console.log(s); //Symbol is not a constructor
+	*/
+	/*
+	let s = Symbol('hello');
+	console.log(s);
+	console.log(typeof s);//symbol
+
+	let s1 = Symbol('hello');
+	console.log(s == s1);
+	*/
+	/*
+	let obj = {username:"Tom"};
+	obj.username = "Leo";
+	console.log(obj);
+	*/
+	let s1 = Symbol('username for Tom');
+	let s2 = Symbol('username for Leo');
+	let obj = {
+		[s1]:"Tom",
+		age:18
+	}
+	obj[s2] = "Leo";
+	console.log(obj);
+	/* 
+	console.log(Object.getOwnPropertyDescriptors(obj));
+	
+	for(let key in obj){
+		console.log(key,obj[key]);
+	}
+
+
+	console.log("obj[s1]",obj[s1]);
+	*/
+	// console.log(Reflect.ownKeys(obj))
+	let keys = Reflect.ownKeys(obj);
+
+	for(let key of keys){
+		console.log(key,obj[key])
+	}
+
+
+
+
+
+
+
+	
+
+
+
+
+</script>
+</html>

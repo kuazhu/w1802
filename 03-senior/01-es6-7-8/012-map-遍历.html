@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>012-map-遍历.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	let obj1 = {id:100};
+	let obj2 = {id:101};	
+	let map = new Map();
+	map.set('age',18);
+	map.set(obj1,"Teacher");
+	map.set(obj2,"Student");
+
+	for(let key of map.keys()){
+		console.log(key);
+	}
+	for(let value of map.values()){
+		console.log(value);
+	}
+
+	for(let entry of map){
+		console.log(entry);
+	}
+	for(let entry of map.entries()){
+		console.log(entry);
+	}
+
+	map.forEach(function(value,key){
+		console.log(value,key)
+	})
+
+
+
+
+</script>
+</html>
