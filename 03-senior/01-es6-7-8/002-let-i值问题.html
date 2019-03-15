@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>002-let-i值问题.html</title>
+</head>
+<body>
+	<button>点我1</button>
+	<button>点我2</button>
+	<button>点我3</button>
+	<button>点我4</button>
+</body>
+<script>
+	var aBtns = document.getElementsByTagName('button');
+
+	/*
+	for(var i = 0;i<aBtns.length;i++){
+		aBtns[i].onclick = function(){
+			console.log(i);
+		}
+	}
+	console.log(i);
+	*/
+	/*
+	for(var i = 0;i<aBtns.length;i++){
+		aBtns[i].index = i;
+		aBtns[i].onclick = function(){
+			console.log(this.index);
+		}
+	}
+	console.log(i);
+	*/
+	/*
+	for(var i = 0;i<aBtns.length;i++){
+		(function(i){
+			aBtns[i].onclick = function(){
+				console.log(i);
+			}
+		})(i);
+	}
+	*/
+	/*
+	当i = 0时执行函数
+	(function(i){
+			aBtns[i].onclick = function(){
+				console.log(i);
+			}
+		})(0);
+	当i = 1时执行函数	
+	(function(i){
+			aBtns[i].onclick = function(){
+				console.log(i);
+			}
+		})(1);		
+	console.log(i);
+	*/	
+	for(let i = 0;i<aBtns.length;i++){
+		aBtns[i].onclick = function(){
+			console.log(i);
+		}
+	}
+	/*
+		当i = 0时形成作用域
+		{
+			aBtns[0].onclick = function(){
+				console.log(0);
+			}
+		}
+
+		当i = 1时形成作用域
+
+		{
+			aBtns[1].onclick = function(){
+				console.log(1);
+			}
+		}
+		。。。。。
+	 */
+	//console.log(i);//ReferenceError: i is not defined
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>008-对象的扩展运算符.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	let obj1 = {username:"Tom",friend:{username:"Leo"}};
+
+	//console.log(...obj1);//Uncaught TypeError: Found non-callable @@iterator
+	//console.log({...obj1});
+	
+	let obj2 = {...obj1};
+	obj2.username = "Peter";
+
+	obj2.friend.username = "Mike";
+
+	console.log(obj1,obj2);
+
+
+</script>
+</html>

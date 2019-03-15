@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>007-数组的扩展运算.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	let arr1 = [11,22];
+	/*
+	console.log(arr1);
+	console.log(...arr1);
+	console.log(11,22);
+
+	function sum(n1,n2){
+		return n1 + n2;
+	}
+
+	console.log(sum(11,22));
+	console.log(sum(...arr1));
+	*/
+	/*
+	function sum(...arr){
+		console.log(arr);
+		console.log(arguments);
+		var total = 0;
+		for(let i = 0;i<arr.length;i++){
+			total += arr[i]
+		}
+		return total;
+	}
+
+	console.log(sum(11,22,33));
+	*/
+	//console.log(Math.max(11,22,33));
+	//console.log(Math.max.apply(Math,arr1));
+	// console.log(Math.max(...arr1));
+
+	/*
+	var arr2 = arr1;
+	arr2.push(33);
+	console.log(arr1);
+	*/
+	/*
+	var arr2 = [];
+
+	for(var i = 0;i<arr1.length;i++){
+		arr2.push(arr1[i])
+	}
+	arr2.push(33);
+	console.log(arr1);
+	*/
+	/*
+	var arr2 = arr1.concat();
+	arr2.push(33);
+	console.log(arr1);
+	*/
+	/*
+	var arr2 = arr1.slice();
+	arr2.push(33);
+	console.log(arr1,arr2);
+	*/
+
+	var arr2 = [...arr1];
+	arr2.push(33);
+	console.log(arr1,arr2);	
+
+
+
+
+</script>
+</html>

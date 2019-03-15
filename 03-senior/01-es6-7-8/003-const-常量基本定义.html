@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>003-const-常量基本定义.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	/*
+	var PI = 3.1415926;
+
+	PI = 2222;
+
+	console.log(PI)
+	*/
+	/*
+	const PI = 3.1415926;
+	PI = 2222;//Uncaught TypeError: Assignment to constant variable.
+	console.log(PI)
+	*/
+	/*
+	var PI;
+	PI = 3.1415926;
+
+	console.log(PI);
+	*/
+	/*
+	const PI;//Uncaught SyntaxError: Missing initializer in const declaration
+	PI = 3.1415926;
+	console.log(PI);
+	*/
+	/*
+	const PI = 3.1415926;
+	PI = 222;
+	*/
+	/*
+	const CONFIG = {
+		username:'root',
+		password:'123'
+	}
+
+	//CONFIG = {};//Uncaught TypeError: Assignment to constant variable.
+	CONFIG.username = 'tom';
+
+	console.log(CONFIG);
+	*/
+	/*
+	if(true){
+		const PI = 3.1415926;
+		console.log(PI);
+	}
+	console.log(PI);//Uncaught ReferenceError: PI is not defined
+	*/
+	/*
+	console.log(PI);
+	var PI = 3.1415926;
+	*/
+	/*
+	console.log(PI);//Uncaught ReferenceError: PI is not defined
+	const PI = 3.1415926;
+	*/
+
+
+</script>
+</html>
