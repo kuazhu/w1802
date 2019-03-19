@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>041-class定义类.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	//let p1 = new Person();//Person is not defined
+	class Person{
+		constructor(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		sayName(){
+			console.log("I am "+this.name);
+		}
+		sayAge(){
+			console.log("I am "+this.age + " years old");
+		}
+		static sayHi(){
+			console.log('Hi....');
+		}
+	}
+
+	let p = new Person("Tom",18);
+	console.log(p);
+	p.sayName();
+	p.sayAge();
+	Person.sayHi();
+
+
+
+
+	
+</script>
+</html>

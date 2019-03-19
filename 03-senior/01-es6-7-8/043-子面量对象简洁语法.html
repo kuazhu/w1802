@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>043-子面量对象简洁语法.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	let username = 'Tom',
+		age = 18;
+
+	/*	
+	let obj = {
+		username:username,
+		age:age
+	}
+	*/
+	/*
+	let obj = {
+		username,
+		age
+	}
+	*/
+	/*
+	let obj = {
+		username,
+		age,
+		sayUsername:function(){
+			console.log('I am '+this.username);
+		},
+		sayAge:function(){
+			console.log("I am "+ this.age + " years old");
+		}
+	}
+	*/
+	/*
+	let obj = {
+		username,
+		age,
+		sayUsername(){
+			console.log('I am '+this.username);
+		},
+		sayAge(){
+			console.log("I am "+ this.age + " years old");
+		}
+	}
+	*/
+	let obj = {
+		username,
+		age,
+		sayUsername:()=>{
+			console.log(this,'I am '+this.username);
+			console.log('this.name=',this.name);
+		},
+		sayAge:()=>{
+			console.log(this,"I am "+ this.age + " years old");
+		}
+	}
+	console.log(obj);
+	obj.sayUsername();
+	obj.sayAge();
+
+
+
+
+
+
+</script>
+</html>

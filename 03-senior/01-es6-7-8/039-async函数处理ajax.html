@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>039-async函数处理ajax.html</title>
+</head>
+<body>
+	
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	let getDataPromise = (url)=>{
+		return new Promise((resolve,reject)=>{
+			$.get(url,data=>{
+				resolve(data);
+			})
+		});
+	}
+	
+	async function fn(url){
+		let data1 = await getDataPromise(url);
+		console.log("data1::",data1);
+		let data2 = await getDataPromise(data1.followers_url);
+		console.log("data2::",data2);
+		let data3 = await getDataPromise(data2[0].followers_url);
+		console.log("data3::",data3);
+	}
+
+	fn('https://api.github.com/users/kuazhu');
+
+</script>
+</html>

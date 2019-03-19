@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>033-Generator函数的语法.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	
+	function * gen(){
+		console.log('in gen....');
+		yield 'get data1';
+		console.log('do somethig after get data1...');
+		yield 'get data2';
+		console.log('do somethig after get data2...');
+		yield 'get data3';
+		// return 'data3';
+	}
+	//console.log(gen);
+	//console.log(typeof gen);
+	//let g = gen();//该函数并不执行,返回一个遍历器对象
+	//console.log(g);
+	//let result = g.next();
+	//console.log(result);
+	//console.log(g.next());
+
+	let g = gen();//该函数并不执行,返回一个遍历器对象
+	console.log(g.next());
+	console.log(g.next());
+	console.log(g.next());
+	console.log(g.next());
+
+
+</script>
+</html>

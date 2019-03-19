@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>032-Promise.race.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	let getDataPromise = (delay)=>{
+		return new Promise((resolve,reject)=>{
+			setTimeout(()=>{
+				resolve('data::'+delay);
+			},delay)
+		});
+	}
+	let aPromises = [600,300,800].map(delay=>getDataPromise(delay));
+	
+	let p = new Promise((resolve,reject)=>{
+		setTimeout(()=>{
+			reject('rejectd data::'+900);
+		},900)
+	});
+	
+	aPromises.push(p);
+
+	Promise.race(aPromises)
+	.then(data=>{
+		console.log(data);
+	})
+	.catch(err=>{
+		console.log(err);
+	})
+
+
+
+
+</script>
+</html>

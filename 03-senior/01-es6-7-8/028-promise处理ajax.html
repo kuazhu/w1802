@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>028-promise处理ajax.html</title>
+</head>
+<body>
+	
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	/*
+	$.get('https://api.github.com/users/kuazhu',(data1)=>{
+		// console.log(data)
+		$.get(data1.followers_url,data2=>{
+			// console.log(data2);
+			$.get(data2[0].followers_url,data3=>{
+				console.log(data3);
+			})
+		})
+	});
+	*/
+
+	let getDataPromise = (url)=>{
+		return new Promise((resolve,reject)=>{
+			$.get(url,data=>{
+				resolve(data);
+			})
+		});
+	}
+
+	let promise = getDataPromise('https://api.github.com/users/kuazhu');
+	promise
+	.then(data1=>{
+		// console.log(data);
+		/*
+		getDataPromise(data1.followers_url)
+		.then(data2=>{
+			console.log(data2);
+		})
+		*/
+		return getDataPromise(data1.followers_url);
+	})
+	.then(data2=>{
+		// console.log(data2);
+		return getDataPromise(data2[0].followers_url);
+	})
+	.then(data3=>{
+		console.log(data3);
+	})
+
+
+
+
+
+</script>
+
+</html>

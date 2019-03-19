@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>042-extends继承.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	class Person{
+		constructor(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		sayName(){
+			console.log("I am "+this.name);
+		}
+		sayAge(){
+			console.log("I am "+this.age + " years old");
+		}
+		static sayHi(){
+			console.log('Hi....');
+		}
+	}
+
+	let p = new Person("Tom",18);
+	console.log(p);
+	p.sayName();
+	p.sayAge();
+	Person.sayHi();
+
+	class Student extends Person{
+		constructor(name,age,major){
+			super(name,age);
+			this.major = major;
+		}
+		sayMajor(){
+			console.log("I am from " + this.major);
+		}
+	}
+
+	let s = new Student("Leo",88,'Computer');
+	console.log(s);
+	s.sayName();
+	s.sayAge();
+	s.sayMajor();
+	Student.sayHi();	
+
+
+
+
+	
+</script>
+</html>

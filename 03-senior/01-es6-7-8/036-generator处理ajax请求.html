@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>036-generator处理ajax请求.html</title>
+</head>
+<body>
+	
+</body>
+<script src="js/jquery-1.12.4.js"></script>
+<script>
+	let getDataPromise = (url)=>{
+		return new Promise((resolve,reject)=>{
+			$.get(url,data=>{
+				resolve(data);
+			})
+		});
+	}
+
+
+	function * gen(url){
+		let data1 = yield getDataPromise(url);
+		let data2 = yield getDataPromise(data1);
+		let data3 = yield getDataPromise(data2);
+
+		console.log('use data::',data3);
+	}
+
+	let g = gen('https://api.github.com/users/kuazhu');
+	//console.log(g.next());
+	g.next().value
+	.then(data=>{
+		//console.log(data);
+		return g.next(data.followers_url).value;
+	})
+	.then(data=>{
+		// console.log(data);
+		return g.next(data[0].followers_url).value
+	})
+	.then(data=>{
+		// console.log(data);
+		g.next(data);
+	})
+
+
+
+</script>
+</html>

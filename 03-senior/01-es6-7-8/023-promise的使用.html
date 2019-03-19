@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>023-promise的使用.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	//1.new Promise时,传入的函数立即执行
+	let promise = new Promise((resolve,reject)=>{
+		console.log('new promise...');
+		
+		//2.执行异步请求
+		
+		//模拟异步请求成功
+		//resolve('hello');
+		
+		//模拟异步请求失败
+		reject('出错了');
+	});
+
+	// console.log(promise)
+	
+	//3.通过promise实例对异步结果进行处理
+	promise
+	.then((data)=>{
+		console.log("success::",data);
+	},(err)=>{
+		console.log("failed:::",err)
+	});
+	
+
+
+
+
+</script>
+
+
+</html>

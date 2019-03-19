@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>040-原型链的对象和继承.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	function Person(name,age){
+		this.name = name;
+		this.age = age;
+	}
+	Person.prototype.sayName = function(){
+		console.log("I am "+this.name);
+	}
+	Person.prototype.sayAge = function(){
+		console.log("I am "+this.age + " years old");
+	}
+	Person.sayHi = function(){
+		console.log('Hi...');
+	}
+
+	var p = new Person("Tom",18);
+	console.log(p);
+	p.sayName();
+	p.sayAge();
+	Person.sayHi();
+
+
+	function Student(name,age,major){
+		Person.call(this,name,age);
+		this.major = major;
+	}
+	Student.prototype = Object.create(Person.prototype);
+	
+	Student.prototype.sayMajor = function(){
+		console.log("I am from " + this.major);
+	}
+	Student.sayHi = Person.sayHi;
+
+	var s = new Student("Leo",88,'Computer');
+	s.sayName();
+	s.sayAge();
+	s.sayMajor();
+	Student.sayHi();
+
+
+</script>
+
+
+
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>027-Promise对象的方法-finally.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	let p1 = new Promise((resolve,reject)=>{
+		 //resolve('ok');
+		reject('error!!');
+	});
+
+	p1
+	.then(data=>{
+		console.log('success::',data);
+	})
+	.catch(err=>{
+		console.log('failed::',err);
+	})
+	.finally(()=>{
+		console.log('finally!!');
+	});
+</script>
+</html>

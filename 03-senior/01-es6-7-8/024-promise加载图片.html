@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>024-promise加载图片.html</title>
+</head>
+<body>
+	
+</body>
+<script>
+	/*
+	var img = new Image();
+
+	img.onload = function(){
+		console.log('img/1.jpg'+' loaded');
+	}
+	img.onerror = function(){
+		console.log('img/1.jpg'+' loaded failed');
+	}
+
+
+	img.src = 'img/1x.jpg';
+	*/
+
+	/*
+	function loadImg(url,success,error){
+		var img = new Image();
+		img.onload = function(){
+			success(url)
+		}
+		img.onerror = function(){
+			error(url);
+		}
+		img.src = url;		
+	}
+
+	loadImg('img/1.jpg',function(url){
+		console.log(url+' loaded...')
+	},function(url){
+		console.log(url+' loaded failed...');
+	});
+
+	loadImg('img/2.jpg',function(url){
+		console.log(url+' loaded!')
+	},function(url){
+		console.log(url+' loaded failed!');
+	});
+	*/
+	/*
+	let promise = new Promise((resolve,reject)=>{
+		var img = new Image();
+		img.onload = function(){
+			resolve('img/1.jpg')
+		}
+		img.onerror = function(){
+			reject('img/1.jpg');
+		}
+		img.src = 'img/1.jpg';		
+	});
+	promise
+	.then(url=>{
+		console.log(url+' loaded!!!')
+	},err=>{
+		console.log(url+' loaded failed!!!');
+	})
+	*/
+
+	let getLoadImgPromise = (url)=>{
+		return new Promise((resolve,reject)=>{
+			var img = new Image();
+			img.onload = function(){
+				resolve(url)
+			}
+			img.onerror = function(){
+				reject(url);
+			}
+			img.src = url;		
+		})	
+	}
+
+	getLoadImgPromise('img/1x.jpg')
+	.then(url=>{
+		console.log(url+' loaded!!!')
+	},url=>{
+		console.log(url+' loaded failed!!!');
+	})
+
+</script>
+
+
+
+
+
+</html>
