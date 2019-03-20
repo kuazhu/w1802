@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>045-新增数组方法.html</title>
+</head>
+<body>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+</body>
+<script>
+	let likeArr = {
+		0:'aa',
+		1:'bb',
+		length:2
+	}
+
+	let arr = Array.from(likeArr);
+	console.log('likeArr=',likeArr);
+	console.log('arr=',arr);
+
+	function fn(){
+		console.log(arguments);
+		console.log(Array.from(arguments));
+	}
+	fn(11,22);
+
+	let aBox = document.querySelectorAll('.box');
+	console.log('aBox',aBox);
+	console.log(Array.from(aBox));
+
+
+	let arr1 = [11,22,33,44];
+
+	console.log(arr1.find(n=>n>23));//33
+	console.log(arr1.find(n=>n>34));//44
+	console.log(arr1.find(n=>n>90));//undefined
+
+	console.log(arr1.findIndex(n=>n>23));//2
+	console.log(arr1.findIndex(n=>n>34));//3
+	console.log(arr1.findIndex(n=>n>90));//-1
+
+
+	console.log(arr1.includes(11))//true
+	console.log(arr1.includes(19))//false
+	console.log(arr1.includes('11'))//false
+
+
+
+
+
+
+
+
+
+</script>
+</html>
