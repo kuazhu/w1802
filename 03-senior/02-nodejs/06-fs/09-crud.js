@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-22 18:04:20
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-22 18:31:30
+* @Last Modified time: 2019-03-22 18:59:57
 */
 //crud (create read update delete)
 
@@ -39,9 +39,7 @@ const add = (name,callback)=>{
 			})
 
 		}
-	});
-	
-	
+	});	
 }
 add('Tom',(err,data)=>{
 	if(err){
@@ -67,12 +65,76 @@ async function add(name){
 	return arr;
 	
 }
-add('Leo')
+async function get(id){
+	//1.获取原有的数据
+	let data = await readFile(filePath);
+	let arr = JSON.parse(data);	
+	//2.查找对应id的对象
+	return arr.find(val=>{
+		return val['id'] == id;
+	})
+}
+async function update(id,name){
+	//1.获取原有的数据
+	let data = await readFile(filePath);
+	let arr = JSON.parse(data);	
+	//2.查找对应id的对象
+	let obj = arr.find(val=>{
+		return val['id'] == id;
+	})
+	if(obj){
+		obj.name = name;
+		let strArr = JSON.stringify(arr);
+		//3.保存
+		await writeFile(filePath,strArr);
+		return arr;
+	}else{
+		return obj;
+	}	
+}
+async function remove(id){
+	//1.获取原有的数据
+	let data = await readFile(filePath);
+	let arr = JSON.parse(data);
+	//2.过滤
+	let newArr = arr.filter(val=>{
+		return val['id'] != id;
+	})	
+	let strArr = JSON.stringify(newArr);
+	//3.保存
+	await writeFile(filePath,strArr);
+	return newArr;	
+
+}
+
+
+/*
+add('Mike')
 .then(data=>{
 	console.log(data);
 })
 .catch(err=>{
 	console.log(err);
+})
+*/
+/*
+get('15532516861085320')
+.then(data=>{
+	console.log(data)
+})
+.catch(err=>{
+	console.log(err);
+})
+*/
+/*
+update('15532506973691480','Peter')
+.then(data=>{
+	console.log(data);
+})
+*/
+remove('15532507082732963')
+.then(data=>{
+	console.log(data);
 })
 
 
