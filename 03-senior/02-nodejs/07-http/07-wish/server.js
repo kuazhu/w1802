@@ -2,13 +2,13 @@
 * @Author: TomChen
 * @Date:   2019-03-22 19:15:42
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-24 16:07:17
+* @Last Modified time: 2019-03-24 16:18:45
 */
 const http = require('http');
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
-
+const swig = require('swig');
 const mime = require('./mime.json');
 
 const { getAll } = require('./WishModel.js')
@@ -22,37 +22,43 @@ const server = http.createServer((req,res)=>{
 	if(pathname == '/' || pathname == '/index.html'){//获取首页
 		getAll()
 		.then(data=>{
-					let html = `<!DOCTYPE html>
-									<html lang="en">
-									<head>
-										<meta charset="UTF-8">
-										<title>许愿墙</title>
-										<link rel="stylesheet" href="css/index.css">
-									</head>
-									<body>
-										<div class="wall">`;
-							data.forEach(item=>{
-								html += `<div class="wish" style="background: ${item.color}">
-											<a href="javascript:;" class="close" data-id='${item.id}'></a>
-												${item.content}
-										</div>`
-							});			
-						html +=			`</div>
-										<div class="form-box">
-											<div>
-												<textarea name="content" id="content" cols="30" rows="20"></textarea>
-											</div>
-											<div>
-												<a href="javascript:;" class="sub-btn">许下心愿</a>
-											</div>
-										</div>	
-									</body>
-									<script src="js/jquery.min.js"></script>
-									<script src="js/jquery.pep.js"></script>
-									<script src="js/index.js"></script>
-									</html>`;
-					res.setHeader('Content-Type',"text/html;charset=utf-8");
-					res.end(html);			
+			/*
+			let html = `<!DOCTYPE html>
+							<html lang="en">
+							<head>
+								<meta charset="UTF-8">
+								<title>许愿墙</title>
+								<link rel="stylesheet" href="css/index.css">
+							</head>
+							<body>
+								<div class="wall">`;
+					data.forEach(item=>{
+						html += `<div class="wish" style="background: ${item.color}">
+									<a href="javascript:;" class="close" data-id='${item.id}'></a>
+										${item.content}
+								</div>`
+					});			
+				html +=			`</div>
+								<div class="form-box">
+									<div>
+										<textarea name="content" id="content" cols="30" rows="20"></textarea>
+									</div>
+									<div>
+										<a href="javascript:;" class="sub-btn">许下心愿</a>
+									</div>
+								</div>	
+							</body>
+							<script src="js/jquery.min.js"></script>
+							<script src="js/jquery.pep.js"></script>
+							<script src="js/index.js"></script>
+							</html>`;
+			*/
+			let template = swig.compileFile(__dirname+'/static/index.html');
+			let html = template({
+				data
+			});
+			res.setHeader('Content-Type',"text/html;charset=utf-8");
+			res.end(html);			
 		})
 		
 	}

@@ -7,14 +7,12 @@
 </head>
 <body>
 	<div class="wall">
-			<div class="wish" style="background: blue">
-				<a href="javascript:;" class="close" data-id='111'></a>
-				111
-			</div>
-			<div class="wish" style="background: yellow">
-				<a href="javascript:;" class="close" data-id='222'></a>
-				222
-			</div>			
+		{% for item in data %}
+		<div class="wish" style="background: {{ item.color }}">
+			<a href="javascript:;" class="close" data-id='{{ item.id }}'></a>
+			{{ item.content }}
+		</div>	
+		{% endfor %}	
 	</div>
 	<div class="form-box">
 		<div>
