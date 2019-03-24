@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-22 18:04:20
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-24 16:00:04
+* @Last Modified time: 2019-03-24 16:53:22
 */
 //crud (create read update delete)
 
@@ -13,20 +13,25 @@ const filePath = './data/wish.json';
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 
-async function add(name){
+const arrColor = ['#f21','#ff4','#0f1','#cca','#cac'];
+
+const getRandom	= (min,max)=>{	
+	return Math.round(min + (max-min)*Math.random());
+}
+
+async function add(options){
 	//1.获取原有的数据
 	let data = await readFile(filePath);
 	let arr = JSON.parse(data);
 	//2.添加数据到原有的数据中
-	arr.push({
-		id:Date.now().toString()+parseInt(Math.random()*10000).toString().padStart(4,'0'),
-		name:name
-	});
+	options.id = Date.now().toString()+parseInt(Math.random()*10000).toString().padStart(4,'0');
+	options.color = arrColor[getRandom(0,arrColor.length-1)];
+	arr.push(options);
 	let strArr = JSON.stringify(arr);
 	//3.保存
 	await writeFile(filePath,strArr);
 
-	return arr;
+	return options;
 	
 }
 async function getAll(){

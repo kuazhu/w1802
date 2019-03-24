@@ -2,16 +2,18 @@
 * @Author: TomChen
 * @Date:   2019-03-22 19:15:42
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-24 16:18:45
+* @Last Modified time: 2019-03-24 16:56:03
 */
 const http = require('http');
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
+const querystring = require('querystring');
+
 const swig = require('swig');
 const mime = require('./mime.json');
 
-const { getAll } = require('./WishModel.js')
+const { getAll,add } = require('./WishModel.js')
 
 
 const server = http.createServer((req,res)=>{
@@ -22,37 +24,6 @@ const server = http.createServer((req,res)=>{
 	if(pathname == '/' || pathname == '/index.html'){//获取首页
 		getAll()
 		.then(data=>{
-			/*
-			let html = `<!DOCTYPE html>
-							<html lang="en">
-							<head>
-								<meta charset="UTF-8">
-								<title>许愿墙</title>
-								<link rel="stylesheet" href="css/index.css">
-							</head>
-							<body>
-								<div class="wall">`;
-					data.forEach(item=>{
-						html += `<div class="wish" style="background: ${item.color}">
-									<a href="javascript:;" class="close" data-id='${item.id}'></a>
-										${item.content}
-								</div>`
-					});			
-				html +=			`</div>
-								<div class="form-box">
-									<div>
-										<textarea name="content" id="content" cols="30" rows="20"></textarea>
-									</div>
-									<div>
-										<a href="javascript:;" class="sub-btn">许下心愿</a>
-									</div>
-								</div>	
-							</body>
-							<script src="js/jquery.min.js"></script>
-							<script src="js/jquery.pep.js"></script>
-							<script src="js/index.js"></script>
-							</html>`;
-			*/
 			let template = swig.compileFile(__dirname+'/static/index.html');
 			let html = template({
 				data
@@ -60,7 +31,37 @@ const server = http.createServer((req,res)=>{
 			res.setHeader('Content-Type',"text/html;charset=utf-8");
 			res.end(html);			
 		})
-		
+		.catch(err=>{
+			console.log('get data err::',err);
+			res.setHeader('Content-Type',"text/html;charset=utf-8");
+			res.statusCode = 500;
+			res.end('<h1>好像哪里不对了!</h1>');				
+		})
+	}
+	else if(pathname == '/add' && req.method.toLowerCase() == 'post'){//添加
+		//获取参数
+		let body = '';
+		req.on('data',(chunk)=>{
+			body += chunk;
+		});
+		req.on('end',()=>{
+			let obj = querystring.parse(body);
+			add(obj)
+			.then(data=>{
+				let result = JSON.stringify({
+					status:0,//代表成功,
+					data:data
+				})
+				res.end(result);
+			})
+			.catch(err=>{
+				let result = JSON.stringify({
+					status:10,//代表失败,
+					message:'添加失败'
+				})
+				res.end(result);
+			})
+		})
 	}
 	else{//请求静态资源
 		let filePath =path.normalize(__dirname + '/static/'+pathname);

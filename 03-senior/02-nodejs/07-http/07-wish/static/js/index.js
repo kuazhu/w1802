@@ -2,7 +2,7 @@
 * @Author: Tom
 * @Date:   2018-07-25 14:33:24
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-24 11:48:27
+* @Last Modified time: 2019-03-24 17:03:59
 */
 
 (function($){
@@ -17,18 +17,54 @@
 		wishHeight = $wish.height(),
 		wallWidth = $wall.width(),
 		wallHeight = $wall.height();
+	function handWishPep($elem){
+		//1.设置许愿卡片拖动
+		$elem.pep({  constrainTo: '.wall' })
+		//2.随机显示许愿卡片
+		$elem.each(function(){
+			let x = getRandom(0,wallWidth - wishWidth);
+			let y = getRandom(0,wallHeight - wishHeight);
+			$(this).css({
+				transform: "matrix(1, 0, 0, 1, "+x+", "+y+")"
+			})
+		});
+		$elem.hover(function(){
+			$(this).css({
+				zIndex:999
+			})
+		},function(){
+			$(this).css({
+				zIndex:0
+			})
+		})		
+	}
+	handWishPep($wish);
 
 
-		
-	//1.设置许愿卡片拖动
-	$wish.pep({  constrainTo: '.wall' })
-	//2.随机显示许愿卡片
-	$wish.each(function(){
-		let x = getRandom(0,wallWidth - wishWidth);
-		let y = getRandom(0,wallHeight - wishHeight);
-		$(this).css({
-			transform: "matrix(1, 0, 0, 1, "+x+", "+y+")"
+	//监听添加事件
+	$('.sub-btn').on('click',function(){
+		$.ajax({
+			url:"/add",
+			type:'post',
+			dataType:'json',
+			data:{
+				content:$('#content').val()
+			}
 		})
+		.done(function(result){
+			if(result.status == 0){
+				var $dom = $(`<div class="wish" style="background: ${result.data.color}">
+								<a href="javascript:;" class="close" data-id='${result.data.id}'></a>
+								${result.data.content}
+							</div>`);
+				$wall.append($dom);
+				handWishPep($dom);
+				$('#content').val('');
+			}else{
+				alert(result.message);
+			}
+		});
+
 	});
 
 
