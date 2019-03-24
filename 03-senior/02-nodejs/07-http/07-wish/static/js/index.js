@@ -2,7 +2,7 @@
 * @Author: Tom
 * @Date:   2018-07-25 14:33:24
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-24 11:43:41
+* @Last Modified time: 2019-03-24 11:48:27
 */
 
 (function($){
@@ -19,6 +19,7 @@
 		wallHeight = $wall.height();
 
 
+		
 	//1.设置许愿卡片拖动
 	$wish.pep({  constrainTo: '.wall' })
 	//2.随机显示许愿卡片
