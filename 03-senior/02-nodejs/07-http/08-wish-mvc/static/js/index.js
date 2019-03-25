@@ -2,7 +2,7 @@
 * @Author: Tom
 * @Date:   2018-07-25 14:33:24
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-24 17:30:14
+* @Last Modified time: 2019-03-25 19:25:30
 */
 
 (function($){
@@ -44,7 +44,7 @@
 	//监听添加事件
 	$('.sub-btn').on('click',function(){
 		$.ajax({
-			url:"/add",
+			url:"/Wish/add",
 			type:'post',
 			dataType:'json',
 			data:{
@@ -70,9 +70,8 @@
 	$wall.on('click','.close',function(){
 		var $this = $(this);
 		$.ajax({
-			url:'del',
+			url:'/Wish/del/'+$this.data('id'),
 			dataType:'json',
-			data:'id='+ $this.data('id')
 		})
 		.done(function(result){
 			if(result.status == 0){
