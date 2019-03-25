@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-22 19:15:42
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-25 18:23:48
+* @Last Modified time: 2019-03-25 18:57:47
 */
 const http = require('http');
 const url = require('url');
@@ -10,11 +10,7 @@ const path = require('path');
 const fs = require('fs');
 const querystring = require('querystring');
 
-const swig = require('swig');
 const mime = require('./mime.json');
-
-const { getAll,add,remove } = require('./WishModel.js')
-
 
 const server = http.createServer((req,res)=>{
 	console.log('url=>',req.url);
@@ -27,7 +23,9 @@ const server = http.createServer((req,res)=>{
 	//					 /Wish/del/12345676
 	//					 /Wish/index
 	if(pathname.startsWith('/static/')){//静态资源处理
-		let filePath =path.normalize(__dirname + '/static/'+pathname);
+		
+		let filePath =path.normalize(__dirname + pathname);
+		console.log(filePath)
 		let extname = path.extname(filePath);
 
 		fs.readFile(filePath,(err,data)=>{
@@ -39,23 +37,21 @@ const server = http.createServer((req,res)=>{
 				res.end(data);
 			}
 		});
-	}else{//路由处理
+	}
+	else{//路由处理
 		let paths = pathname.split('/');
 		let controller = paths[1] || 'Wish';
 		let action = paths[2] || 'index';
+		let args = paths.slice(3);
 		try{
 			let mode = require('./Controller/'+controller);
-			mode[action] && mode[action]();
+			mode[action] && mode[action].apply(null,[req,res].concat(args));
 		}
 		catch(err){
-			console.log('err::',err);
+			// console.log('err::',err);
 			res.setHeader('Content-Type',"text/html;charset=utf-8");
 			res.end('<h1>出错啦!</h1>');
 		}
-		
-
-		console.log(paths);
-		res.end('ok');
 	}
 
 

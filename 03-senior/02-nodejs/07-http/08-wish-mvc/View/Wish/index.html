@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>许愿墙</title>
+	<link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+	<div class="wall">
+		{% for item in data %}
+		<div class="wish" style="background: {{ item.color }}">
+			<a href="javascript:;" class="close" data-id='{{ item.id }}'></a>
+			{{ item.content }}
+		</div>	
+		{% endfor %}	
+	</div>
+	<div class="form-box">
+		<div>
+			<textarea name="content" id="content" cols="30" rows="20"></textarea>
+		</div>
+		<div>
+			<a href="javascript:;" class="sub-btn">许下心愿</a>
+		</div>
+	</div>	
+</body>
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery.pep.js"></script>
+<script src="/static/js/index.js"></script>
+</html>
