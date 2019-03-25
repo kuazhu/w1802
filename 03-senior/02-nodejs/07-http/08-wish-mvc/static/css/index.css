@@ -1,0 +1,92 @@
+/*
+* @Author: Tom
+* @Date:   2018-07-24 22:30:42
+* @Last Modified by:   TomChen
+* @Last Modified time: 2018-07-26 17:15:12
+*/
+body{
+    background: url(../img/bg.jpg) no-repeat;
+    background-size: cover;
+}
+.wall {
+    width: 900px;
+    height: 600px;
+    float: left;
+    margin: 20px;
+}
+
+.wish {
+    width: 150px;
+    height: 200px;
+    background: blue;
+    position: relative;
+    box-sizing: border-box;
+    padding:20px 10px 10px 10px;
+    overflow: hidden;
+    word-break:break-all;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.6);
+}
+
+.form-box {
+    float: right;
+    margin: 20px;
+}
+
+textarea {
+    resize: none;
+    outline: 0;
+}
+
+.sub-btn {
+    display: block;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+    background: #f11;
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+.sub-btn:hover {
+    text-decoration: none;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    position: absolute;
+    display: inline-block;
+    right: 5px;
+    top: 1px;
+    width: 17px;
+    height: 17px;
+    overflow: hidden;
+}
+
+.close:hover::before,
+.close:hover::after {
+    background: #f00;
+}
+
+.close::before,
+.close::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: #000;
+}
+
+.close::before {
+    transform: rotate(45deg);
+}
+
+.close::after {
+    transform: rotate(-45deg);
+}
