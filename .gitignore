@@ -5,3 +5,4 @@
 *.mp4
 *.webm
 **/node_modules
+**/db
