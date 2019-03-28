@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-27 18:39:54
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-28 18:58:15
+* @Last Modified time: 2019-03-28 18:44:46
 */
 const mongoose = require('mongoose');
 const UserModel = require('./models/user.js')
@@ -19,10 +19,10 @@ db.once('open', ()=>{
 	console.log('connection successful');
 	
 	UserModel.insertMany({
-		name:"Tom",
-		age:18,
-		phone:'13811111111',
-		major:"computer"
+		name:"哈哈哈",
+		age:15,
+		phone:1381111111,
+		major:"art"
 	},(err,docs)=>{
 		if(err){
 			console.log('insertMany err::',err)
