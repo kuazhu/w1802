@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ title }}</title>
+</head>
+<body>
+	<h1>
+		{{ content }}
+	</h1>
+	<p>
+		{{ obj.name }} {{ obj.age }}
+	</p>
+	<p>
+		{% if name === 'Tom' %}
+			Hello Tom
+		{% endif %}
+	</p>
+	<p>
+		{% if name === 'Tom' %}
+		  hello Tom
+		{% elseif name === 'Leo' %}
+		  hello Leo
+		{% else %}
+		  hello guy
+		{% endif %}		
+	</p>
+	<ul>
+		{% for key,val in arr %}
+			<li>{{ key }} -- {{ val }}</li>
+		{% endfor %}
+	</ul>
+</body>
+</html>

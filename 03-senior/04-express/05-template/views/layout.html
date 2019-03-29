@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		{% block title %}{% endblock %}
+	</title>
+	<link rel="stylesheet" href="css/common.css">
+	{% block head %}{% endblock %}
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		nav{
+			height: 50px;
+			background: #c1c1c1;
+		}
+		.main{
+			height: 800px;
+		}
+		.left{
+			float: left;
+			width: 20%;
+			height: 100%;
+			background: tomato;
+		}
+		.right{
+			float: right;
+			width: 80%;
+			height: 100%;
+			background: orange;
+		}
+		.footer{
+			height: 50px;
+			background: black;
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		顶部导航
+	</nav>
+	<div class="main">
+		<div class="left">
+			left
+		</div>
+		<div class="right">
+			{% block content %}{% endblock %}
+		</div>
+	</div>
+	<div class="footer">
+		footer
+	</div>
+</body>
+{% include "./footer.html" %}
+{% block footer %}{% endblock %}
+</html>
+
+
+
+
+
+
