@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-mongo": "^2.0.3",
+    "cookies": "^0.7.3",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "mongoose": "^5.4.20",
     "swig": "^1.4.2"
   }

@@ -2,11 +2,15 @@
 * @Author: TomChen
 * @Date:   2019-03-29 19:32:15
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-29 20:54:14
+* @Last Modified time: 2019-03-31 16:37:24
 */
 const express = require('express')
 const swig = require('swig')
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const Cookies = require('cookies');
+const session = require('express-session');
+const MongoStore = require("connect-mongo")(session);
 
 const app = express();
 const port = 3000
@@ -38,8 +42,53 @@ app.set('views', './views')
 //注册模板引擎
 app.set('view engine', 'html')
 
-app.get('/',(req,res)=>{
-	res.render('main/index')
+//post/put请求处理中间件
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+
+/*
+//设置cookie中间件
+app.use((req,res,next)=>{
+	req.cookies = new Cookies(req,res)
+	
+	req.userInfo = {}
+	
+	let userInfo = req.cookies.get('userInfo');
+	
+	if(userInfo){
+		req.userInfo = JSON.parse(userInfo);
+	}
+	next()
 })
+*/
+
+//设置session中间件
+app.use(session({
+	//设置cookie名称
+    name:'kzid',
+    //用它来对session cookie签名，防止篡改
+    secret:'abc',
+    //强制保存session即使它并没有变化
+    resave: true, 
+    //强制将未初始化的session存储
+    saveUninitialized: true,
+    //如果为true,则每次请求都更新cookie的过期时间
+    rolling:true,
+    //cookie过期时间 1天
+    cookie:{maxAge:1000*60*60*24}, 
+    // cookie:{maxAge:1000*10},
+    //设置session存储在数据库中
+    store:new MongoStore({ mongooseConnection: mongoose.connection })                
+}))
+app.use((req,res,next)=>{
+	
+	req.userInfo = req.session.userInfo || {};
+	
+	next()
+})
+app.use('/',require('./routes/index.js'))
+app.use('/user',require('./routes/user.js'))
+app.use('/admin',require('./routes/admin.js'))
 
 app.listen(port, () => console.log(`app listening on port ${port}!`))

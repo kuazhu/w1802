@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-13 18:10:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-31 10:13:17
+* @Last Modified time: 2019-03-31 16:27:01
 */
 body{
 	background: #f1f1f1;
@@ -55,6 +55,7 @@ body{
 #user-info{
 	padding-left: 20px;
 	box-sizing: border-box;
+	height: 130px;
 }
 #user-info .link{
 	text-align: left;
