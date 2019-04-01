@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-01 19:26:42
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-01 19:52:14
+* @Last Modified time: 2019-04-01 20:53:32
 */
 /*
 page:请求页码
@@ -44,9 +44,11 @@ async function pagination(options){
 	if(page > pages){
 		page = pages
 	}
+	//如果总页数是0
 	if(pages == 0){
 		page = 1;
 	}
+	
 	//生成页码数组
 	const list = [];
 	for(let i = 1;i<=pages;i++){
