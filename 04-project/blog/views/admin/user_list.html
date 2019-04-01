@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="content">
 <table class="table table-striped">
   <thead>
     <tr>
@@ -13,12 +14,12 @@
     </tr>
   </thead>
   <tbody>
-  	{% for key,val in users %}
+  	{% for user in users %}
     <tr>
-      <td>{{ val._id.toString() }}</td>
-      <td>{{ val.username }}</td>
+      <td>{{ user._id.toString() }}</td>
+      <td>{{ user.username }}</td>
       <td>
-      	{% if val.isAdmin %}
+      	{% if user.isAdmin %}
       		是
       	{% else %}
       		否
@@ -28,4 +29,26 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li>
+      <a href="/admin/users?page={{ page - 1 }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% for i in list %}
+    {% if i == page %}
+    <li class="active"><a href="javascript:;">{{ i }}</a></li>
+    {% else %}
+    <li><a href="/admin/users?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+    {% endfor %}
+    <li>
+      <a href="/admin/users?page={{ page + 1 }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 {% endblock %}

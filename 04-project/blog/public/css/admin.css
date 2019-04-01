@@ -2,10 +2,16 @@
 * @Author: TomChen
 * @Date:   2019-03-31 17:04:17
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-31 17:05:05
+* @Last Modified time: 2019-04-01 18:49:23
 */
 .user-info{
 	float: right;
 	margin-top: 8px;
 	margin-right: 80px;
+}
+.content{
+	min-height: 200px;
+}
+.btn-add{
+	margin-bottom: 20px;
 }
