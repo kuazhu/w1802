@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="content">
-<a href="/category/add" class="btn btn-primary btn-add">新增分类</a>  
+<a href="/category/add" class="btn btn-primary btn-add">新增分类</a> 
 <table class="table table-striped">
   <thead>
     <tr>
@@ -16,8 +16,17 @@
     </tr>
   </thead>
   <tbody>
-
+    {% for category in categories %}
+    <tr>
+      <td>{{ category._id.toString() }}</td>
+      <td>{{ category.name }}</td>
+      <td>{{ category.order }}</td>
+    </tr>
+    {% endfor %}
   </tbody>
 </table>
 </div>
+{% if pages > 1 %}
+{% include './pagination.html' %}
+{% endif %}
 {% endblock %}
