@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-01 19:26:42
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-01 20:53:32
+* @Last Modified time: 2019-04-02 20:15:12
 */
 /*
 page:请求页码
@@ -10,6 +10,7 @@ model:数据模型
 query:查询条件
 projection:投影
 sort:排序
+populates:关联的数组
 */
 async function pagination(options){
 	/*
@@ -23,7 +24,7 @@ async function pagination(options){
 	第 page 页 跳过 （page -1）* limit 条 skip(（page -1）* limit)
 
 	*/
-	let { page,model,query,projection,sort } = options;
+	let { page,model,query,projection,sort,populates } = options;
 	const limit = 2;
 
 	page = parseInt(page)
@@ -58,7 +59,14 @@ async function pagination(options){
 	//跳过条数
 	const skip = (page -1) * limit
 
-	const docs = await model.find(query,projection).sort(sort).skip(skip).limit(limit)
+	let result = model.find(query,projection);
+	if(populates){
+		populates.forEach(populate=>{
+			result = result.populate(populate);
+		})
+	}
+
+	const docs = await result.sort(sort).skip(skip).limit(limit)
 
 	return {
 		docs,

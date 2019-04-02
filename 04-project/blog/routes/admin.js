@@ -2,9 +2,12 @@
 * @Author: TomChen
 * @Date:   2019-03-31 11:06:49
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-01 19:52:36
+* @Last Modified time: 2019-04-02 19:19:50
 */
 const express = require('express')
+const multer  = require('multer')
+const upload = multer({ dest: 'public/uploads/' })
+
 const UserModel = require('../models/user.js')
 const pagination = require('../util/pagination.js')
 const router = express.Router()
@@ -99,8 +102,15 @@ router.get("/users",(req,res)=>{
 			url:'/admin/users'
 		})		
 	})
+})
 
-
+//处理上传图片
+router.post('/uploadImage',upload.single('upload'),(req,res)=>{
+	const uploadedFilePath = '/uploads/'+req.file.filename
+	res.json({
+		uploaded:true,
+		url:uploadedFilePath
+	})
 })
 
 module.exports = router
