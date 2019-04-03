@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-29 19:32:15
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-02 18:15:40
+* @Last Modified time: 2019-04-03 20:49:07
 */
 const express = require('express')
 const swig = require('swig')
@@ -92,5 +92,6 @@ app.use('/user',require('./routes/user.js'))
 app.use('/admin',require('./routes/admin.js'))
 app.use('/category',require('./routes/category.js'))
 app.use('/article',require('./routes/article.js'))
+app.use('/comment',require('./routes/comment.js'))
 
 app.listen(port, () => console.log(`app listening on port ${port}!`))

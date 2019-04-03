@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-13 18:10:45
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-31 17:14:59
+* @Last Modified time: 2019-04-03 19:58:02
 */
 ;(function($){
 	var $login = $('#login');
@@ -118,4 +118,78 @@
 			})
 		}
 	})
+	//4.文章列表分页
+	var $articlePagination = $('#article-page');
+	function buildArtileListHtml(articles){
+		var html = '';
+		articles.forEach(function(article){
+			var createdAt = moment(article.createdAt).format('YYYY年MM月DD日 H:mm:ss')
+			html += `<div class="panel panel-default content-item">
+					    <div class="panel-heading">
+					      <h3 class="panel-title">
+					        <a href="/view/${ article._id.toString() }" class="link" target="_blank">${article.title}</a>
+					      </h3>
+					    </div>
+					    <div class="panel-body">
+					      ${ article.intro }
+					    </div>
+					    <div class="panel-footer">
+					      <span class="glyphicon glyphicon-user"></span>
+					      <span class="panel-footer-text text-muted">${ article.user.username }</span>
+					      <span class="glyphicon glyphicon-th-list"></span>
+					      <span class="panel-footer-text text-muted">${ article.category.name  }</span>
+					      <span class="glyphicon glyphicon-time"></span>
+					      <span class="panel-footer-text text-muted">${ createdAt }</span>
+					      <span class="glyphicon glyphicon-eye-open"></span>
+					      <span class="panel-footer-text text-muted"><em>${ article.click }</em>已阅读</span>
+					    </div>
+					  </div>
+					`
+		})
+
+		return html;
+	}
+
+	function buildArtilePaginationHtml(list, page){
+		var html = '';
+		html = `<li>
+			      <a href="javascript:;" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>`
+		
+		list.forEach(function(i){
+			if(i == page){
+				html += `<li class="active"><a href="javascript:;">${ i }</a></li>`
+			}else{
+				html += `<li><a href="javascript:;">${ i }</a></li>`
+			}
+		})
+
+		html += `<li>
+			      <a href="javascript:;" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>`
+		return html;
+	}
+	$articlePagination.on('get-data',function(ev,data){
+		//1.构建文章列表
+		console.log(data)
+		$('#article-wrap').html(buildArtileListHtml(data.docs))
+		//2.构建分页器
+		var $pagination = $articlePagination.find('.pagination')
+		if(data.pages > 1){
+			$pagination.html(buildArtilePaginationHtml(data.list,data.page))
+		}else{
+			$pagination.html('')
+		}	
+	})
+
+	$articlePagination.pagination({
+		url:'/articles'
+	})
+
+
+
 })(jQuery);

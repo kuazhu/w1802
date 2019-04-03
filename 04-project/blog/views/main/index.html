@@ -4,7 +4,7 @@
   我的个人博客
 {% endblock %}
 {% block head %}
-  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="/css/index.css">
 {% endblock %} 
 {% block content %}
 <div id="main-carousel" class="carousel slide" data-ride="carousel">
@@ -33,29 +33,8 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-{% for article in articles %}
-<div class="panel panel-default content-item">
-  <div class="panel-heading">
-    <h3 class="panel-title">
-      <a href="/view/{{ article._id.toString() }}" class="link" target="_blank">{{article.title}}</a>
-    </h3>
-  </div>
-  <div class="panel-body">
-    {{ article.intro }}
-  </div>
-  <div class="panel-footer">
-    <span class="glyphicon glyphicon-user"></span>
-    <span class="panel-footer-text text-muted">{{ article.user.username }}</span>
-    <span class="glyphicon glyphicon-th-list"></span>
-    <span class="panel-footer-text text-muted">{{ article.category.name  }}</span>
-    <span class="glyphicon glyphicon-time"></span>
-    <span class="panel-footer-text text-muted">{{ article.createdAt | date('Y年m月d日 H:m:i',-8*60) }}</span>
-    <span class="glyphicon glyphicon-eye-open"></span>
-    <span class="panel-footer-text text-muted"><em>{{ article.click }}</em>已阅读</span>
-  </div>
-</div>
-{% endfor %}
-{% include './pagination.html' %}                                       
+{% include './article_list.html' %} 
+             
 {% endblock %}
 {% block footer %}
 <script src="js/index.js"></script>

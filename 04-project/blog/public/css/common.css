@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-13 18:10:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-03-31 16:27:01
+* @Last Modified time: 2019-04-03 19:12:10
 */
 body{
 	background: #f1f1f1;
@@ -130,6 +130,9 @@ body{
 }
 footer{
 	text-align: center;
+}
+#article-wrap{
+	min-height: 300px;
 }
 
 
