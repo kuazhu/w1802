@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-29 19:32:15
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-03 20:49:07
+* @Last Modified time: 2019-04-04 19:40:15
 */
 const express = require('express')
 const swig = require('swig')
@@ -90,6 +90,7 @@ app.use((req,res,next)=>{
 app.use('/',require('./routes/index.js'))
 app.use('/user',require('./routes/user.js'))
 app.use('/admin',require('./routes/admin.js'))
+app.use('/home',require('./routes/home.js'))
 app.use('/category',require('./routes/category.js'))
 app.use('/article',require('./routes/article.js'))
 app.use('/comment',require('./routes/comment.js'))

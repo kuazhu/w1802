@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-13 18:10:45
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-03 20:48:43
+* @Last Modified time: 2019-04-04 19:04:40
 */
 ;(function($){
 	//提交评论
@@ -31,7 +31,8 @@
 			}
 		})
 		.done(function(result){
-			console.log(result)
+			$('#comment-content').val('')
+			$('#comment-page').trigger('get-data',result.data)
 		})
 		.fail(function(err){
 			console.log(err)

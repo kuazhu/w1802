@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-27 20:25:44
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-03 20:51:54
+* @Last Modified time: 2019-04-04 18:28:30
 */
 
 const mongoose = require('mongoose');
@@ -35,7 +35,7 @@ CommentSchema.statics.getPaginationComments = function(req,query={}){
 		query:query,
 		projection:'-__v',
 		sort:{_id:-1},
-		populates:[{path:"user",select:'username'},{path:'category',select:'name'}]
+		populates:[{path:"user",select:'username'},{path:'article',select:'title'}]
 	}
 	return pagination(options)	
 }

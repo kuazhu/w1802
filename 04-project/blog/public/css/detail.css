@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-13 20:33:29
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-03 20:35:52
+* @Last Modified time: 2019-04-04 18:46:34
 */
 .detail-panel{
 	min-height: 600px;
@@ -20,4 +20,11 @@
 
 .btn-sub-comment{
 	padding: 26px 20px;
+}
+
+#comment-wrap .panel-body{
+	word-break: break-word;
+}
+#comment-wrap{
+	min-height: 400px;
 }

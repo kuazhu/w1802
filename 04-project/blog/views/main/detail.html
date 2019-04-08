@@ -28,15 +28,38 @@
 </div> 
 <div class="row">
   <div class="col-lg-12">
+    {% if userInfo._id %}
     <div class="input-group">
       <textarea  class="form-control" id="comment-content" rows="3"></textarea>
       <span class="input-group-btn">
         <button class="btn btn-primary btn-sub-comment" data-id="{{ article._id.toString() }}" type="button">提交</button>
       </span>
-    </div><!-- /input-group -->
+    </div>
     <p class="text-danger err"></p>
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
+    {% else %}
+    <div class="alert alert-info" role="alert">请登录后添加评论</div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div id="comment-wrap">
+      {% for comment in comments %}
+      <div class="panel panel-default">
+        <div class="panel-heading">{{ comment.user.username }} 发布于 {{ comment.createdAt | date('Y年m月d日 H:m:i',-8*60) }}</div>
+        <div class="panel-body">
+          {{ comment.content }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <nav aria-label="Page navigation" id="comment-page" data-id="{{ article._id.toString() }}">
+    {% include './pagination.html' %}  
+    </nav>    
+  </div>
+</div>
+
 {% endblock %}
 {% block footer %}
 <script src="/js/detail.js"></script>

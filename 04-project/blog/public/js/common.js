@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-03-13 18:10:45
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-03 19:58:02
+* @Last Modified time: 2019-04-04 18:44:57
 */
 ;(function($){
 	var $login = $('#login');
@@ -149,8 +149,7 @@
 
 		return html;
 	}
-
-	function buildArtilePaginationHtml(list, page){
+	function buildPaginationHtml(list, page){
 		var html = '';
 		html = `<li>
 			      <a href="javascript:;" aria-label="Previous">
@@ -173,14 +172,28 @@
 			    </li>`
 		return html;
 	}
+	function buildCommentListHtml(comments){
+		var html = '';
+		comments.forEach(function(comment){
+			var createdAt = moment(comment.createdAt).format('YYYY年MM月DD日 H:mm:ss');
+			html += `<div class="panel panel-default">
+				        <div class="panel-heading">${ comment.user.username } 发布于 ${ createdAt}</div>
+				        <div class="panel-body">
+				          ${ comment.content }
+				        </div>
+				      </div>`
+		})
+
+
+		return html;
+	}
 	$articlePagination.on('get-data',function(ev,data){
 		//1.构建文章列表
-		console.log(data)
 		$('#article-wrap').html(buildArtileListHtml(data.docs))
 		//2.构建分页器
 		var $pagination = $articlePagination.find('.pagination')
 		if(data.pages > 1){
-			$pagination.html(buildArtilePaginationHtml(data.list,data.page))
+			$pagination.html(buildPaginationHtml(data.list,data.page))
 		}else{
 			$pagination.html('')
 		}	
@@ -189,7 +202,21 @@
 	$articlePagination.pagination({
 		url:'/articles'
 	})
-
-
+	//5.评论列表分页
+	var $commentPagination = $('#comment-page');
+	$commentPagination.on('get-data',function(ev,data){
+		//1.构建评论列表
+		$('#comment-wrap').html(buildCommentListHtml(data.docs))
+		//2.构建分页器
+		var $pagination = $commentPagination.find('.pagination')
+		if(data.pages > 1){
+			$pagination.html(buildPaginationHtml(data.list,data.page))
+		}else{
+			$pagination.html('')
+		}	
+	})	
+	$commentPagination.pagination({
+		url:'/comment/list'
+	})
 
 })(jQuery);
