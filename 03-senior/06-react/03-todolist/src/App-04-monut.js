@@ -2,18 +2,16 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-10 20:43:50
+* @Last Modified time: 2019-04-10 19:40:54
 */
 
 import React,{ Component,Fragment } from 'react'
-import { DatePicker,Button } from 'antd';
-
 import Item from './Item.js'
 import './App.css'
-// import 'antd/dist/antd.css'; 
 
 class App extends Component{
 	constructor(props){
+		console.log('App constructor')
 		super(props);
 		this.state = {
 			list:["吃饭"],
@@ -21,6 +19,15 @@ class App extends Component{
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleAdd = this.handleAdd.bind(this)
+	}
+	static getDerivedStateFromProps(nextProps, prevState){
+		console.log('App getDerivedStateFromProps(nextProps, prevState)',nextProps, prevState)
+		return {
+			list:['睡觉']
+		}
+	}
+	componentDidMount(){
+		console.log('App componentDidMount')
 	}
 	handleAdd(){
 		this.setState(preState=>({
@@ -47,6 +54,7 @@ class App extends Component{
 		})
 	}
 	render(){
+		console.log('App render....')
 		return( 
 			<div className="App">
 				<input 
@@ -59,8 +67,6 @@ class App extends Component{
 						this.getItems()
 					}
 				</ul>
-				<Button type="primary">Primary</Button>
-				<DatePicker />
 			</div>
 		)
 	}

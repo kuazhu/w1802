@@ -2,18 +2,16 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-10 20:43:50
+* @Last Modified time: 2019-04-10 20:15:57
 */
 
 import React,{ Component,Fragment } from 'react'
-import { DatePicker,Button } from 'antd';
-
 import Item from './Item.js'
 import './App.css'
-// import 'antd/dist/antd.css'; 
 
 class App extends Component{
 	constructor(props){
+		console.log('App constructor')
 		super(props);
 		this.state = {
 			list:["吃饭"],
@@ -21,6 +19,25 @@ class App extends Component{
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleAdd = this.handleAdd.bind(this)
+	}
+
+	static getDerivedStateFromProps(nextProps, prevState){
+		console.log('App getDerivedStateFromProps(nextProps, prevState)',nextProps, prevState)
+		return {
+		
+		}
+	}
+	shouldComponentUpdate(nextProps, nextState){
+		console.log('App shouldComponentUpdate(nextProps, nextState)',nextProps, nextState)
+		// return false;
+		return true;
+	}
+	getSnapshotBeforeUpdate(prevProps, prevState){
+		console.log('App getSnapshotBeforeUpdate(prevProps, prevState)',prevProps, prevState)
+		return 123;
+	}
+	componentDidUpdate(prevProps, prevState,snapshot){
+		console.log('App componentDidUpdate(prevProps, prevState,snapshot)',prevProps, prevState,snapshot)
 	}
 	handleAdd(){
 		this.setState(preState=>({
@@ -47,6 +64,7 @@ class App extends Component{
 		})
 	}
 	render(){
+		console.log('App render....')
 		return( 
 			<div className="App">
 				<input 
@@ -59,8 +77,6 @@ class App extends Component{
 						this.getItems()
 					}
 				</ul>
-				<Button type="primary">Primary</Button>
-				<DatePicker />
 			</div>
 		)
 	}

@@ -2,15 +2,12 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-10 20:43:50
+* @Last Modified time: 2019-04-10 18:57:46
 */
 
 import React,{ Component,Fragment } from 'react'
-import { DatePicker,Button } from 'antd';
-
 import Item from './Item.js'
 import './App.css'
-// import 'antd/dist/antd.css'; 
 
 class App extends Component{
 	constructor(props){
@@ -26,10 +23,14 @@ class App extends Component{
 		this.setState(preState=>({
 			list:[...preState.list,preState.val],
 			val:''			
-		}));
+		}),()=>{
+			console.log(this.ul.querySelectorAll('li'))
+		});
+		//console.log(this.ul.querySelectorAll('li'))
 	}
 	handleChange(ev){
-		const val = ev.target.value
+		// const val = ev.target.value
+		const val = this.input.value
 		this.setState(()=>({
 			val
 		}));
@@ -47,20 +48,23 @@ class App extends Component{
 		})
 	}
 	render(){
+		console.log('App render....')
 		return( 
 			<div className="App">
 				<input 
 					onChange={this.handleChange} 
 					value={this.state.val}
+					ref={(input)=>{
+						// console.log(input)
+						this.input = input
+					}} 
 				/>
 				<button onClick={this.handleAdd}>新增</button>
-				<ul>
+				<ul ref={(ul)=>{this.ul=ul}}>
 					{
 						this.getItems()
 					}
 				</ul>
-				<Button type="primary">Primary</Button>
-				<DatePicker />
 			</div>
 		)
 	}
