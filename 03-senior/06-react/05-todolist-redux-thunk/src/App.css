@@ -1,0 +1,22 @@
+/*
+* @Author: TomChen
+* @Date:   2019-04-09 20:06:03
+* @Last Modified by:   TomChen
+* @Last Modified time: 2019-04-09 20:07:57
+*/
+*{
+	margin: 0;
+	padding: 0;
+}
+.App{
+	width: 500px;
+	margin: 50px auto;
+}
+.App ul{
+	margin-top: 20px;
+}
+.App li{
+	list-style: none;
+	line-height: 30px;
+	border-bottom: 1px dashed #ccc;
+}

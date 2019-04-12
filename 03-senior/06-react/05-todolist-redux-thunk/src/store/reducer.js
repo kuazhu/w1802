@@ -2,9 +2,9 @@
 * @Author: TomChen
 * @Date:   2019-04-11 18:56:06
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-11 20:14:46
+* @Last Modified time: 2019-04-11 20:58:06
 */
-import {ADD_ITEM,CHANGE_ITEM,DEL_ITEM} from './actionTypes.js'
+import {ADD_ITEM,CHANGE_ITEM,DEL_ITEM,LOAD_DATA} from './actionTypes.js'
 
 
 const defaultState = {
@@ -47,7 +47,11 @@ export default (state=defaultState,action)=>{
 		newState.list.splice(action.payload,1)
 		return newState
 	}
-
+	if(action.type == LOAD_DATA){
+		const newState = JSON.parse(JSON.stringify(state))
+		newState.list = action.payload
+		return newState
+	}
 
 	return state;
 }
