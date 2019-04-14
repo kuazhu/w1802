@@ -2,11 +2,12 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-14 11:16:10
+* @Last Modified time: 2019-04-14 11:34:49
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const publicPath = "/";
 
 module.exports = {
 	//指定打包环境
@@ -24,6 +25,8 @@ module.exports = {
 	output: {
 		//出口文件名称
 		filename: '[name].[hash].bundle.js',
+		//输出路径
+		publicPath:publicPath,
 		//出口的文件所在的目录
 		path: path.resolve(__dirname, 'dist')
 	},

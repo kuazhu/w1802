@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-14 11:45:10
+* @Last Modified time: 2019-04-14 11:15:11
 */
 
 import React,{ Component,Fragment } from 'react'
@@ -11,7 +11,6 @@ import {
 	BrowserRouter as Router, 
 	// HashRouter as Router, 
 	Route, 
-	Switch,
 	Link 
 } from "react-router-dom";
 
@@ -24,11 +23,7 @@ class Home extends Component{
 }
 class User extends Component{
 	render(){
-		return <Switch>
-			<Route exact path="/users" render={()=><h1>this is users page,no id</h1>}  />
-			<Route path="/users/profile" render={()=><h1>this is user profile page</h1>} />
-			<Route path="/users/:id" render={(route)=><h1>this is users page,user id is {route.match.params.id}</h1>} />
-		</Switch>
+		return <h1>this is users page</h1>
 	}
 }
 
@@ -47,13 +42,7 @@ class App extends Component{
 						</li>
 						<li>
 							<Link to="/users">/users</Link>
-						</li>							
-						<li>
-							<Link to="/users/123">/users/123</Link>
-						</li>
-						<li>
-							<Link to="/users/profile">/users/profile</Link>
-						</li>												
+						</li>						
 					</ul>
 					<Route exact path="/" component={Home} />				
 					<Route path="/about" render={()=>(<h1>this about page</h1>)} />				
