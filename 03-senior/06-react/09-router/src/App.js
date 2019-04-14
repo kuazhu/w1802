@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-14 11:45:10
+* @Last Modified time: 2019-04-14 15:54:33
 */
 
 import React,{ Component,Fragment } from 'react'
@@ -31,10 +31,31 @@ class User extends Component{
 		</Switch>
 	}
 }
+class Info extends Component{
+	render(){
+		return <h1>this is info page</h1>
+	}
+}
+class Login extends Component{
+	render(){
+		return <h1>this is login page</h1>
+	}
+}
 
 class App extends Component{
-
+	constructor(props){
+		super(props);
+		this.state = {
+			isLogin:false
+		}
+	}
 	render(){
+		const ProtectRoute = ({component:Component,...rest})=>(
+			<Route
+				{...rest}
+				render={(props)=>(this.state.isLogin ? <Component {...props} /> : <Login />)}
+			 />
+		)
 		return( 
 			<Router>
 				<div className="App">
@@ -46,6 +67,9 @@ class App extends Component{
 							<Link to="/about">/about</Link>
 						</li>
 						<li>
+							<Link to="/info">/info</Link>
+						</li>						
+						<li>
 							<Link to="/users">/users</Link>
 						</li>							
 						<li>
@@ -56,8 +80,10 @@ class App extends Component{
 						</li>												
 					</ul>
 					<Route exact path="/" component={Home} />				
-					<Route path="/about" render={()=>(<h1>this about page</h1>)} />				
-					<Route path="/users" component={User}  />				
+					<Route path="/about" render={()=>(<h1>this about page</h1>)} />							
+					<ProtectRoute path="/info" component={Info}  />	
+					<ProtectRoute path="/users" component={User}  />
+
 				</div>
 			</Router>
 		)

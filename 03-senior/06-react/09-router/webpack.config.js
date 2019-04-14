@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-14 11:34:49
+* @Last Modified time: 2019-04-14 15:44:15
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -59,7 +59,7 @@ module.exports = {
 			    use: {
 			        loader: 'babel-loader',
 			        options: {
-			            presets: ['env', 'react'],
+			            presets: ['env','es2015','react','stage-3'],
 			            plugins: [["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]]
 			        }
 			    }               
