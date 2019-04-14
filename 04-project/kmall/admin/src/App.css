@@ -1,0 +1,19 @@
+/*
+* @Author: TomChen
+* @Date:   2019-04-09 20:06:03
+* @Last Modified by:   TomChen
+* @Last Modified time: 2019-04-14 10:48:19
+*/
+*{
+	margin: 0;
+	padding: 0;
+}
+li{
+	list-style: none;
+	float: left;
+	margin-right: 10px;
+}
+.nav{
+	height: 40px;
+	margin-bottom: 20px;
+}

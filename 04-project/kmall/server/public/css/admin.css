@@ -1,0 +1,20 @@
+/*
+* @Author: TomChen
+* @Date:   2019-03-31 17:04:17
+* @Last Modified by:   TomChen
+* @Last Modified time: 2019-04-02 19:06:03
+*/
+.user-info{
+	float: right;
+	margin-top: 8px;
+	margin-right: 80px;
+}
+.content{
+	min-height: 200px;
+}
+.btn-add{
+	margin-bottom: 20px;
+}
+.ck-editor__editable{
+	height: 200px;
+}

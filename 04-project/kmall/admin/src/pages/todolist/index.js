@@ -2,23 +2,23 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-12 19:44:21
+* @Last Modified time: 2019-04-12 20:54:27
 */
 
 import React,{ Component,Fragment } from 'react'
 import { Input,Button,Row, Col,List  } from 'antd';
 
 import { connect } from 'react-redux'
-import {getAddItemAction,getChangeItemAction,getDelItemAction,loadInitDataAction,getInitDataAction} from './store/actionCreator.js'
-import './App.css'
+import { actionCreator } from './store'
+import './index.css'
 
-class App extends Component{
+class TodoList extends Component{
 	componentDidMount(){
 		this.props.handleInit()
 	}
 	render(){
 		return( 
-			<div className="App">
+			<div className="TodoList">
 				<Row>
 					<Col span={12}>
 						<Input
@@ -43,8 +43,8 @@ class App extends Component{
 
 const mapStateToProps = (state)=>{
 	return {
-		val:state.val,
-		list:state.list
+		val:state.get('todolist').get('val'),
+		list:state.get('todolist').get('list')
 	}
 }
 
@@ -52,22 +52,22 @@ const mapDispatchToProps = (dispatch)=>{
 	return {
 		handleChange:(ev)=>{
 			const val = ev.target.value
-			const action = getChangeItemAction(val)
+			const action = actionCreator.getChangeItemAction(val)
 			dispatch(action)			
 		},
 		handleAdd:()=>{
-			const action = getAddItemAction();
+			const action = actionCreator.getAddItemAction();
 			dispatch(action)			
 		},
 		handleDel:(index)=>{
-			const action = getDelItemAction(index)
+			const action = actionCreator.getDelItemAction(index)
 			dispatch(action)			
 		},
 		handleInit:()=>{
-			const action = getInitDataAction();
+			const action = actionCreator.getInitDataAction();
 			dispatch(action)			
 		}
 	}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(TodoList);
