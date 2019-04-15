@@ -2,12 +2,13 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-14 17:32:46
+* @Last Modified time: 2019-04-15 19:00:26
 */
 
 import React,{ Component } from 'react'
+import axios from 'axios'
 import {
-  Form, Icon, Input, Button, Checkbox,
+  Form, Icon, Input, Button, message,
 } from 'antd';
 
 import './index.css'
@@ -21,7 +22,25 @@ class NormalLoginForm extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
+        axios({
+        	method:'post',
+        	url:'http://127.0.0.1:300/admin/login',
+        	data:values
+        })
+        .then(result=>{
+        	// console.log(result)
+        	if(result.data.code == 0){//登录成功
+        		//跳转到后台首页
+        		window.location.href = "/"
+        	}else if(result.data.code == 1){
+        		message.error(result.data.message)
+        	}
+        })
+        .catch(err=>{
+        	console.log(err);
+        	message.error('网络请求失败,请稍后再试')
+        })
       }
     });
   }
@@ -33,14 +52,14 @@ class NormalLoginForm extends Component {
 			<Form className="login-form">
 			<Form.Item>
 			  {getFieldDecorator('username', {
-			    rules: [{ required: true, message: '请输入用户名!' }],
+			    rules: [{ required: true, message: '请输入用户名!' },{ pattern: /^[a-z0-9_]{3,6}$/, message: '用户名为3到6位的字母,数字或者下划线!' }],
 			  })(
 			    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
 			  )}
 			</Form.Item>
 			<Form.Item>
 			  {getFieldDecorator('password', {
-			    rules: [{ required: true, message: '请输入密码!' }],
+			    rules: [{ required: true, message: '请输入密码!' },,{ pattern: /^\w{3,6}$/, message: '密码为3到6位的字符!' }],
 			  })(
 			    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
 			  )}
