@@ -1,157 +1,178 @@
 /*
-* @Author: TomChen
-* @Date:   2019-03-31 11:06:49
+* @Author: Tom
+* @Date:   2018-08-06 09:23:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-01 20:55:26
+* @Last Modified time: 2018-09-18 11:13:41
 */
-const express = require('express')
-const CategoryModel = require('../models/category.js')
-const pagination = require('../util/pagination.js')
-const router = express.Router()
+const Router = require('express').Router;
+const CategoryModel = require('../models/category.js');
+const pagination = require('../util/pagination.js');
 
-//权限验证
+const router = Router();
+
+//权限控制
 router.use((req,res,next)=>{
 	if(req.userInfo.isAdmin){
 		next()
 	}else{
-		res.send('<h1>请用管理员账号登录</h1>')
+		res.send({
+			code:10
+		});
 	}
 })
-
-//显示分类列表
-router.get("/",(req,res)=>{
-	const options = {
-		page:req.query.page,
-		model:CategoryModel,
-		query:{},
-		projection:'-__v',
-		sort:{order:-1}
-	}
-	pagination(options)
-	.then(data=>{
-		res.render('admin/category_list',{
-			userInfo:req.userInfo,
-			categories:data.docs,
-			page:data.page,
-			list:data.list,
-			pages:data.pages,
-			url:'/category'
-		})		
-	})	
-})
-
-//显示添加分类页面
-router.get("/add",(req,res)=>{
-	res.render('admin/category_add_edit',{
-		userInfo:req.userInfo
-	})
-})
-//处理添加分类
-router.post("/add",(req,res)=>{
-	const { name,order } = req.body;
-	CategoryModel.findOne({name})
-	.then(category=>{
-		if(category){//已经存在同名的分类
-			res.render('admin/error',{
-				userInfo:req.userInfo,
-				message:"添加分类失败,分类已存在"
-			})
+//添加分类
+router.post("/",(req,res)=>{
+	let body = req.body;
+	CategoryModel
+	.findOne({name:body.name,pid:body.pid})
+	.then((cate)=>{
+		if(cate){
+	 		res.json({
+	 			code:1,
+	 			message:"添加分类失败,分类已存在"
+	 		})
 		}else{
-			CategoryModel.insertMany({name,order})
-			.then(categories=>{
-				res.render('admin/success',{
-					userInfo:req.userInfo,
-					message:'添加分类成功',
-					url:'/category'
-				})
+			new CategoryModel({
+				name:body.name,
+				pid:body.pid
 			})
-			.catch(err=>{
-				throw err
-			})			
-		}
-	})
-	.catch(err=>{
-		res.render('admin/error',{
-			userInfo:req.userInfo,
-			message:"添加分类失败,操作数据库错误,稍后再试一试"
-		})
-	})
-})
-
-//显示编辑页面
-router.get('/edit/:id',(req,res)=>{
-	const { id } = req.params
-	CategoryModel.findById(id)
-	.then(category=>{
-		res.render('admin/category_add_edit',{
-			userInfo:req.userInfo,
-			category
-		})		
-	})
-})
-
-//处理编辑
-router.post('/edit',(req,res)=>{
-	const { id,name,order } = req.body
-
-	CategoryModel.findById(id)
-	.then(category=>{
-		if(category.name == name && category.order == order){//没有更改
-			res.render('admin/error',{
-				userInfo:req.userInfo,
-				message:"请修改后在提交"
-			})			
-		}else{
-			CategoryModel.findOne({name:name,_id:{$ne:id}})
-			.then(newCategory=>{
-				if(newCategory){
-					res.render('admin/error',{
-						userInfo:req.userInfo,
-						message:"修改分类失败,分类已存在"
-					})	
-				}else{
-					CategoryModel.updateOne({_id:id},{name,order})
-					.then(result=>{
-						res.render('admin/success',{
-							userInfo:req.userInfo,
-							message:'修改分类成功',
-							url:'/category'
-						})					
-					})
-					.catch(err=>{
-						throw err;
-					})					
+			.save()
+			.then((newCate)=>{
+				if(newCate){
+					if(body.pid == 0){//如果添加的是一级分类,返回新的一级分类
+						CategoryModel.find({pid:0},"_id name")
+						.then((categories)=>{
+							res.json({
+								code:0,
+								data:categories
+							})	
+						})						
+					}else{
+						res.json({
+							code:0
+						})
+					}
+					
 				}
 			})
-			.catch(err=>{
-				throw err;
+			.catch((e)=>{
+		 		res.json({
+		 			code:1,
+		 			message:"添加分类失败,服务器端错误"
+		 		})
 			})
 		}
 	})
-	.catch(err=>{
-		res.render('admin/error',{
-			userInfo:req.userInfo,
-			message:"修改分类失败,操作数据库错误,稍后再试一试"
+})
+//获取分类
+router.get("/",(req,res)=>{
+	let pid = req.query.pid;
+	let page = req.query.page;
+	
+	if(page){
+		CategoryModel
+		.getPaginationCategories(page,{pid:pid})
+		.then((result)=>{
+			res.json({
+				code:0,
+				data:{
+					current:result.current,
+					total:result.total,
+					pageSize:result.pageSize,
+					list:result.list					
+				}
+			})	
+		})
+	}else{
+		CategoryModel.find({pid:pid},"_id name pid order")
+		.then((categories)=>{
+			res.json({
+				code:0,
+				data:categories
+			})	
+		})
+		.catch(e=>{
+	 		res.json({
+	 			code:1,
+	 			message:"获取分类失败,服务器端错误"
+	 		})		
 		})		
+	}
+
+});
+//更新名称
+router.put("/updateName",(req,res)=>{
+	let body = req.body;
+	CategoryModel
+	.findOne({name:body.name,pid:body.pid})
+	.then((cate)=>{
+		if(cate){
+	 		res.json({
+	 			code:1,
+	 			message:"更新分类失败,分类已存在"
+	 		})
+		}else{
+			CategoryModel
+			.update({_id:body.id},{name:body.name})
+			.then((cate)=>{
+				if(cate){
+					CategoryModel
+					.getPaginationCategories(body.page,{pid:body.pid})
+					.then((result)=>{
+						res.json({
+							code:0,
+							data:{
+								current:result.current,
+								total:result.total,
+								pageSize:result.pageSize,
+								list:result.list					
+							}
+						})	
+					})					
+				}else{
+			 		res.json({
+			 			code:1,
+			 			message:"更新分类失败,数据操作失败"
+			 		})					
+				}
+			})
+			.catch((e)=>{
+		 		res.json({
+		 			code:1,
+		 			message:"添加分类失败,服务器端错误"
+		 		})
+			})
+		}
 	})
 })
 
-//删除
-router.get('/delete/:id',(req,res)=>{
-	const { id } = req.params
-	CategoryModel.deleteOne({_id:id})
-	.then(result=>{
-		res.render('admin/success',{
-			userInfo:req.userInfo,
-			message:'删除分类成功',
-			url:'/category'
-		})	
+//更新排序
+router.put("/updateOrder",(req,res)=>{
+	let body = req.body;
+	CategoryModel
+	.update({_id:body.id},{order:body.order})
+	.then((cate)=>{
+		if(cate){
+			CategoryModel
+			.getPaginationCategories(body.page,{pid:body.pid})
+			.then((result)=>{
+				res.json({
+					code:0,
+					data:{
+						current:result.current,
+						total:result.total,
+						pageSize:result.pageSize,
+						list:result.list					
+					}
+				})	
+			})					
+		}else{
+	 		res.json({
+	 			code:1,
+	 			message:"更新排序失败,数据操作失败"
+	 		})					
+		}
 	})
-	.catch(err=>{
-		res.render('admin/error',{
-			userInfo:req.userInfo,
-			message:"删除分类失败,操作数据库错误,稍后再试一试"
-		})		
-	})	
 })
-module.exports = router
+
+module.exports = router;

@@ -1,98 +1,91 @@
 /*
-* @Author: TomChen
-* @Date:   2019-03-29 19:32:15
-* @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-04 19:40:15
+* @Author: Tom
+* @Date:   2018-08-06 09:14:54
+* @Last Modified by:   Tom
+* @Last Modified time: 2019-04-15 10:13:22
 */
-const express = require('express')
-const swig = require('swig')
-const mongoose = require('mongoose');
+//项目入口文件
+const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const Cookies = require('cookies');
 const session = require('express-session');
 const MongoStore = require("connect-mongo")(session);
 
-const app = express();
-const port = 3000
+//启动数据库
+mongoose.connect('mongodb://localhost:27017/kmall',{ useNewUrlParser: true });
 
-//1.连接数据库服务
-mongoose.connect('mongodb://localhost/blog', {useNewUrlParser: true});
 const db = mongoose.connection;
 
-db.on('error', (err)=>{
-	console.log('connection error');
-	throw err;
+db.on('error',(err)=>{
+	throw err
 });
 
-db.once('open', ()=>{
-	console.log('connection successful');	
+db.once('open',()=>{
+	console.log('DB connected....');
 });
 
-app.use(express.static('public'))
 
-//开发阶段设置不走缓存
-swig.setDefaults({
-  cache: false
-})
+const app = express();
 
-//配置应用模板
-app.engine('html', swig.renderFile);
-//配置模板的存放目录
-app.set('views', './views')
-//注册模板引擎
-app.set('view engine', 'html')
-
-//post/put请求处理中间件
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-
-
-/*
-//设置cookie中间件
+//跨域设置
 app.use((req,res,next)=>{
-	req.cookies = new Cookies(req,res)
-	
-	req.userInfo = {}
-	
-	let userInfo = req.cookies.get('userInfo');
-	
-	if(userInfo){
-		req.userInfo = JSON.parse(userInfo);
-	}
-	next()
+	res.append("Access-Control-Allow-Origin","http://localhost:3001");
+	res.append("Access-Control-Allow-Credentials",true);
+	res.append("Access-Control-Allow-Methods","GET, POST, PUT,DELETE");
+	res.append("Access-Control-Allow-Headers", "Content-Type, X-Requested-With,X-File-Name"); 
+	next();
 })
-*/
 
-//设置session中间件
+//配置静态资源
+app.use(express.static('public'));
+
+//OPTIONS请求处理
+app.use((req,res,next)=>{
+    if(req.method == 'OPTIONS'){
+        res.send('OPTIONS OK');
+    }else{
+        next();
+    }
+})
+
+//设置cookie的中间件,后面所有的中间件都会有cookie
 app.use(session({
-	//设置cookie名称
-    name:'kzid',
+    //设置cookie名称
+    name:'kmid',
     //用它来对session cookie签名，防止篡改
-    secret:'abc',
+    secret:'dsjfkdfd',
     //强制保存session即使它并没有变化
-    resave: true, 
+    resave: true,
     //强制将未初始化的session存储
-    saveUninitialized: true,
+    saveUninitialized: true, 
     //如果为true,则每次请求都更新cookie的过期时间
     rolling:true,
     //cookie过期时间 1天
-    cookie:{maxAge:1000*60*60*24}, 
-    // cookie:{maxAge:1000*10},
+    cookie:{maxAge:1000*60*60*24},    
     //设置session存储在数据库中
-    store:new MongoStore({ mongooseConnection: mongoose.connection })                
+    store:new MongoStore({ mongooseConnection: mongoose.connection })   
 }))
-app.use((req,res,next)=>{
-	
-	req.userInfo = req.session.userInfo || {};
-	
-	next()
-})
-app.use('/',require('./routes/index.js'))
-app.use('/user',require('./routes/user.js'))
-app.use('/admin',require('./routes/admin.js'))
-app.use('/home',require('./routes/home.js'))
-app.use('/category',require('./routes/category.js'))
-app.use('/article',require('./routes/article.js'))
-app.use('/comment',require('./routes/comment.js'))
 
-app.listen(port, () => console.log(`app listening on port ${port}!`))
+app.use((req,res,next)=>{
+	req.userInfo  = req.session.userInfo || {};
+	next();	
+});
+
+//添加处理post请求的中间件
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+//处理路由
+app.use("/admin",require('./routes/admin.js'));
+app.use("/user",require('./routes/user.js'));
+app.use("/category",require('./routes/category.js'));
+app.use("/product",require('./routes/product.js'));
+app.use("/cart",require('./routes/cart.js'));
+app.use("/shipping",require('./routes/shipping.js'));
+app.use("/order",require('./routes/order.js'));
+app.use("/payment",require('./routes/payment.js'));
+
+app.listen(3000,()=>{
+	console.log('server is running at 127.0.0.1:3000')
+});

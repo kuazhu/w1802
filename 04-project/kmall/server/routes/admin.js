@@ -1,118 +1,117 @@
 /*
-* @Author: TomChen
-* @Date:   2019-03-31 11:06:49
+* @Author: Tom
+* @Date:   2018-08-06 09:23:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-04 19:33:16
+* @Last Modified time: 2019-04-15 18:25:38
 */
-const express = require('express')
-const multer  = require('multer')
-const upload = multer({ dest: 'public/uploads/' })
+const Router = require('express').Router;
 
-const UserModel = require('../models/user.js')
-const CommentModel = require('../models/comment.js')
-const pagination = require('../util/pagination.js')
+const UserModel = require('../models/user.js');
+const OrderModel = require('../models/order.js');
+const ProductModel = require('../models/product.js');
+const pagination = require('../util/pagination.js');
 const hmac = require('../util/hmac.js')
-const router = express.Router()
 
-//权限验证
+const router = Router();
+
+
+router.get("/init",(req,res)=>{
+	//插入数据到数据库
+	new UserModel({
+		username:'admin',
+		password:hmac('admin'),
+		isAdmin:true
+	})
+	.save((err,newUser)=>{
+		if(!err){//插入成功
+			res.send('ok')
+		}else{
+			res.send('err')				
+		}
+	})
+});
+
+//用户登录
+router.post("/login",(req,res)=>{
+	let body = req.body;
+	//定义返回数据
+	let result  = {
+		code:0,// 0 代表成功 
+		message:''
+	}
+	UserModel
+	.findOne({username:body.username,password:hmac(body.password),isAdmin:true})
+	.then((user)=>{
+		if(user){//登录成功
+			 req.session.userInfo = {
+			 	_id:user._id,
+			 	username:user.username,
+			 	isAdmin:user.isAdmin
+			 }
+			 result.data = {
+			 	username:user.username
+			 }
+			 res.json(result);
+		}else{
+			result.code = 1;
+			result.message = '用户名和密码错误'
+			res.json(result);
+		}
+	})
+})
+
+//权限控制
 router.use((req,res,next)=>{
 	if(req.userInfo.isAdmin){
 		next()
 	}else{
-		res.send('<h1>请用管理员账号登录</h1>')
+		res.send({
+			code:10
+		});
 	}
 })
 
-//显示后台首页
-router.get("/",(req,res)=>{
-	res.render('admin/index',{
-		userInfo:req.userInfo
+//系统统计
+router.get('/count',(req,res)=>{
+	UserModel.estimatedDocumentCount()
+	.then(usernum=>{
+		OrderModel.estimatedDocumentCount()
+		.then(ordernum=>{
+			ProductModel.estimatedDocumentCount()
+			.then(productnum=>{
+				res.json({
+					code:0,
+					data:{
+						usernum:usernum,
+						ordernum:ordernum,
+						productnum:productnum
+					}
+				})				
+			})
+		})
 	})
 })
-
-//显示用户列表
-router.get("/users",(req,res)=>{
-	const options = {
-		page:req.query.page,
-		model:UserModel,
-		query:{},
-		projection:'-password -__v',
-		sort:{_id:1}
+//获取用户
+router.get('/users',(req,res)=>{
+	let options = {
+		page: req.query.page,//需要显示的页码
+		model:UserModel, //操作的数据模型
+		query:{}, //查询条件
+		projection:'-password -__v -updatedAt', //投影，
+		sort:{_id:-1} //排序
 	}
 	pagination(options)
-	.then(data=>{
-		res.render('admin/user_list',{
-			userInfo:req.userInfo,
-			users:data.docs,
-			page:data.page,
-			list:data.list,
-			pages:data.pages,
-			url:'/admin/users'
-		})		
+	.then((result)=>{
+		res.json({
+			code:0,
+			data:{
+				current:result.current,
+				total:result.total,
+				pageSize:result.pageSize,
+				list:result.list
+			}
+		})
 	})
 })
 
-//处理上传图片
-router.post('/uploadImage',upload.single('upload'),(req,res)=>{
-	const uploadedFilePath = '/uploads/'+req.file.filename
-	res.json({
-		uploaded:true,
-		url:uploadedFilePath
-	})
-})
-//评论列表
-router.get('/comments',(req,res)=>{
-	CommentModel.getPaginationComments(req)
-	.then(data=>{
-		res.render('admin/comment_list',{
-			userInfo:req.userInfo,
-			comments:data.docs,
-			page:data.page,
-			list:data.list,
-			pages:data.pages,
-			url:'/admin/comments'
-		})		
-	})	
-})
-
-//删除评论
-router.get('/comment/delete/:id',(req,res)=>{
-	const { id } = req.params
-	CommentModel.deleteOne({_id:id})
-	.then(result=>{
-		res.render('admin/success',{
-			userInfo:req.userInfo,
-			message:'删除评论成功',
-			url:'/admin/comments'
-		})	
-	})
-	.catch(err=>{
-		res.render('admin/error',{
-			userInfo:req.userInfo,
-			message:"删除评论失败,操作数据库错误,稍后再试一试"
-		})		
-	})	
-})
-//显示修改密码页面
-router.get('/password',(req,res)=>{
-	res.render('admin/password',{
-		userInfo:req.userInfo
-	})		
-})
-//修改密码
-router.post('/password',(req,res)=>{
-	const { password } = req.body
-	UserModel.updateOne({_id:req.userInfo._id},{password:hmac(password)})
-	.then(result=>{
-		req.session.destroy();
-		res.render('admin/success',{
-			userInfo:req.userInfo,
-			message:'更新密码成功,请重新登录',
-			url:'/'
-		})		
-	})
-})
-
-
-
-module.exports = router
+module.exports = router;
