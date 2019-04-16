@@ -1,0 +1,15 @@
+/*
+* @Author: TomChen
+* @Date:   2019-04-16 20:12:21
+* @Last Modified by:   TomChen
+* @Last Modified time: 2019-04-16 20:16:35
+*/
+.AdminSider a.active{
+	color: #1890ff;
+}
+.AdminSider .ant-menu-item-selected{
+	background: transparent !important;
+}
+.AdminSider .ant-menu-item-selected:after{
+	border-right: none;
+}
