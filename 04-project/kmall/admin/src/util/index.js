@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-16 18:14:09
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-16 18:22:24
+* @Last Modified time: 2019-04-16 18:53:03
 */
 
 import axios from 'axios';
@@ -23,3 +23,19 @@ export const request = (options)=>{
 		})
 	})
 }
+
+export const setUserName = (username)=>{
+	window.localStorage.setItem('username',username)
+}
+export const getUserName = ()=>{
+	return window.localStorage.getItem('username')
+}
+export const removeUserName = ()=>{
+	window.localStorage.removeItem('username')
+}
+
+
+
+
+
+

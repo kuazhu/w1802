@@ -2,13 +2,13 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-16 18:30:42
+* @Last Modified time: 2019-04-16 18:53:44
 */
 import * as types from './actionTypes.js'
 import axios from 'axios';
 import { message } from 'antd';
 
-import { request } from 'util'
+import { request,setUserName } from 'util'
 import { ADMIN_LOGIN } from 'api'
 
 const getLoginRequestAction = ()=>{
@@ -38,6 +38,8 @@ export const getLoginAction = (values)=>{
         })
         .then(result=>{
             if(result.code == 0){//登录成功
+                //把用户名保存到本地
+                setUserName(result.data.username)
                 //跳转到后台首页
                  window.location.href = "/"
             }else if(result.code == 1){
