@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-15 20:58:01
+* @Last Modified time: 2019-04-16 18:07:11
 */
 
 import React,{ Component } from 'react'
@@ -28,41 +28,12 @@ class NormalLoginForm extends Component {
   constructor(props){
   	super(props);
   	this.handleSubmit = this.handleSubmit.bind(this)
-    /*
-  	this.state = {
-  		isFething:false
-  	}
-    */
   }
   handleSubmit(e){
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.handleLogin(values);
-        /*
-        this.setState(()=>({isFething:true}))
-        axios({
-        	method:'post',
-        	url:'http://127.0.0.1:3000/admin/login',
-        	data:values
-        })
-        .then(result=>{
-        	// console.log(result)
-        	if(result.data.code == 0){//登录成功
-        		//跳转到后台首页
-        		window.location.href = "/"
-        	}else if(result.data.code == 1){
-        		message.error(result.data.message)
-        	}
-        })
-        .catch(err=>{
-        	console.log(err);
-        	message.error('网络请求失败,请稍后再试')
-        })
-        .finally(()=>{
-        	this.setState(()=>({isFething:false}))
-        })
-        */
       }
     });
   }

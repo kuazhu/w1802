@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-15 18:22:20
+* @Last Modified time: 2019-04-16 18:28:45
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -32,6 +32,14 @@ module.exports = {
 		//出口的文件所在的目录
 		path: path.resolve(__dirname, 'dist')
 	},
+	//配置别名
+    resolve:{
+        alias:{
+            pages:path.resolve(__dirname,'./src/pages'),
+            util:path.resolve(__dirname,'./src/util'),
+            api:path.resolve(__dirname,'./src/api'),
+        }
+    },	
 	module: {
 		rules: [
 		//处理css文件
