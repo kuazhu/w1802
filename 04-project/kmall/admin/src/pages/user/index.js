@@ -2,13 +2,14 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-17 19:51:46
+* @Last Modified time: 2019-04-17 20:43:08
 */
 
 import React,{ Component } from 'react'
 import { connect } from 'react-redux'
 import { Table, Divider, Tag } from 'antd';
-
+import moment from 'moment'
+import { actionCreator } from './store'
 import Layout from 'common/layout'
 
 const columns = [{
@@ -35,8 +36,11 @@ const columns = [{
 }];
 
 class User extends Component{
+	componentDidMount(){
+		this.props.handlePage(1);
+	}
     render(){
-    	const { list } = this.props;
+    	const { list,current,pageSize,total,handlePage,isFetching } = this.props;
     	const dataSource = list.map(user=>{
     		return {
 				key:user.get('_id'),
@@ -44,13 +48,28 @@ class User extends Component{
 				isAdmin: user.get('isAdmin'),
 				email: user.get('email'),
 				phone:user.get('phone'),
-				createdAt:user.get('createdAt')
+				createdAt:moment(user.get('createdAt')).format('YYYY-MM-DD HH:mm:ss')
     		}
     	}).toJS()
         return (
         	<div className="User">
         		<Layout>
-        			<Table dataSource={dataSource} columns={columns} />
+        			<Table 
+        				dataSource={dataSource} 
+        				columns={columns} 
+        				pagination={{
+        					current:current,
+        					pageSize:pageSize,
+        					total:total
+        				}}
+        				onChange={(page)=>{
+        					handlePage(page.current)
+        				}}
+        				loading={{
+        					spinning:isFetching,
+        					tip:'正在加载数据'
+        				}}
+        			/>
         		</Layout>
         	</div>
         )
@@ -60,12 +79,19 @@ class User extends Component{
 const mapStateToProps = (state)=>{
 	return {
 		list:state.get('user').get('list'),
+		current:state.get('user').get('current'),
+		pageSize:state.get('user').get('pageSize'),
+		total:state.get('user').get('total'),	
+		isFetching:	state.get('user').get('isFetching'),	
 	}
 }
 
 const mapDispatchToProps = (dispath)=>{
 	return {
-
+		handlePage:(page)=>{
+			const action = actionCreator.getPageAction(page)
+			dispath(action)
+		}
 	}
 }
 export default connect(mapStateToProps,mapDispatchToProps)(User)

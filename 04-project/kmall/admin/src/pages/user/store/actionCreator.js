@@ -2,42 +2,49 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-12 20:09:18
+* @Last Modified time: 2019-04-17 20:45:48
 */
 import * as types from './actionTypes.js'
-import axios from 'axios';
-export const getAddItemAction = ()=>{
+import { request } from 'util'
+import { GET_USERS } from 'api'
+
+const getPageRequestAction = ()=>{
 	return {
-		type:types.ADD_ITEM
+		type:types.PAGE_REQUEST
 	}
 }
-export const getChangeItemAction = (payload)=>{
+const getPageDoneAction = ()=>{
 	return {
-		type:types.CHANGE_ITEM,
-		payload
+		type:types.PAGE_DONE
 	}
 }
-export const getDelItemAction = (payload)=>{
-	return  {
-		type:types.DEL_ITEM,
+
+const setPageAction = (payload)=>{
+	return {
+		type:types.SET_PAGE,
 		payload
 	}
 }
 
-export const loadInitDataAction = (payload)=>{
-	return {
-		type:types.LOAD_DATA,
-		payload
-	}
-}
-
-export const getInitDataAction = ()=>{
+export const getPageAction = (page)=>{
 	return (dispatch)=>{
-		axios
-		.get('http://127.0.0.1:3000/')
+		dispatch(getPageRequestAction())
+		request({
+			url:GET_USERS,
+			data:{
+				page:page
+			}
+		})
 		.then(result=>{
-			const action = loadInitDataAction(result.data);
-			dispatch(action)
+			if(result.code == 0){
+				dispatch(setPageAction(result.data))
+			}
+		})
+		.catch(err=>{
+			console.log(err)
+		})
+		.finally(()=>{
+			dispatch(getPageDoneAction())
 		})
 	}
 }

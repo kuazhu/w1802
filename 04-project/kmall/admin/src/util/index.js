@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-16 18:14:09
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-17 19:16:08
+* @Last Modified time: 2019-04-17 20:36:56
 */
 
 import axios from 'axios';
@@ -12,8 +12,16 @@ export const request = (options)=>{
 		const params = {
         	method:options.method || 'get',	
 			url:options.url || '',
-			data:options.data || '',
 			withCredentials: true,
+		}
+		switch(params.method.toUpperCase()){
+			case 'GET':
+			case 'DELETE':
+				params.params = options.data
+				break
+			default:
+				params.data = options.data
+
 		}
 		axios(params)
 		.then(result=>{
