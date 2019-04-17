@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-16 18:14:09
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-17 18:34:59
+* @Last Modified time: 2019-04-17 19:16:08
 */
 
 import axios from 'axios';
@@ -17,7 +17,17 @@ export const request = (options)=>{
 		}
 		axios(params)
 		.then(result=>{
-			resolve(result.data);
+			const data = result.data;
+			if(data.code == 10){//没有权限
+				//移除前端的登录信息
+				removeUserName();
+				//跳转到登录页面
+				window.location.href = '/login'
+				reject('没有权限')
+			}else{
+				resolve(result.data);
+			}
+			
 		})
 		.catch(err=>{
 			reject(err)
