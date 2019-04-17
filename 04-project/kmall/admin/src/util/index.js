@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-16 18:14:09
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-16 18:53:03
+* @Last Modified time: 2019-04-17 18:34:59
 */
 
 import axios from 'axios';
@@ -12,7 +12,8 @@ export const request = (options)=>{
 		const params = {
         	method:options.method || 'get',	
 			url:options.url || '',
-			data:options.data || ''
+			data:options.data || '',
+			withCredentials: true,
 		}
 		axios(params)
 		.then(result=>{

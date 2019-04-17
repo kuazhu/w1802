@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-16 19:30:16
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-16 19:54:21
+* @Last Modified time: 2019-04-17 18:07:43
 */
 .AdminHeader .logo{
 	color: #fff;
@@ -13,7 +13,5 @@
 }
 .AdminHeader .ant-dropdown-link{
 	float: right;
-}
-.AdminHeader .ant-dropdown-menu{
-	padding: 0 !important;
+	color: #fff;
 }
