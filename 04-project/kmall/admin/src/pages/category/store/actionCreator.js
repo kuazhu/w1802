@@ -2,11 +2,11 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-17 20:45:48
+* @Last Modified time: 2019-04-18 19:20:12
 */
 import * as types from './actionTypes.js'
 import { request } from 'util'
-import { GET_USERS } from 'api'
+import { GET_USERS,ADD_CATEGORY } from 'api'
 
 const getPageRequestAction = ()=>{
 	return {
@@ -18,7 +18,16 @@ const getPageDoneAction = ()=>{
 		type:types.PAGE_DONE
 	}
 }
-
+const getAddRequestAction = ()=>{
+	return {
+		type:types.ADD_REQUEST
+	}
+}
+const getAddDoneAction = ()=>{
+	return {
+		type:types.ADD_DONE
+	}
+}
 const setPageAction = (payload)=>{
 	return {
 		type:types.SET_PAGE,
@@ -48,5 +57,27 @@ export const getPageAction = (page)=>{
 		})
 	}
 }
+export const getAddAction = (values)=>{
+	return (dispatch)=>{
+		dispatch(getAddRequestAction())
+		request({
+			method:'post',
+			url:ADD_CATEGORY,
+			data:values
+		})
+		.then(result=>{
+			console.log(result)
+		})
+		.catch(err=>{
+			console.log(err)
+		})
+		.finally(()=>{
+			dispatch(getAddDoneAction())
+		})
+	}	
+}
+
+
+
 
 

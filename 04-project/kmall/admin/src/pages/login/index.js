@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-16 18:07:11
+* @Last Modified time: 2019-04-18 19:14:40
 */
 
 import React,{ Component } from 'react'
@@ -17,7 +17,6 @@ import { connect } from 'react-redux'
 //3.而'./store/index.js'中的actionCreator是引入'./actionCreator.js'中的所有action的别名
 import { actionCreator } from './store'
 
-import axios from 'axios'
 import {
   Form, Icon, Input, Button, message,
 } from 'antd';

@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-11 18:56:06
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-17 19:44:04
+* @Last Modified time: 2019-04-18 19:05:55
 */
 // import { combineReducers } from 'redux'
 import { combineReducers } from 'redux-immutable'
@@ -11,6 +11,7 @@ import { combineReducers } from 'redux-immutable'
 import { reducer as loginReducer  } from 'pages/login/store'
 import { reducer as homeReducer  } from 'pages/home/store'
 import { reducer as userReducer  } from 'pages/user/store'
+import { reducer as categoryReducer  } from 'pages/category/store'
 
 export default combineReducers({
 	//3.属性login就是合并和整个顶层数据(state)的一个属性,值loginReducer就是该属性的值
@@ -18,4 +19,5 @@ export default combineReducers({
 	login:loginReducer,
 	home:homeReducer,
 	user:userReducer,
+	category:categoryReducer,
 })
