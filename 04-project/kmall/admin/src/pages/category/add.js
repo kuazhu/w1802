@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-18 19:19:32
+* @Last Modified time: 2019-04-18 19:56:39
 */
 
 import React,{ Component } from 'react'
@@ -23,6 +23,9 @@ class CategoryAdd extends Component{
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this)
     }
+    componentDidMount(){
+        this.props.getLevelOneCategories()
+    }
     handleSubmit(e){
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -33,7 +36,7 @@ class CategoryAdd extends Component{
     }        
     render(){
         const { getFieldDecorator } = this.props.form;
-        const { isAddFetching } = this.props;
+        const { isAddFetching,levelOneCategories } = this.props;
         const formItemLayout = {
           labelCol: {
             xs: { span: 24 },
@@ -78,6 +81,11 @@ class CategoryAdd extends Component{
                           })(
                             <Select style={{ width: 300 }}>
                                 <Option value="0">根分类</Option>
+                                {
+                                    levelOneCategories.map(category=>{
+                                        return <Option key={category.get('_id')} value={category.get('_id')}>根分类/{category.get('name')}</Option>
+                                    })
+                                }
                             </Select>
                           )}
                         </Form.Item>                                             
@@ -101,6 +109,7 @@ const WrappedCategoryAdd = Form.create()(CategoryAdd);
 const mapStateToProps = (state)=>{
     return {  
         isAddFetching: state.get('category').get('isAddFetching'),    
+        levelOneCategories: state.get('category').get('levelOneCategories'),    
     }
 }
 
@@ -108,6 +117,10 @@ const mapDispatchToProps = (dispatch)=>{
     return {
         handleAdd:(values)=>{
             const action = actionCreator.getAddAction(values);
+            dispatch(action)
+        },
+        getLevelOneCategories:()=>{
+            const action = actionCreator.getLevelOneCategoriesAction();
             dispatch(action)
         }
     }

@@ -2,11 +2,12 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-18 19:20:12
+* @Last Modified time: 2019-04-18 20:57:02
 */
 import * as types from './actionTypes.js'
+import { message } from 'antd'
 import { request } from 'util'
-import { GET_USERS,ADD_CATEGORY } from 'api'
+import { GET_USERS,ADD_CATEGORY,GET_CATEGORIES } from 'api'
 
 const getPageRequestAction = ()=>{
 	return {
@@ -34,14 +35,20 @@ const setPageAction = (payload)=>{
 		payload
 	}
 }
-
-export const getPageAction = (page)=>{
+const setLevelOneCategoriesAction = (payload)=>{
+	return {
+		type:types.SET_LEVEL_ONE_CATEGORIES,
+		payload
+	}
+}
+export const getPageAction = (pid,page)=>{
 	return (dispatch)=>{
 		dispatch(getPageRequestAction())
 		request({
-			url:GET_USERS,
+			url:GET_CATEGORIES,
 			data:{
-				page:page
+				page:page,
+				pid:pid
 			}
 		})
 		.then(result=>{
@@ -66,13 +73,35 @@ export const getAddAction = (values)=>{
 			data:values
 		})
 		.then(result=>{
-			console.log(result)
+			if(result.code == 0){
+				if(result.data){
+					dispatch(setLevelOneCategoriesAction(result.data))
+				}
+				message.success('添加分类成功')
+			}else if(result.code == 1){
+				message.error(result.message)
+			}
 		})
 		.catch(err=>{
 			console.log(err)
+			message.success('添加分类失败')
 		})
 		.finally(()=>{
 			dispatch(getAddDoneAction())
+		})
+	}	
+}
+export const getLevelOneCategoriesAction = ()=>{
+	return (dispatch)=>{
+		request({
+			url:GET_CATEGORIES,
+			data:{
+				pid:0
+			}
+		})
+		.then(result=>{
+			console.log(result)
+			dispatch(setLevelOneCategoriesAction(result.data))
 		})
 	}	
 }
