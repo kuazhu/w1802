@@ -2,12 +2,12 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-18 20:57:02
+* @Last Modified time: 2019-04-19 18:43:46
 */
 import * as types from './actionTypes.js'
 import { message } from 'antd'
 import { request } from 'util'
-import { GET_USERS,ADD_CATEGORY,GET_CATEGORIES } from 'api'
+import { GET_USERS,ADD_CATEGORY,GET_CATEGORIES,UPDATE_CATEGORY_ORDER } from 'api'
 
 const getPageRequestAction = ()=>{
 	return {
@@ -83,8 +83,7 @@ export const getAddAction = (values)=>{
 			}
 		})
 		.catch(err=>{
-			console.log(err)
-			message.success('添加分类失败')
+			message.error('添加分类失败')
 		})
 		.finally(()=>{
 			dispatch(getAddDoneAction())
@@ -100,8 +99,28 @@ export const getLevelOneCategoriesAction = ()=>{
 			}
 		})
 		.then(result=>{
-			console.log(result)
 			dispatch(setLevelOneCategoriesAction(result.data))
+		})
+	}	
+}
+export const getOrderAction = (pid,id,newOrder)=>{
+	return (dispatch,getState)=>{
+		const state = getState().get('category');
+		request({
+			method:'put',
+			url:UPDATE_CATEGORY_ORDER,
+			data:{
+				pid:pid,
+				id:id,
+				order:newOrder,
+				page:state.get('current')
+			}
+		})
+		.then(result=>{
+			if(result.code == 0){
+				message.success('更新排序成功')
+				dispatch(setPageAction(result.data))
+			}
 		})
 	}	
 }

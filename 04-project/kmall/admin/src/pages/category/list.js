@@ -2,73 +2,93 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-18 21:04:06
+ * @Last Modified time: 2019-04-19 18:34:33
  */
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Breadcrumb,Button,Table,InputNumber,Divider  } from 'antd'
+import { Breadcrumb, Button, Table, InputNumber, Divider } from 'antd'
 import { Link } from "react-router-dom"
 import { actionCreator } from './store'
 import Layout from 'common/layout'
 
 
 class CategoryList extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            pid:this.props.match.params.pid || 0
+            pid: this.props.match.params.pid || 0
         }
     }
-    componentDidUpdate(preProps,preState){
+    componentDidUpdate(preProps, preState) {
         const oldPath = preProps.location.pathname;
         const newPath = this.props.location.pathname;
-        if(oldPath != newPath){
-            const newPid = this.props.match.params.pid;
-            this.setState(()=>({pid:newPid}),()=>{
-                this.props.handlePage(newPid,1)
+        if (oldPath != newPath) {
+            const newPid = this.props.match.params.pid || 0;
+            this.setState(() => ({ pid: newPid }), () => {
+                this.props.handlePage(newPid, 1)
             })
         }
     }
-    componentDidMount(){
-        this.props.handlePage(this.state.pid,1);
-    }    
+    componentDidMount() {
+        this.props.handlePage(this.state.pid, 1);
+    }
     render() {
-        const { list,current,pageSize,total,handlePage,isPageFetching } = this.props;
+        const { 
+            list, 
+            current, 
+            pageSize, 
+            total, 
+            handlePage, 
+            isPageFetching,
+            handleOrder, 
+        } = this.props;
         const { pid } = this.state
-        const dataSource = list.map(user=>{
+        const dataSource = list.map(category => {
             return {
-                key:user.get('_id'),
-                id:user.get('_id'),
-                name: user.get('name'),
-                order: user.get('order'),
+                key: category.get('_id'),
+                id: category.get('_id'),
+                name: category.get('name'),
+                order: category.get('order'),
+                pid:category.get('pid')
             }
         }).toJS()
         const columns = [{
-          title: 'id',
-          dataIndex: 'id',
-          key: 'id',
+            title: 'id',
+            dataIndex: 'id',
+            key: 'id',
         }, {
-          title: '分类名称',
-          dataIndex: 'name',
-          key: 'name',
+            title: '分类名称',
+            dataIndex: 'name',
+            key: 'name',
         }, {
-          title: '排序',
-          dataIndex: 'order',
-          key: 'order',
-          render:(order)=><InputNumber defaultValue={order} />
+            title: '排序',
+            dataIndex: 'order',
+            key: 'order',
+            render: (order,record) => <InputNumber 
+                    defaultValue={order} 
+                    onBlur={(ev)=>{
+                        handleOrder(record.pid,record.id,ev.target.value)
+                    }}
+                />
         }, {
-          title: '操作',
-          dataIndex: 'action',
-          key: 'action',
-          render: (text, record) => (
-            <span>
-              <a href="javascript:;">修改名称</a>
-              <Divider type="vertical" />
-              <Link to={"/category/"+record.id} >查看子分类</Link>
-            </span>
-          ),           
-        }];                
+            title: '操作',
+            dataIndex: 'action',
+            key: 'action',
+            render: (text, record) => (
+                <span>
+                  <a href="javascript:;">修改名称</a>
+                  {
+                    pid == 0
+                    ?<span>
+                        <Divider type="vertical" />
+                        <Link to={"/category/"+record.id} >查看子分类</Link>                    
+                     </span>
+                    : null    
+                  }
+                </span>
+            ),
+        }];
         return (
             <div className="CategoryList">
             <Layout>
@@ -104,23 +124,27 @@ class CategoryList extends Component {
         )
     }
 }
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state) => {
     return {
-        list:state.get('category').get('list'),
-        current:state.get('category').get('current'),
-        pageSize:state.get('category').get('pageSize'),
-        total:state.get('category').get('total'),   
-        isPageFetching: state.get('category').get('isPageFetching'),    
+        list: state.get('category').get('list'),
+        current: state.get('category').get('current'),
+        pageSize: state.get('category').get('pageSize'),
+        total: state.get('category').get('total'),
+        isPageFetching: state.get('category').get('isPageFetching'),
     }
 }
 
-const mapDispatchToProps = (dispath)=>{
+const mapDispatchToProps = (dispath) => {
     return {
-        handlePage:(pid,page)=>{
-            const action = actionCreator.getPageAction(pid,page)
+        handlePage: (pid, page) => {
+            const action = actionCreator.getPageAction(pid, page)
             dispath(action)
+        },
+        handleOrder:(pid,id,newOrder)=>{
+            const action = actionCreator.getOrderAction(pid,id,newOrder)
+            dispath(action)            
         }
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(CategoryList)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryList)
