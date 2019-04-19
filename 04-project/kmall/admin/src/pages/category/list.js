@@ -2,12 +2,12 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-19 18:34:33
+ * @Last Modified time: 2019-04-19 19:29:48
  */
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Breadcrumb, Button, Table, InputNumber, Divider } from 'antd'
+import { Breadcrumb, Button, Table, InputNumber, Divider,Modal,Input } from 'antd'
 import { Link } from "react-router-dom"
 import { actionCreator } from './store'
 import Layout from 'common/layout'
@@ -41,7 +41,13 @@ class CategoryList extends Component {
             total, 
             handlePage, 
             isPageFetching,
-            handleOrder, 
+            handleOrder,
+            updateNameModalVisible,
+            showUpdateNameModal,
+            closeUpdateNameModal,
+            updateName,
+            handleUpdateNameChange,
+            handleUpdateName 
         } = this.props;
         const { pid } = this.state
         const dataSource = list.map(category => {
@@ -77,7 +83,13 @@ class CategoryList extends Component {
             key: 'action',
             render: (text, record) => (
                 <span>
-                  <a href="javascript:;">修改名称</a>
+                  <a href="javascript:;"
+                     onClick={()=>{
+                        showUpdateNameModal(record.id,record.name)
+                     }}
+                  >
+                    修改名称
+                  </a>
                   {
                     pid == 0
                     ?<span>
@@ -118,7 +130,22 @@ class CategoryList extends Component {
                         spinning:isPageFetching,
                         tip:'正在加载数据'
                     }}
-                />                          
+                />
+                <Modal
+                  title="修改分类名称"
+                  visible={updateNameModalVisible}
+                  onOk={()=>{handleUpdateName(pid)}}
+                  onCancel={closeUpdateNameModal}
+                  cancelText="取消"
+                  okText="确认"
+                >
+                    <Input 
+                        value={updateName}
+                        onChange={(ev)=>{
+                            handleUpdateNameChange(ev.target.value)
+                        }} 
+                    />
+                </Modal>                          
             </Layout>
           </div>
         )
@@ -131,6 +158,8 @@ const mapStateToProps = (state) => {
         pageSize: state.get('category').get('pageSize'),
         total: state.get('category').get('total'),
         isPageFetching: state.get('category').get('isPageFetching'),
+        updateNameModalVisible: state.get('category').get('updateNameModalVisible'),
+        updateName: state.get('category').get('updateName'),
     }
 }
 
@@ -143,7 +172,23 @@ const mapDispatchToProps = (dispath) => {
         handleOrder:(pid,id,newOrder)=>{
             const action = actionCreator.getOrderAction(pid,id,newOrder)
             dispath(action)            
-        }
+        },
+        showUpdateNameModal:(updateId,updateName)=>{
+            const action = actionCreator.getShowUpdateNameModalAction(updateId,updateName)
+            dispath(action)              
+        },
+        closeUpdateNameModal:()=>{
+            const action = actionCreator.getCloseUpdateNameModalAction()
+            dispath(action)              
+        },
+        handleUpdateNameChange:(value)=>{
+            const action = actionCreator.getUpdateNameChangeAction(value)
+            dispath(action)             
+        }, 
+        handleUpdateName:(pid)=>{
+            const action = actionCreator.getUpdateNameAction(pid)
+            dispath(action)             
+        }      
     }
 }
 

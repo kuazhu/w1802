@@ -2,12 +2,12 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-19 18:43:46
+* @Last Modified time: 2019-04-19 19:33:05
 */
 import * as types from './actionTypes.js'
 import { message } from 'antd'
 import { request } from 'util'
-import { GET_USERS,ADD_CATEGORY,GET_CATEGORIES,UPDATE_CATEGORY_ORDER } from 'api'
+import { GET_USERS,ADD_CATEGORY,GET_CATEGORIES,UPDATE_CATEGORY_ORDER,UPDATE_CATEGORY_NAME } from 'api'
 
 const getPageRequestAction = ()=>{
 	return {
@@ -119,6 +119,49 @@ export const getOrderAction = (pid,id,newOrder)=>{
 		.then(result=>{
 			if(result.code == 0){
 				message.success('更新排序成功')
+				dispatch(setPageAction(result.data))
+			}
+		})
+	}	
+}
+
+export const getShowUpdateNameModalAction = (updateId,updateName)=>{
+	return {
+		type:types.SHOW_UPDATE_NAME_MODAL,
+		payload:{
+			updateId,
+			updateName
+		}
+	}	
+}
+export const getCloseUpdateNameModalAction = ()=>{
+	return {
+		type:types.CLOSE_UPDATE_NAME_MODAL
+	}	
+}
+export const getUpdateNameChangeAction = (payload)=>{
+	return {
+		type:types.UPDATE_NAME_CHANGE,
+		payload
+	}	
+}
+export const getUpdateNameAction = (pid)=>{
+	return (dispatch,getState)=>{
+		const state = getState().get('category');
+		request({
+			method:'put',
+			url:UPDATE_CATEGORY_NAME,
+			data:{
+				pid:pid,
+				id:state.get('updateId'),
+				name:state.get('updateName'),
+				page:state.get('current')
+			}
+		})
+		.then(result=>{
+			if(result.code == 0){
+				message.success('更新名称成功')
+				dispatch(getCloseUpdateNameModalAction());
 				dispatch(setPageAction(result.data))
 			}
 		})
