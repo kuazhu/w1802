@@ -2,7 +2,7 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-19 19:29:48
+ * @Last Modified time: 2019-04-21 15:38:49
  */
 
 import React, { Component } from 'react'
@@ -41,7 +41,7 @@ class CategoryList extends Component {
             total, 
             handlePage, 
             isPageFetching,
-            handleOrder,
+            handleUpdateOrder,
             updateNameModalVisible,
             showUpdateNameModal,
             closeUpdateNameModal,
@@ -74,7 +74,7 @@ class CategoryList extends Component {
             render: (order,record) => <InputNumber 
                     defaultValue={order} 
                     onBlur={(ev)=>{
-                        handleOrder(record.pid,record.id,ev.target.value)
+                        handleUpdateOrder(record.pid,record.id,ev.target.value)
                     }}
                 />
         }, {
@@ -169,8 +169,8 @@ const mapDispatchToProps = (dispath) => {
             const action = actionCreator.getPageAction(pid, page)
             dispath(action)
         },
-        handleOrder:(pid,id,newOrder)=>{
-            const action = actionCreator.getOrderAction(pid,id,newOrder)
+        handleUpdateOrder:(pid,id,newOrder)=>{
+            const action = actionCreator.getUpdateOrderAction(pid,id,newOrder)
             dispath(action)            
         },
         showUpdateNameModal:(updateId,updateName)=>{

@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-19 19:33:05
+* @Last Modified time: 2019-04-21 15:38:19
 */
 import * as types from './actionTypes.js'
 import { message } from 'antd'
@@ -103,7 +103,7 @@ export const getLevelOneCategoriesAction = ()=>{
 		})
 	}	
 }
-export const getOrderAction = (pid,id,newOrder)=>{
+export const getUpdateOrderAction = (pid,id,newOrder)=>{
 	return (dispatch,getState)=>{
 		const state = getState().get('category');
 		request({

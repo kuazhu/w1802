@@ -2,7 +2,7 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-21 11:41:17
+ * @Last Modified time: 2019-04-21 15:52:25
  */
 
 import React, { Component } from 'react'
@@ -42,6 +42,11 @@ class ProductSave extends Component {
     }
     render() {
         const { getFieldDecorator } = this.props.form;
+        const {
+            handleCategoryId,
+            handleImages,
+            handleDetail,
+        } = this.props
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -89,7 +94,7 @@ class ProductSave extends Component {
                         </Form.Item>
                         <Form.Item label="商品分类">
                             <CategorySelector getCategoryId={(pid,id)=>{
-                                console.log(pid,id)
+                                handleCategoryId(pid,id)
                             }} />
                         </Form.Item>
                         <Form.Item label="商品价格">
@@ -111,13 +116,16 @@ class ProductSave extends Component {
                                 action={UPLOAD_PRODUCT_IMAGE}
                                 max={3}
                                 getFileList={(fileList)=>{
-                                    console.log(fileList)
+                                    handleImages(fileList)
                                 }}
                             />
                         </Form.Item>
                         <Form.Item label="商品描述">
                             <RichEditor 
                                 url={UPLOAD_PRODUCT_DETAIL_IMAGE}
+                                getRichEditorValue={(value)=>{
+                                    handleDetail(value)
+                                }}
                             />
                         </Form.Item>                                                                                                                                                                     
                         <Form.Item {...tailFormItemLayout}>
@@ -144,7 +152,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        handleCategoryId:(pid,id)=>{
+            const action = actionCreator.getSetCategoryIdAction(pid,id)
+            dispatch(action)   
+        },
+        handleImages:(fileList)=>{
+            const action = actionCreator.getSetImagesAction(fileList)
+            dispatch(action)   
+        },
+        handleDetail:(value)=>{
+            const action = actionCreator.getSetDetailAction(value)
+            dispatch(action)   
+        },                
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(WrappedProductSave)

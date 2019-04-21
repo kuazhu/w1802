@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-21 11:14:24
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 11:45:57
+* @Last Modified time: 2019-04-21 15:28:11
 */
 import React,{ Component } from 'react'
 
@@ -44,14 +44,17 @@ class RichEditor extends Component{
 
 
 	componentDidMount(){
-		new Simditor({
-		  textarea: this.textarea,
-		  toolbar:this.toolbar,
-		  upload:{
-			url: this.props.url,
-			fileKey: 'upload'
-		  }
+		this.simditor = new Simditor({
+				textarea: this.textarea,
+				toolbar:this.toolbar,
+				upload:{
+					url: this.props.url,
+					fileKey: 'upload'
+				}
 		});
+		this.simditor.on('valuechanged',()=>{
+			this.props.getRichEditorValue(this.simditor.getValue())
+		})
 	}
 	render(){
 		return(
