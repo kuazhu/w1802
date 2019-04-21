@@ -2,12 +2,19 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 15:52:53
+* @Last Modified time: 2019-04-21 16:37:02
 */
 import * as types from './actionTypes.js'
 import { message } from 'antd'
 import { request } from 'util'
-import { GET_USERS,ADD_CATEGORY,GET_CATEGORIES,UPDATE_CATEGORY_ORDER,UPDATE_CATEGORY_NAME } from 'api'
+import { 
+	GET_USERS,
+	ADD_CATEGORY,
+	GET_CATEGORIES,
+	UPDATE_CATEGORY_ORDER,
+	UPDATE_CATEGORY_NAME,
+	SAVE_PRODUCT 
+} from 'api'
 
 export const getSetCategoryIdAction = (pid,id)=>{
 	return {
@@ -30,6 +37,55 @@ export const getSetDetailAction = (payload)=>{
 		payload
 	}	
 }
+
+const setCategoryError=()=>{
+	return {
+		type:types.SET_CATEGORY_ERROR
+	}	
+}
+const setImagesError=()=>{
+	return {
+		type:types.SET_IMAGES_ERROR
+	}	
+}
+export const getSaveAction = (err,values)=>{
+	return (dispatch,getState)=>{
+		const state = getState().get('product');
+		const category = state.get('categoryId');
+		const images = state.get('images');
+		const detail = state.get('detail');
+		let hasError = false;
+		if(err){
+			hasError = true;
+		}
+		if(!category){
+			dispatch(setCategoryError())
+			hasError = true;
+		}
+		if(!images){
+			dispatch(setImagesError())
+			hasError = true;			
+		}
+		if(hasError){
+			return;
+		}
+		request({
+			method:'post',
+			url:SAVE_PRODUCT,
+			data:{
+				...values,
+				category,
+				images,
+				detail
+			}
+		})
+		.then(result=>{
+			console.log(result)
+		})
+	}	
+}
+
+
 const getPageRequestAction = ()=>{
 	return {
 		type:types.PAGE_REQUEST

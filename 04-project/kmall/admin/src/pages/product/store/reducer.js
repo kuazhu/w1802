@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-11 18:56:06
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 15:53:34
+* @Last Modified time: 2019-04-21 16:38:38
 */
 import { fromJS } from 'immutable'
 
@@ -13,6 +13,10 @@ const defaultState = fromJS({
 	categoryId:'',
 	images:'',
 	detail:'',
+	categoryIdValidateStatus:'',
+	categoryIdHelp:'',
+	imagesValidateStatus:'',
+	imagesHelp:'',	
 
 	isPageFetching:false,
 	list:[],
@@ -39,14 +43,32 @@ export default (state=defaultState,action)=>{
 	if(action.type == types.SET_CATEGORY_ID){
 		return state.merge({
 			parentCategoryId:action.payload.parentCategoryId,
-			categoryId:action.payload.categoryId
+			categoryId:action.payload.categoryId,
+			categoryIdValidateStatus:'',
+			categoryIdHelp:''			
 		})
 	}
 	if(action.type == types.SET_IMAGES){
-		return state.set('images',action.payload)
+		return state.merge({
+			images:action.payload,
+			imagesValidateStatus:'',
+			imagesHelp:''
+		})
 	}
 	if(action.type == types.SET_DETAIL){
 		return state.set('detail',action.payload)
-	}					
+	}
+	if(action .type == types.SET_CATEGORY_ERROR){
+		return state.merge({
+			categoryIdValidateStatus:'error',
+			categoryIdHelp:'请选择商品分类!'
+		})
+	}
+	if(action .type == types.SET_IMAGES_ERROR){
+		return state.merge({
+			imagesValidateStatus:'error',
+			imagesHelp:'请选择商品图片!'
+		})
+	}						
 	return state;
 }
