@@ -2,7 +2,7 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-19 20:47:32
+ * @Last Modified time: 2019-04-21 10:43:28
  */
 
 import React, { Component } from 'react'
@@ -18,7 +18,9 @@ import {
 } from 'antd';
 
 import CategorySelector from './category-selector.js'
+import UploadImage from 'common/upload-image'
 
+import { UPLOAD_PRODUCT_IMAGE } from 'api'
 import { actionCreator } from './store'
 
 import Layout from 'common/layout'
@@ -104,6 +106,10 @@ class ProductSave extends Component {
                           )}
                         </Form.Item>
                         <Form.Item label="商品图片">
+                            <UploadImage 
+                                action={UPLOAD_PRODUCT_IMAGE}
+                                max={3}
+                            />
                         </Form.Item>
                         <Form.Item label="商品描述">
                         </Form.Item>                                                                                                                                                                     
