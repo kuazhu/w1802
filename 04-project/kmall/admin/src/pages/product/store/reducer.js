@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-11 18:56:06
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 16:38:38
+* @Last Modified time: 2019-04-21 17:14:28
 */
 import { fromJS } from 'immutable'
 
@@ -17,7 +17,7 @@ const defaultState = fromJS({
 	categoryIdHelp:'',
 	imagesValidateStatus:'',
 	imagesHelp:'',	
-
+	isSaveFetching:false,
 	isPageFetching:false,
 	list:[],
 	current:1,
@@ -69,6 +69,12 @@ export default (state=defaultState,action)=>{
 			imagesValidateStatus:'error',
 			imagesHelp:'请选择商品图片!'
 		})
-	}						
+	}
+	if(action.type == types.SAVE_REQUEST){
+		return state.set('isSaveFetching',true)
+	}
+	if(action.type == types.SAVE_DONE){
+		return state.set('isSaveFetching',false)
+	}							
 	return state;
 }

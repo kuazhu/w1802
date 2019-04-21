@@ -2,7 +2,7 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-21 16:35:48
+ * @Last Modified time: 2019-04-21 17:02:01
  */
 
 import React, { Component } from 'react'
@@ -47,7 +47,8 @@ class ProductSave extends Component {
             categoryIdValidateStatus,
             categoryIdHelp,
             imagesValidateStatus,
-            imagesHelp
+            imagesHelp,
+            isSaveFetching
         } = this.props
         const formItemLayout = {
             labelCol: {
@@ -108,14 +109,18 @@ class ProductSave extends Component {
                           {getFieldDecorator('price', {
                             rules: [{ required: true, message: '请输入商品价格!' }],
                           })(
-                            <InputNumber  />
+                            <InputNumber  
+                                min={0}
+                            />
                           )}
                         </Form.Item>
                         <Form.Item label="商品库存">
                           {getFieldDecorator('stock', {
                             rules: [{ required: true, message: '请输入商品库存!' }],
                           })(
-                            <InputNumber  />
+                            <InputNumber  
+                                min={0}
+                            />
                           )}
                         </Form.Item>
                         <Form.Item 
@@ -144,6 +149,7 @@ class ProductSave extends Component {
                           <Button 
                             type="primary"
                             onClick={this.handleSubmit}
+                            loading={isSaveFetching}
                           >
                             提交
                           </Button>
@@ -162,6 +168,7 @@ const mapStateToProps = (state) => {
         categoryIdHelp:state.get('product').get('categoryIdHelp'),
         imagesValidateStatus:state.get('product').get('imagesValidateStatus'),
         imagesHelp:state.get('product').get('imagesHelp'),        
+        isSaveFetching:state.get('product').get('isSaveFetching'),        
     }
 }
 

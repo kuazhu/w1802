@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-16 18:28:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 16:09:30
+* @Last Modified time: 2019-04-21 17:19:01
 */
 const SERVER = 'http://127.0.0.1:3000/';
 
@@ -17,3 +17,5 @@ export const UPDATE_CATEGORY_NAME = SERVER +  'category/updateName'
 export const UPLOAD_PRODUCT_IMAGE = SERVER + 'product/uploadImage'
 export const UPLOAD_PRODUCT_DETAIL_IMAGE = SERVER + 'product/uploadDetailImage'
 export const SAVE_PRODUCT = SERVER + 'product'
+export const GET_PRODUCTS = SERVER + 'product'
+export const UPDATE_PRODUCT_ORDER = SERVER + 'product/updateOrder'

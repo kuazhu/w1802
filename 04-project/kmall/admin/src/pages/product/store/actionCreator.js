@@ -2,18 +2,15 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 16:37:02
+* @Last Modified time: 2019-04-21 17:20:06
 */
 import * as types from './actionTypes.js'
 import { message } from 'antd'
 import { request } from 'util'
 import { 
-	GET_USERS,
-	ADD_CATEGORY,
-	GET_CATEGORIES,
-	UPDATE_CATEGORY_ORDER,
-	UPDATE_CATEGORY_NAME,
-	SAVE_PRODUCT 
+	SAVE_PRODUCT,
+	GET_PRODUCTS,
+	UPDATE_PRODUCT_ORDER 
 } from 'api'
 
 export const getSetCategoryIdAction = (pid,id)=>{
@@ -48,6 +45,16 @@ const setImagesError=()=>{
 		type:types.SET_IMAGES_ERROR
 	}	
 }
+const getSaveRequestAction = ()=>{
+	return {
+		type:types.SAVE_REQUEST
+	}
+}
+const getSaveDoneAction = ()=>{
+	return {
+		type:types.SAVE_DONE
+	}
+}
 export const getSaveAction = (err,values)=>{
 	return (dispatch,getState)=>{
 		const state = getState().get('product');
@@ -69,6 +76,7 @@ export const getSaveAction = (err,values)=>{
 		if(hasError){
 			return;
 		}
+		dispatch(getSaveRequestAction())
 		request({
 			method:'post',
 			url:SAVE_PRODUCT,
@@ -80,7 +88,14 @@ export const getSaveAction = (err,values)=>{
 			}
 		})
 		.then(result=>{
-			console.log(result)
+			if(result.code == 0){
+				window.location.href="/product"
+			}else{
+				message.error(result.message)
+			}
+		})
+		.finally(()=>{
+			dispatch(getSaveDoneAction())
 		})
 	}	
 }
@@ -103,14 +118,13 @@ const setPageAction = (payload)=>{
 	}
 }
 
-export const getPageAction = (pid,page)=>{
+export const getPageAction = (page)=>{
 	return (dispatch)=>{
 		dispatch(getPageRequestAction())
 		request({
-			url:GET_CATEGORIES,
+			url:GET_PRODUCTS,
 			data:{
-				page:page,
-				pid:pid
+				page:page
 			}
 		})
 		.then(result=>{
@@ -127,14 +141,13 @@ export const getPageAction = (pid,page)=>{
 	}
 }
 
-export const getOrderAction = (pid,id,newOrder)=>{
+export const getUpdateOrderAction = (id,newOrder)=>{
 	return (dispatch,getState)=>{
-		const state = getState().get('category');
+		const state = getState().get('product');
 		request({
 			method:'put',
-			url:UPDATE_CATEGORY_ORDER,
+			url:UPDATE_PRODUCT_ORDER,
 			data:{
-				pid:pid,
 				id:id,
 				order:newOrder,
 				page:state.get('current')
