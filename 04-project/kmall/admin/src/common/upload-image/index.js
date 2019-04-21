@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-21 10:21:37
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 10:43:41
+* @Last Modified time: 2019-04-21 11:07:48
 */
 import React,{ Component } from 'react'
 
@@ -30,7 +30,9 @@ class UploadImage extends Component{
 		});
 	}	
 	handleChange({ fileList }){
-		this.setState({ fileList })
+		this.setState({ fileList },()=>{
+			this.props.getFileList(fileList.map(file=>file.response).join(','))
+		})
 	}
 	render(){
 		const { previewVisible, previewImage, fileList } = this.state;
