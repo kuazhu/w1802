@@ -2,11 +2,13 @@
 * @Author: TomChen
 * @Date:   2019-04-21 11:14:24
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 11:24:55
+* @Last Modified time: 2019-04-21 11:45:57
 */
 import React,{ Component } from 'react'
 
 import Simditor from 'simditor'
+
+import $ from 'jquery';
 
 import 'simditor/styles/simditor.css'
 
@@ -32,14 +34,23 @@ class RichEditor extends Component{
 			'indent',
 			'outdent',
 			'alignment',
-		]
+		];
+		$.ajaxSetup({
+			xhrFields:{
+				withCredentials: true
+			}	
+		})
 	}
 
 
 	componentDidMount(){
 		new Simditor({
 		  textarea: this.textarea,
-		  toolbar:this.toolbar
+		  toolbar:this.toolbar,
+		  upload:{
+			url: this.props.url,
+			fileKey: 'upload'
+		  }
 		});
 	}
 	render(){

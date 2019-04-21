@@ -2,7 +2,7 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-21 11:15:57
+ * @Last Modified time: 2019-04-21 11:41:17
  */
 
 import React, { Component } from 'react'
@@ -21,7 +21,7 @@ import CategorySelector from './category-selector.js'
 import UploadImage from 'common/upload-image'
 import RichEditor from 'common/rich-editor'
 
-import { UPLOAD_PRODUCT_IMAGE } from 'api'
+import { UPLOAD_PRODUCT_IMAGE,UPLOAD_PRODUCT_DETAIL_IMAGE } from 'api'
 import { actionCreator } from './store'
 
 import Layout from 'common/layout'
@@ -116,7 +116,9 @@ class ProductSave extends Component {
                             />
                         </Form.Item>
                         <Form.Item label="商品描述">
-                            <RichEditor />
+                            <RichEditor 
+                                url={UPLOAD_PRODUCT_DETAIL_IMAGE}
+                            />
                         </Form.Item>                                                                                                                                                                     
                         <Form.Item {...tailFormItemLayout}>
                           <Button 
