@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-22 18:15:26
+* @Last Modified time: 2019-04-22 18:45:00
 */
 import * as types from './actionTypes.js'
 import { message } from 'antd'
@@ -11,7 +11,8 @@ import {
 	SAVE_PRODUCT,
 	GET_PRODUCTS,
 	UPDATE_PRODUCT_ORDER,
-	UPDATE_PRODUCT_STATUS 
+	UPDATE_PRODUCT_STATUS,
+	GET_PRODUCT_DETAIL 
 } from 'api'
 
 export const getSetCategoryIdAction = (pid,id)=>{
@@ -179,6 +180,27 @@ export const getUpdateStatusAction = (id,newStatus)=>{
 			if(result.code == 0){
 				message.success('更新状态成功')
 				dispatch(setPageAction(result.data))
+			}
+		})
+	}	
+}
+const setProductDetailAction = (payload)=>{
+	return {
+		type:types.SET_PRODUCT_DETAIL,
+		payload
+	}
+} 
+export const getProductDetailAction = (productId)=>{
+	return (dispatch,getState)=>{
+		request({
+			url:GET_PRODUCT_DETAIL,
+			data:{
+				id:productId,
+			}
+		})
+		.then(result=>{
+			if(result.code == 0){
+				dispatch(setProductDetailAction(result.data))
 			}
 		})
 	}	

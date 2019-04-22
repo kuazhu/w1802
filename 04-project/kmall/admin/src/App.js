@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-19 19:55:30
+* @Last Modified time: 2019-04-22 18:55:54
 */
 
 import React,{ Component,Fragment } from 'react'
@@ -43,7 +43,7 @@ class App extends Component{
 
 
 		return( 
-			<Router>
+			<Router forceRefresh={true}>
 				<div className="App">
 					<Switch>
 						<ProtectRoute exact path="/" component={Home} />

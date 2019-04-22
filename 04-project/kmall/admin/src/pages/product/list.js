@@ -2,7 +2,7 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-22 18:16:46
+ * @Last Modified time: 2019-04-22 18:31:25
  */
 
 import React, { Component } from 'react'
@@ -73,9 +73,9 @@ class ProductList extends Component {
             key: 'action',
             render: (text, record) => (
                 <span>
+                    <Link to={"/product/save/"+record.id} >修改</Link>
+                    <Divider type="vertical" />   
                     <Link to={"/product/"+record.id} >查看详情</Link>
-                    <Divider type="vertical" />
-                     <Link to={"/product/save/"+record.id} >修改</Link>                   
                 </span>
             ),
         }];

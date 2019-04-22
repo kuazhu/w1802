@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-11 18:56:06
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 17:14:28
+* @Last Modified time: 2019-04-22 18:52:08
 */
 import { fromJS } from 'immutable'
 
@@ -13,12 +13,19 @@ const defaultState = fromJS({
 	categoryId:'',
 	images:'',
 	detail:'',
+	description:'',
+	name: '',
+	price: '',
+	stock: '',
+
 	categoryIdValidateStatus:'',
 	categoryIdHelp:'',
 	imagesValidateStatus:'',
 	imagesHelp:'',	
+	
 	isSaveFetching:false,
 	isPageFetching:false,
+	
 	list:[],
 	current:1,
 	pageSize:0,
@@ -75,6 +82,18 @@ export default (state=defaultState,action)=>{
 	}
 	if(action.type == types.SAVE_DONE){
 		return state.set('isSaveFetching',false)
+	}
+	if(action.type == types.SET_PRODUCT_DETAIL){
+		return state.merge({
+			parentCategoryId:action.payload.category.pid,
+			categoryId:action.payload.category._id,
+			images:action.payload.images,
+			detail:action.payload.detail,
+			description:action.payload.description,
+			name: action.payload.name,
+			price: action.payload.price,
+			stock: action.payload.stock,		
+		})
 	}							
 	return state;
 }
