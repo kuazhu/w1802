@@ -2,7 +2,7 @@
 * @Author: Tom
 * @Date:   2018-08-06 09:23:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2018-09-17 16:33:28
+* @Last Modified time: 2019-04-22 10:18:25
 */
 const Router = require('express').Router;
 const ProductModel = require('../models/product.js');
@@ -219,24 +219,19 @@ router.put("/updateOrder",(req,res)=>{
 	})
 })
 
-//更新排序
+//更新状态
 router.put("/updateStatus",(req,res)=>{
 	let body = req.body;
 	ProductModel
 	.update({_id:body.id},{status:body.status})
 	.then((product)=>{
 		if(product){
-			res.json({
-				code:0,
-				message:'更新状态成功'
-			})					
-		}else{
 			ProductModel
 			.getPaginationProducts(body.page,{})
 			.then((result)=>{
 				res.json({
-					code:1,
-					message:'更新状态失败',
+					code:0,
+					message:'更新状态成功',
 					data:{
 						current:result.current,
 						total:result.total,
@@ -244,6 +239,11 @@ router.put("/updateStatus",(req,res)=>{
 						list:result.list					
 					}
 				})	
+			})								
+		}else{
+			res.json({
+				code:1,
+				message:'更新状态失败'
 			})							
 		}
 	})
