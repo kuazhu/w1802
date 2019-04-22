@@ -2,7 +2,7 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-22 18:54:25
+ * @Last Modified time: 2019-04-22 19:14:34
  */
 
 import React, { Component } from 'react'
@@ -120,9 +120,13 @@ class ProductSave extends Component {
                             validateStatus={categoryIdValidateStatus}
                             help={categoryIdHelp}
                         >
-                            <CategorySelector getCategoryId={(pid,id)=>{
-                                handleCategoryId(pid,id)
-                            }} />
+                            <CategorySelector 
+                                getCategoryId={(pid,id)=>{
+                                    handleCategoryId(pid,id)
+                                }}
+                                parentCategoryId={parentCategoryId}
+                                categoryId={categoryId} 
+                            />
                         </Form.Item>
                         <Form.Item label="商品价格">
                           {getFieldDecorator('price', {

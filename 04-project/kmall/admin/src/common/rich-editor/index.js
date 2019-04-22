@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-21 11:14:24
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 15:28:11
+* @Last Modified time: 2019-04-22 19:42:19
 */
 import React,{ Component } from 'react'
 
@@ -11,6 +11,7 @@ import Simditor from 'simditor'
 import $ from 'jquery';
 
 import 'simditor/styles/simditor.css'
+import './index.css'
 
 class RichEditor extends Component{
 	constructor(props){
