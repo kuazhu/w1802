@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2018-08-04 17:14:00
 * @Last Modified by:   TomChen
-* @Last Modified time: 2018-09-10 09:16:06
+* @Last Modified time: 2019-04-22 20:38:00
 */
 const mongoose = require('mongoose');
 const pagination = require('../util/pagination.js');
@@ -42,7 +42,7 @@ const ProductSchema = new mongoose.Schema({
   timestamps:true
 });
 
-ProductSchema.statics.getPaginationProducts = function(page,query={},projection='name _id price status order',sort={order:-1}){
+ProductSchema.statics.getPaginationProducts = function(page,query={},projection='name _id price status order',sort={order:-1,_id:-1}){
     return new Promise((resolve,reject)=>{
       let options = {
         page: page,
