@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 17:20:06
+* @Last Modified time: 2019-04-22 18:15:26
 */
 import * as types from './actionTypes.js'
 import { message } from 'antd'
@@ -10,7 +10,8 @@ import { request } from 'util'
 import { 
 	SAVE_PRODUCT,
 	GET_PRODUCTS,
-	UPDATE_PRODUCT_ORDER 
+	UPDATE_PRODUCT_ORDER,
+	UPDATE_PRODUCT_STATUS 
 } from 'api'
 
 export const getSetCategoryIdAction = (pid,id)=>{
@@ -156,6 +157,27 @@ export const getUpdateOrderAction = (id,newOrder)=>{
 		.then(result=>{
 			if(result.code == 0){
 				message.success('更新排序成功')
+				dispatch(setPageAction(result.data))
+			}
+		})
+	}	
+}
+
+export const getUpdateStatusAction = (id,newStatus)=>{
+	return (dispatch,getState)=>{
+		const state = getState().get('product');
+		request({
+			method:'put',
+			url:UPDATE_PRODUCT_STATUS,
+			data:{
+				id:id,
+				status:newStatus,
+				page:state.get('current')
+			}
+		})
+		.then(result=>{
+			if(result.code == 0){
+				message.success('更新状态成功')
 				dispatch(setPageAction(result.data))
 			}
 		})

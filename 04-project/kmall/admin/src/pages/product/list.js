@@ -2,12 +2,12 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-21 17:11:50
+ * @Last Modified time: 2019-04-22 18:16:46
  */
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Breadcrumb, Button, Table, InputNumber, Divider, Modal, Input } from 'antd'
+import { Breadcrumb, Button, Table, InputNumber, Divider, Modal, Input,Switch } from 'antd'
 import { Link } from "react-router-dom"
 import { actionCreator } from './store'
 import Layout from 'common/layout'
@@ -25,7 +25,8 @@ class ProductList extends Component {
             total,
             handlePage,
             isPageFetching,
-            handleUpdateOrder
+            handleUpdateOrder,
+            handleUpdateStatus
         } = this.props;
         const dataSource = list.map(product => {
             return {
@@ -58,6 +59,14 @@ class ProductList extends Component {
             title: '状态',
             dataIndex: 'status',
             key: 'status',
+            render:(status,record)=><Switch 
+                checkedChildren="在售" 
+                unCheckedChildren="下架" 
+                checked={status==0 ? true : false}
+                onChange={(checked)=>{
+                    handleUpdateStatus(record.id,checked ? '0' : '1')
+                }} 
+            />
         }, {
             title: '操作',
             dataIndex: 'action',
@@ -123,7 +132,11 @@ const mapDispatchToProps = (dispath) => {
         handleUpdateOrder: (id, newOrder) => {
             const action = actionCreator.getUpdateOrderAction(id, newOrder)
             dispath(action)
-        }
+        },
+        handleUpdateStatus: (id, newStatus) => {
+            const action = actionCreator.getUpdateStatusAction(id, newStatus)
+            dispath(action)
+        },        
     }
 }
 
