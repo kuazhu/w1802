@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-22 18:45:00
+* @Last Modified time: 2019-04-22 20:16:51
 */
 import * as types from './actionTypes.js'
 import { message } from 'antd'
@@ -78,9 +78,13 @@ export const getSaveAction = (err,values)=>{
 		if(hasError){
 			return;
 		}
+		let method = 'post'
+		if(values.id){
+			method = 'put'
+		}
 		dispatch(getSaveRequestAction())
 		request({
-			method:'post',
+			method:method,
 			url:SAVE_PRODUCT,
 			data:{
 				...values,

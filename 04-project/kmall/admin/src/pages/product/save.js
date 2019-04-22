@@ -2,7 +2,7 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-22 19:14:34
+ * @Last Modified time: 2019-04-22 20:20:59
  */
 
 import React, { Component } from 'react'
@@ -43,6 +43,7 @@ class ProductSave extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
+            values.id = this.state.productId;
             this.props.handleSave(err,values)
         });
     }
@@ -67,6 +68,16 @@ class ProductSave extends Component {
             price,
             stock            
         } = this.props
+        let fileList = [];
+        console.log(images)
+        if(images){
+            fileList = images.split(',').map((url,index)=>({
+                uid:index,
+                status: 'done',
+                url:url,
+                response:url
+            }))
+        }
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -160,6 +171,7 @@ class ProductSave extends Component {
                                 getFileList={(fileList)=>{
                                     handleImages(fileList)
                                 }}
+                                fileList={fileList}
                             />
                         </Form.Item>
                         <Form.Item label="商品描述">

@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-21 10:21:37
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-21 11:07:48
+* @Last Modified time: 2019-04-22 20:13:43
 */
 import React,{ Component } from 'react'
 
@@ -20,6 +20,14 @@ class UploadImage extends Component{
 		this.handlePreview = this.handlePreview.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 	}
+	static getDerivedStateFromProps(props, state){
+		if(props.fileList.length > 0 && state.fileList == 0){
+			return {
+				fileList:props.fileList
+			}
+		}
+		return null;
+	}	
 	handleCancel(){
 		this.setState({ previewVisible: false })
 	}
