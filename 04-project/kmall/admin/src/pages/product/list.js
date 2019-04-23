@@ -2,7 +2,7 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-04-23 18:49:15
+ * @Last Modified time: 2019-04-23 19:15:19
  */
 
 import React, { Component } from 'react'
@@ -48,6 +48,15 @@ class ProductList extends Component {
             title: '商品名称',
             dataIndex: 'name',
             key: 'name',
+            render:name=>{
+                if(keyword){
+                    const reg = new RegExp('('+keyword+')','ig');
+                    const html = name.replace(reg,"<b style='color:red'>$1</b>");
+                    return <span dangerouslySetInnerHTML={{__html:html}}></span>;
+                }else{
+                    return name;
+                }
+            }
         }, {
             title: '排序',
             dataIndex: 'order',
