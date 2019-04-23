@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-22 19:47:22
+* @Last Modified time: 2019-04-23 18:16:45
 */
 
 import React,{ Component } from 'react'
@@ -117,6 +117,7 @@ class CategorySelector extends Component{
 	}
     render(){
     	const { levelOneCategories,levelTwoCategories,levelOneId,levelTwoId } = this.state;
+    	const { disabled } = this.props
     	const levelOneOptions = levelOneCategories.map(category=><Option key={category._id} value={category._id}>{category.name}</Option>)
     	const levelTwoOptions = levelTwoCategories.map(category=><Option key={category._id} value={category._id}>{category.name}</Option>)
         return (
@@ -125,6 +126,7 @@ class CategorySelector extends Component{
         			style={{width:200,marginRight:10}}
         			onChange={this.handleLevelOneChange}
         			value={levelOneId}
+        			disabled={disabled}
         		>
         			{levelOneOptions}
         		</Select>
@@ -134,6 +136,7 @@ class CategorySelector extends Component{
         				style={{width:200}}
         				onChange={this.handleLevelTwoChange}
         				value={levelTwoId}
+        				disabled={disabled}
         			 >
         				{levelTwoOptions}
         			</Select>

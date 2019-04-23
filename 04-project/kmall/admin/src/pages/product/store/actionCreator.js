@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-22 20:16:51
+* @Last Modified time: 2019-04-23 18:49:27
 */
 import * as types from './actionTypes.js'
 import { message } from 'antd'
@@ -12,7 +12,8 @@ import {
 	GET_PRODUCTS,
 	UPDATE_PRODUCT_ORDER,
 	UPDATE_PRODUCT_STATUS,
-	GET_PRODUCT_DETAIL 
+	GET_PRODUCT_DETAIL,
+	SEARCH_PRODUCTS, 
 } from 'api'
 
 export const getSetCategoryIdAction = (pid,id)=>{
@@ -208,6 +209,25 @@ export const getProductDetailAction = (productId)=>{
 			}
 		})
 	}	
+}
+
+export const getSearchAction = (keyword,page)=>{
+	return (dispatch)=>{
+		request({
+			url:SEARCH_PRODUCTS,
+			data:{
+				keyword:keyword,
+				page:page
+			}
+		})
+		.then(result=>{
+			if(result.code == 0){
+				dispatch(setPageAction(result.data))
+			}else if(result.code == 1){
+				message.error(result.message)
+			}
+		})
+	}
 }
 
 
