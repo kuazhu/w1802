@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-23 19:46:37
+* @Last Modified time: 2019-04-23 20:51:54
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -50,6 +50,7 @@ module.exports = {
             util:path.resolve(__dirname,'./src/util'),
             api:path.resolve(__dirname,'./src/api'),
             common:path.resolve(__dirname,'./src/common'),
+            node_modules:path.resolve(__dirname,'./node_modules'),
         }
     },	
 	module: {
@@ -68,12 +69,13 @@ module.exports = {
 			},
 	    //处理图片 
 			{
-				test: /\.(png|jpg|gif|jpeg)$/i,
+				test: /\.(png|jpg|gif|jpeg|ttf|woff2|woff|eot|svg)\??.*$/i,
 				use: [
 			  		{
 			    		loader: 'url-loader',
 			    		options: {
-			      			limit: 100
+			      			limit: 100,
+			      			name:'resource/[name].[ext]'
 			    		}
 			  		}
 				]
@@ -95,7 +97,9 @@ module.exports = {
 	    new htmlWebpackPlugin(getHtmlConfig('index')),
 	    new htmlWebpackPlugin(getHtmlConfig('user-login')),	    
 	    new CleanWebpackPlugin(),
-	    new MiniCssExtractPlugin({})
+	    new MiniCssExtractPlugin({
+	    	filename:'css/[name].css'
+	    })
 	],
 	devServer:{
 		contentBase: './dist',//内容的目录

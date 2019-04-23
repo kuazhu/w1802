@@ -5,6 +5,7 @@
 *.mp4
 *.webm
 **/node_modules
+**/dist
 **/db
 *.jpg
 *.png
