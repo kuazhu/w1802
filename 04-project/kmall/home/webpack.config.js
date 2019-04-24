@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-23 20:51:54
+* @Last Modified time: 2019-04-24 19:14:08
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -48,7 +48,7 @@ module.exports = {
         alias:{
             pages:path.resolve(__dirname,'./src/pages'),
             util:path.resolve(__dirname,'./src/util'),
-            api:path.resolve(__dirname,'./src/api'),
+            service:path.resolve(__dirname,'./src/service'),
             common:path.resolve(__dirname,'./src/common'),
             node_modules:path.resolve(__dirname,'./node_modules'),
         }
@@ -104,5 +104,9 @@ module.exports = {
 	devServer:{
 		contentBase: './dist',//内容的目录
 		port:3002,//服务运行的端口
+		proxy: [{
+		  context: ['/user'],
+		  target: 'http://127.0.0.1:3000',
+		}]		
 	}			
 };
