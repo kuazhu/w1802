@@ -2,10 +2,11 @@
 * @Author: TomChen
 * @Date:   2019-04-24 18:17:34
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-24 19:31:31
+* @Last Modified time: 2019-04-24 19:52:14
 */
 require('./index.css')
 var _user = require('service/user')
+var _util = require('util')
 var nav = {
 	init:function(){
 		this.bindEvent();
@@ -15,9 +16,9 @@ var nav = {
 		//1.绑定退出事件
 		$('#logout').on('click',function(){
 			_user.logout(function(result){
-				console.log(result)
+				window.location.reload();
 			},function(msg){
-				alert(msg)
+				_util.showErrorMsg(msg)
 			})
 		})
 	}

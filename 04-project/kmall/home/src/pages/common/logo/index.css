@@ -1,0 +1,16 @@
+/*
+* @Author: TomChen
+* @Date:   2019-04-24 19:57:00
+* @Last Modified by:   TomChen
+* @Last Modified time: 2019-04-24 20:00:11
+*/
+.logo-box{
+	background-color: #fff;
+	padding: 10px;
+}
+.logo-text{
+	color: #f21;
+	text-decoration: none;
+	font-size: 30px;
+	font-weight: bold;
+}
