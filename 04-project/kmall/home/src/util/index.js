@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-24 19:20:01
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-24 19:53:24
+* @Last Modified time: 2019-04-24 20:51:57
 */
 var _util = {
 	request:function(options){
@@ -40,7 +40,26 @@ var _util = {
 		alert(msg)
 	},
 	goLogin:function(){
-		window.location.herf = './user-login.html'
+		window.location.href = './user-login.html'
+	},
+	goHome:function(){
+		window.location.href = '/'
+	},	
+	validate:function(value,type){
+		
+		var value = $.trim(value);
+		//非空验证
+		if(type == 'require'){
+			return !!value;
+		}
+		//用户名格式验证
+		if(type == 'username'){
+			return /^[a-zA-Z0-9_]{3,6}$/.test(value);
+		}
+		//密码格式验证
+		if(type == 'password'){
+			return /^[a-zA-Z0-9_]{3,6}$/.test(value);
+		}
 	}
 }
 
