@@ -1,0 +1,25 @@
+/*
+* @Author: TomChen
+* @Date:   2019-04-24 18:17:26
+* @Last Modified by:   TomChen
+* @Last Modified time: 2019-04-24 18:22:49
+*/
+.nav{
+	height: 30px;
+	line-height: 30px;
+	background-color: #f3f3f3;
+}
+.user-info{
+	float: left;
+}
+.username{
+	color: #666;
+	margin-right: 10px;
+}
+.nav-list{
+	float: right;
+}
+.nav-list .nav-item{
+	float: left;
+	margin-right: 10px;
+}
