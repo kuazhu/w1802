@@ -1,0 +1,23 @@
+/*
+* @Author: TomChen
+* @Date:   2019-04-23 20:23:13
+* @Last Modified by:   TomChen
+* @Last Modified time: 2019-04-25 19:29:29
+*/
+.result{
+	min-height: 300px;
+	background-color: #999;
+	padding-top: 100px;
+	text-align: center;
+}
+.result .title{
+	font-size: 30px;
+	margin-bottom: 10px;
+	color: #fff;
+}
+.result-box{
+	display: none;
+}
+.addCart .btn{
+	width: 110px;
+}

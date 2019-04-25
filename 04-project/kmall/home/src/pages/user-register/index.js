@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-25 18:51:33
+* @Last Modified time: 2019-04-25 19:31:28
 */
 require('pages/common/footer')
 require('pages/common/logo')
@@ -29,7 +29,22 @@ var page = {
 	},
 	bindEvent:function(){
 		var _this = this;
-		//1.用户注册
+		//1.验证用户名是否存在
+		$('[name="username"]').on('blur',function(){
+			var username = $(this).val();
+			if(!_util.validate(username,'require')){
+				return;
+			}
+			if(!_util.validate(username,'username')){
+				return;
+			}
+			_user.checkUsername(username,function(){
+				formErr.hide()
+			},function(msg){
+				formErr.show(msg)
+			})
+		})
+		//2.用户注册
 		$('#btn-submit').on('click',function(){
 			_this.submitRegister();
 		})
@@ -54,7 +69,7 @@ var page = {
 		if(validateResult.status){//验证通过
 			formErr.hide()
 			_user.register(formData,function(){
-				console.log('reg ok...')
+				window.location.href = './result.html?type=register'
 			},function(msg){
 				formErr.show(msg)
 			})

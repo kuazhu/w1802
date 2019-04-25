@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-24 19:20:01
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-25 18:50:02
+* @Last Modified time: 2019-04-25 19:42:31
 */
 var _util = {
 	request:function(options){
@@ -44,6 +44,15 @@ var _util = {
 	},
 	goHome:function(){
 		window.location.href = '/'
+	},
+	getParamFromUrl:function(key){
+		//?type=register
+		//?name=tom&&type=register
+		//?name=tom&&type=register&&id=123
+		var query = window.location.search.substr(1);
+		var reg = new RegExp('(^|&)'+key+'=([^&]*)(&|$)');
+		var result = query.match(reg)
+		return result ? result[2] : null;
 	},	
 	validate:function(value,type){
 		
