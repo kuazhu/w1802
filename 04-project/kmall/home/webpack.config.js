@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-25 20:19:57
+* @Last Modified time: 2019-04-25 20:57:52
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -94,7 +94,13 @@ module.exports = {
 			            presets: ['env','es2015','stage-3'],
 			        }
 			    }               
-			}							
+			},
+			{
+			    test:/\.tpl$/,
+			    use: {
+			        loader: 'html-loader',
+			    }               
+			}										
 		]
 	},
 	plugins:[
