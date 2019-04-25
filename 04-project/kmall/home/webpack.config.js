@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-24 19:14:08
+* @Last Modified time: 2019-04-25 18:22:13
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -11,9 +11,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const publicPath = "/";
 
-const getHtmlConfig = (name)=>({
+const getHtmlConfig = (name,title)=>({
     template:'./src/view/'+name+'.html',//模板文件
     filename:name+'.html',//输出的文件名
+    title:title,//页面标题
     inject:true,//脚本写在那个标签里,默认是true(在body结束后)
     hash:true,//给生成的js/css文件添加一个唯一的hash
     chunks:['common',name]
@@ -94,8 +95,8 @@ module.exports = {
 		]
 	},
 	plugins:[
-	    new htmlWebpackPlugin(getHtmlConfig('index')),
-	    new htmlWebpackPlugin(getHtmlConfig('user-login')),	    
+	    new htmlWebpackPlugin(getHtmlConfig('index','首页')),
+	    new htmlWebpackPlugin(getHtmlConfig('user-login','用户登录')),	    
 	    new CleanWebpackPlugin(),
 	    new MiniCssExtractPlugin({
 	    	filename:'css/[name].css'

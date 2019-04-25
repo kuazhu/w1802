@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-24 20:52:38
+* @Last Modified time: 2019-04-25 18:08:39
 */
 require('pages/common/footer')
 require('pages/common/logo')
@@ -32,6 +32,11 @@ var page = {
 		//1.用户登录
 		$('#btn-submit').on('click',function(){
 			_this.submitLogin();
+		})
+		$('input').on('keyup',function(ev){
+			if(ev.keyCode == 13){
+				_this.submitLogin();
+			}
 		})
 	},
 	submitLogin:function(){
