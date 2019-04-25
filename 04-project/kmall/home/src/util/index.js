@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-24 19:20:01
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-24 20:51:57
+* @Last Modified time: 2019-04-25 18:50:02
 */
 var _util = {
 	request:function(options){
@@ -60,6 +60,14 @@ var _util = {
 		if(type == 'password'){
 			return /^[a-zA-Z0-9_]{3,6}$/.test(value);
 		}
+		//手机号格式验证
+		if(type == 'phone'){
+			return /^1[3568]\d{9}$/.test(value);
+		}
+		//邮箱格式验证
+		if(type == 'email'){
+			return /^\w+@\w+\.\w{2,6}$/.test(value);
+		}				
 	}
 }
 

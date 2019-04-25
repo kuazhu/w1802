@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-25 18:22:13
+* @Last Modified time: 2019-04-25 18:40:06
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -32,6 +32,7 @@ module.exports = {
 		'common':'./src/pages/common/index.js',		
 		'index':'./src/pages/index/index.js',		
 		'user-login':'./src/pages/user-login/index.js',		
+		'user-register':'./src/pages/user-register/index.js',		
 	},
 	//单入口写法二
 	//entry: './src/index.js',
@@ -97,6 +98,7 @@ module.exports = {
 	plugins:[
 	    new htmlWebpackPlugin(getHtmlConfig('index','首页')),
 	    new htmlWebpackPlugin(getHtmlConfig('user-login','用户登录')),	    
+	    new htmlWebpackPlugin(getHtmlConfig('user-register','用户注册')),	    
 	    new CleanWebpackPlugin(),
 	    new MiniCssExtractPlugin({
 	    	filename:'css/[name].css'
