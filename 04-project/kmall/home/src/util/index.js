@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-24 19:20:01
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-25 19:42:31
+* @Last Modified time: 2019-04-25 20:03:20
 */
 var _util = {
 	request:function(options){
@@ -52,7 +52,7 @@ var _util = {
 		var query = window.location.search.substr(1);
 		var reg = new RegExp('(^|&)'+key+'=([^&]*)(&|$)');
 		var result = query.match(reg)
-		return result ? result[2] : null;
+		return result ? decodeURIComponent(result[2]) : null;
 	},	
 	validate:function(value,type){
 		
