@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-25 18:08:39
+* @Last Modified time: 2019-04-26 18:20:26
 */
 require('pages/common/footer')
 require('pages/common/logo')
@@ -51,7 +51,7 @@ var page = {
 		if(validateResult.status){//验证通过
 			formErr.hide()
 			_user.login(formData,function(){
-				_util.goHome()
+				window.location.href = _util.getParamFromUrl('redirect') || "/"
 			},function(msg){
 				formErr.show(msg)
 			})

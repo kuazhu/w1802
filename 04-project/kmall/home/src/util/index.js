@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-24 19:20:01
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-25 20:55:42
+* @Last Modified time: 2019-04-26 18:18:38
 */
 var Hogan = require('hogan.js')
 var _util = {
@@ -41,7 +41,7 @@ var _util = {
 		alert(msg)
 	},
 	goLogin:function(){
-		window.location.href = './user-login.html'
+		window.location.href = './user-login.html?redirect='+window.location.href
 	},
 	goHome:function(){
 		window.location.href = '/'
