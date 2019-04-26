@@ -1,14 +1,12 @@
-{{#user}}
-<div class="form-item">
-	<span class="label-item">用户名:</span>
-	<span class="content-item">{{username}}</span>
-</div>
-<div class="form-item">
-	<span class="label-item">邮箱:</span>
-	<span class="content-item">{{email}}</span>
-</div>
-<div class="form-item">
-	<span class="label-item">电话:</span>
-	<span class="content-item">{{phone}}</span>
-</div>
-{{/user}}	
+<ul class="clearfix">
+	{{#list}}
+	<li class="product-list-item">
+		<a href="./detail.html?productId={{_id}}" target="_blank">
+			<img class="product-img" src="{{image}}" alt="{{name}}">
+			<p class="product-price">￥{{price}}</p>
+			<p class="product-name">{{name}}</p>
+		</a>
+	</li>
+	{{/list}}
+
+</ul>	

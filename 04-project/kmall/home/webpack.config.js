@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-26 20:21:14
+* @Last Modified time: 2019-04-26 20:35:53
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -123,7 +123,7 @@ module.exports = {
 		contentBase: './dist',//内容的目录
 		port:3002,//服务运行的端口
 		proxy: [{
-		  context: ['/user'],
+		  context: ['/user','/product'],
 		  target: 'http://127.0.0.1:3000',
 		}]		
 	}			
