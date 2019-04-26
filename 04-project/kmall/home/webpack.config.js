@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-26 18:31:19
+* @Last Modified time: 2019-04-26 19:34:33
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -55,6 +55,7 @@ module.exports = {
             util:path.resolve(__dirname,'./src/util'),
             service:path.resolve(__dirname,'./src/service'),
             common:path.resolve(__dirname,'./src/common'),
+            images:path.resolve(__dirname,'./src/images'),
             node_modules:path.resolve(__dirname,'./node_modules'),
         }
     },	
