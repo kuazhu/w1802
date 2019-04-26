@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 20:22:40
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-26 19:38:30
+* @Last Modified time: 2019-04-26 19:55:54
 */
 .focus{
 	margin-bottom: 40px;
@@ -38,4 +38,57 @@
 .focus .swiper-container .swiper-pagination-bullet{
 	width: 15px;
 	height: 15px;
+}
+.floor{
+	margin-bottom: 20px;
+}
+.floor-box{
+	margin-bottom: 20px;
+}
+.floor-title{
+	font-size: 18px;
+	margin-bottom: 15px;
+}
+.floor-box:nth-child(1) .floor-title{
+	color: #f21;
+	border-bottom: 2px solid #f21;
+}
+.floor-box:nth-child(2) .floor-title{
+	color: #ff1;
+	border-bottom: 2px solid #ff1;
+}
+.floor-box:nth-child(3) .floor-title{
+	color: #f0f;
+	border-bottom: 2px solid #f0f;
+}
+.floor-item{
+	float: left;
+	width: 208px;
+	height: 280px;
+	margin-right: 10px;
+	background-color: #fff;
+	text-align: center;
+	box-sizing: border-box;
+	padding-top: 10px;
+}
+.floor-item:hover{
+	box-shadow: 0px 1px 7px rgba(0,0,0,0.5);
+}
+.floor-item:last-child{
+	margin-right: 0px;
+}
+.floor-item a{
+	text-decoration: none;
+
+}
+.floor-text{
+	font-size: 18px;
+	font-weight: bold;
+	color: #111;
+
+}
+.floor-img{
+	width: 180px;
+	height: 180px;
+	margin-top: 20px;
 }  
