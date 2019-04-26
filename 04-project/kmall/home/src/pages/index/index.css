@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 20:22:40
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-26 19:00:36
+* @Last Modified time: 2019-04-26 19:15:18
 */
 .focus{
 	margin-bottom: 40px;
@@ -32,3 +32,6 @@
 .keywords .keyowrd-item .link:hover{
 	color: #f21;
 }
+.swiper-container {
+    height: 440px;
+}  
