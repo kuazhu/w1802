@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-26 18:40:48
+* @Last Modified time: 2019-04-26 18:57:58
 */
 require('pages/common/nav')
 require('pages/common/search')
@@ -38,6 +38,11 @@ var page = {
 		$('#btn-submit').on('click',function(){
 			_this.submitUpdatePassword();
 		})
+		$('.side-content input').on('keyup',function(ev){
+			if(ev.keyCode == 13){
+				_this.submitUpdatePassword();
+			}
+		})			
 	},
 	submitUpdatePassword:function(){
 		//1.获取数据
