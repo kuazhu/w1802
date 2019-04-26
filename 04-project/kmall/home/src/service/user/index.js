@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-24 19:11:15
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-26 18:10:11
+* @Last Modified time: 2019-04-26 18:37:13
 */
 var _util = require('util')
 
@@ -57,7 +57,16 @@ var _user = {
 			success:success,
 			error:error			
 		})		
-	}
+	},
+	updatePassword:function(data,success,error){
+		_util.request({
+			method:'put',
+			url:'/user/updatePassword',
+			data:data,
+			success:success,
+			error:error
+		})
+	},	
 }
 
 module.exports = _user;
