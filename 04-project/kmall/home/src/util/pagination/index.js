@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-28 10:44:41
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-28 11:34:40
+* @Last Modified time: 2019-04-28 11:48:15
 */
 require('./index.css');
 var _util = require('util');
@@ -16,7 +16,14 @@ var tpl = require('./index.tpl');
 	Pagination.prototype = {
 		constructor:Pagination,
 		bindEvent:function(){
-
+			var _this = this;
+			this.$elem.on('click','.page-item',function(){
+				var $this = $(this);
+				if($this.hasClass('active') || $this.hasClass('disabled')){
+					return;
+				}
+				_this.$elem.trigger('page-change',$this.data('value'))
+			})
 		},
 		render:function(options){
 			//1.计算总页数
@@ -52,7 +59,9 @@ var tpl = require('./index.tpl');
 				disabled:next > pages ? true : false
 			})
 			var html = _util.render(tpl,{
-				pageArray:pageArray
+				pageArray:pageArray,
+				current:options.current,
+				pages:pages
 			})
 			this.$elem.html(html)
 		}

@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-28 10:56:40
+* @Last Modified time: 2019-04-28 11:51:26
 */
 require('pages/common/nav')
 require('pages/common/search')
@@ -16,7 +16,8 @@ var page = {
 	listParam:{
 		keyword:_util.getParamFromUrl('keyword') || '',
 		categoryId:_util.getParamFromUrl('categoryId') || '',
-		orderBy:_util.getParamFromUrl('orderBy') || 'default'
+		orderBy:_util.getParamFromUrl('orderBy') || 'default',
+		page:_util.getParamFromUrl('page') || 1,
 	},
 	init:function(){
 		this.initPagination();
@@ -24,7 +25,12 @@ var page = {
 		this.bindEvent();
 	},
 	initPagination:function(){
+		var _this = this;
 		this.$pagination = $('.pagination-box');
+		this.$pagination.on('page-change',function(ev,value){
+			_this.listParam.page = value;
+			_this.loadProductList();
+		})
 		this.$pagination .pagination();
 	},
 	bindEvent:function(){
@@ -58,6 +64,7 @@ var page = {
 					_this.listParam.orderBy = 'price_asc';
 				}
 			}
+			_this.listParam.page = 1;
 			_this.loadProductList();
 		});
 	},
