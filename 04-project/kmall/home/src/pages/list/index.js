@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-28 11:51:26
+* @Last Modified time: 2019-04-28 15:35:52
 */
 require('pages/common/nav')
 require('pages/common/search')
@@ -20,6 +20,7 @@ var page = {
 		page:_util.getParamFromUrl('page') || 1,
 	},
 	init:function(){
+		this.$elem = $('.product-list-box');
 		this.initPagination();
 		this.loadProductList();
 		this.bindEvent();
@@ -80,7 +81,7 @@ var page = {
 				var html = _util.render(tpl,{
 					list:result.list
 				})
-				$('.product-list-box').html(html)
+				_this.$elem.html(html)
 				//调用分页组件
 				_this.$pagination .pagination('render',{
 					current:result.current,
@@ -88,7 +89,7 @@ var page = {
 					pageSize:result.pageSize
 				})
 			}else{
-				$('.product-list-box').html('<p class="empty-msg">你找的商品去火星啦！！！</p>')
+				_this.$elem.html('<p class="empty-msg">你找的商品去火星啦！！！</p>')
 			}
 
 		},function(msg){

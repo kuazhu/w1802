@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-26 20:35:53
+* @Last Modified time: 2019-04-28 15:39:53
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -36,6 +36,7 @@ module.exports = {
 		'user-center':'./src/pages/user-center/index.js',		
 		'user-update-password':'./src/pages/user-update-password/index.js',		
 		'list':'./src/pages/list/index.js',		
+		'detail':'./src/pages/detail/index.js',		
 		'result':'./src/pages/result/index.js',		
 	},
 	//单入口写法二
@@ -113,6 +114,7 @@ module.exports = {
 	    new htmlWebpackPlugin(getHtmlConfig('user-center','用户中心')),	    
 	    new htmlWebpackPlugin(getHtmlConfig('user-update-password','修改密码')),	    
 	    new htmlWebpackPlugin(getHtmlConfig('list','商品列表')),	    
+	    new htmlWebpackPlugin(getHtmlConfig('detail','商品详情')),	    
 	    new htmlWebpackPlugin(getHtmlConfig('result','结果提示')),	    
 	    new CleanWebpackPlugin(),
 	    new MiniCssExtractPlugin({
