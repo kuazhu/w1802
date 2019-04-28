@@ -2,11 +2,12 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-28 10:33:51
+* @Last Modified time: 2019-04-28 10:56:40
 */
 require('pages/common/nav')
 require('pages/common/search')
 require('pages/common/footer')
+require('util/pagination')
 require('./index.css')
 var _util = require('util')
 var _product = require('service/product')
@@ -18,8 +19,13 @@ var page = {
 		orderBy:_util.getParamFromUrl('orderBy') || 'default'
 	},
 	init:function(){
+		this.initPagination();
 		this.loadProductList();
 		this.bindEvent();
+	},
+	initPagination:function(){
+		this.$pagination = $('.pagination-box');
+		this.$pagination .pagination();
 	},
 	bindEvent:function(){
 		var _this = this;
@@ -56,6 +62,7 @@ var page = {
 		});
 	},
 	loadProductList:function(){
+		var _this = this;
 		this.listParam.keyword ? (delete this.listParam.categoryId) : (delete this.listParam.keyword)
 		_product.getProductList(this.listParam,function(result){
 			if(result.list.length > 0){
@@ -67,6 +74,12 @@ var page = {
 					list:result.list
 				})
 				$('.product-list-box').html(html)
+				//调用分页组件
+				_this.$pagination .pagination('render',{
+					current:result.current,
+					total:result.total,
+					pageSize:result.pageSize
+				})
 			}else{
 				$('.product-list-box').html('<p class="empty-msg">你找的商品去火星啦！！！</p>')
 			}
