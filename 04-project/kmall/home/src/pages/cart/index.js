@@ -2,15 +2,13 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-29 19:17:29
+* @Last Modified time: 2019-04-29 19:28:53
 */
 require('pages/common/nav')
 require('pages/common/search')
 require('pages/common/footer')
-require('util/pagination')
 require('./index.css')
 var _util = require('util')
-var _product = require('service/product')
 var _cart = require('service/cart')
 var _nav = require('pages/common/nav')
 var tpl = require('./index.tpl')
