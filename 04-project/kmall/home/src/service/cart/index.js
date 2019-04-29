@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-24 19:11:15
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-29 18:44:07
+* @Last Modified time: 2019-04-29 19:01:59
 */
 var _util = require('util')
 
@@ -80,6 +80,15 @@ var _cart = {
 			success:success,
 			error:error			
 		})			
+	},
+	updateCount:function(data,success,error){
+		_util.request({
+			url:'/cart/updateCount',
+			method:'put',
+			data:data,
+			success:success,
+			error:error			
+		})		
 	},				
 }
 
