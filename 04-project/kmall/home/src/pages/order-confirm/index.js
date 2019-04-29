@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-29 20:02:57
+* @Last Modified time: 2019-04-29 20:27:10
 */
 require('pages/common/nav')
 require('pages/common/search')
@@ -10,6 +10,7 @@ require('pages/common/footer')
 require('./index.css')
 var _util = require('util')
 var _order = require('service/order')
+var _modal = require('./modal.js')
 var shippingTpl = require('./shipping.tpl')
 var productTpl = require('./product.tpl')
 var page = {
@@ -24,7 +25,11 @@ var page = {
 		this.loadProductList();
 	},
 	bindEvent:function(){
-		var _this = this;							
+		var _this = this;
+		//1.弹出地址框
+		this.$shippingBox.on('click','.shipping-add',function(){
+			_modal.show()
+		})							
 	},
 	loadShipping:function(){
 		var html = _util.render(shippingTpl)
@@ -33,7 +38,6 @@ var page = {
 	loadProductList:function(){
 		var _this = this;
 		_order.getOrderProductList(function(result){
-			console.log(result);
 			if(result.cartList.length>0){
 				//处理图片
 				result.cartList.forEach(function(item){
