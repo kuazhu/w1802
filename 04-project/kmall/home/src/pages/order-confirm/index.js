@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-30 18:30:27
+* @Last Modified time: 2019-04-30 18:45:20
 */
 require('pages/common/nav')
 require('pages/common/search')
@@ -33,7 +33,18 @@ var page = {
 		//1.弹出地址框
 		this.$shippingBox.on('click','.shipping-add',function(){
 			_modal.show()
-		})							
+		})
+		//2.删除地址
+		this.$shippingBox.on('click','.shipping-delete',function(){
+			if(_util.confirm('你确定要删除这个地址吗?')){
+				var shippingId = $(this).parents('.shipping-item').data('shipping-id')
+				_shipping.deleteShipping({shippingId:shippingId},function(shippings){
+					_this.renderShipping(shippings)
+				},function(msg){
+					_util.showErrorMsg(msg)
+				})
+			}
+		})									
 	},
 	loadShipping:function(){
 		var _this = this;
