@@ -2,11 +2,12 @@
 * @Author: TomChen
 * @Date:   2019-04-29 20:21:56
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-29 20:51:14
+* @Last Modified time: 2019-04-30 18:31:42
 */
 
 var _util = require('util')
 var _cities = require('util/cities')
+var _shipping = require('service/shipping')
 var modalTpl = require('./modal.tpl')
 var formErr = {
 	show:function(msg){
@@ -72,33 +73,36 @@ var _modal = {
 			_this.loadCities($this.val())
 		})
 
-
-
-		$('#btn-submit').on('click',function(){
+		this.$modalBox.find('#btn-submit').on('click',function(){
 			_this.submit();
 		})
-		$('input').on('keyup',function(ev){
+		this.$modalBox.find('input').on('keyup',function(ev){
 			if(ev.keyCode == 13){
 				_this.submit();
 			}
 		})
 	},
 	submit:function(){
+		var _this = this;
 		//1.获取数据
 		var formData = {
-			username:$.trim($('[name="username"]').val()),
-			password:$.trim($('[name="password"]').val()),
-			repassword:$.trim($('[name="repassword"]').val()),
+			name:$.trim($('[name="name"]').val()),
+			province:$.trim($('[name="province"]').val()),
+			city:$.trim($('[name="city"]').val()),
+			address:$.trim($('[name="address"]').val()),
 			phone:$.trim($('[name="phone"]').val()),
-			email:$.trim($('[name="email"]').val()),
+			zip:$.trim($('[name="zip"]').val()),
 		}
 		//2.验证数据
 		var validateResult = this.validate(formData)
 		//3.发送请求
 		if(validateResult.status){//验证通过
 			formErr.hide()
-			_user.register(formData,function(){
-				window.location.href = './result.html?type=register'
+			//增加地址
+			_shipping.addShipping(formData,function(shippings){
+				_util.showSuccessMsg('添加地址成功')
+				$('.shipping-box').trigger('get-shippings',[shippings])
+				_this.hideModal()
 			},function(msg){
 				formErr.show(msg)
 			})
@@ -112,51 +116,36 @@ var _modal = {
 			status:false,
 			msg:''
 		}
-		//用户名不能为空
-		if(!_util.validate(formData.username,'require')){
-			result.msg = '用户名不能为空'
+		//收货人姓名不能为空
+		if(!_util.validate(formData.name,'require')){
+			result.msg = '收货人姓名不能为空'
 			return result;
 		}
-		//用户名格式不正确
-		if(!_util.validate(formData.username,'username')){
-			result.msg = '用户名格式不正确'
+		//省份不能为空
+		if(!_util.validate(formData.province,'require')){
+			result.msg = '省份不能为空'
 			return result;
 		}
-		//密码不能为空
-		if(!_util.validate(formData.password,'require')){
-			result.msg = '密码不能为空'
+		//城市不能为空
+		if(!_util.validate(formData.city,'require')){
+			result.msg = '城市不能为空'
 			return result;
 		}
-		//密码格式不正确
-		if(!_util.validate(formData.password,'password')){
-			result.msg = '密码格式不正确'
+		//地址不能为空
+		if(!_util.validate(formData.address,'require')){
+			result.msg = '地址不能为空'
 			return result;
-		}
-		//两次密码不一致
-		if(formData.password != formData.repassword){
-			result.msg = '两次密码不一致'
-			return result;			
 		}
 		//手机号码不能为空
 		if(!_util.validate(formData.phone,'require')){
 			result.msg = '手机号码不能为空'
 			return result;
-		}
+		}						
 		//手机号码格式不正确
 		if(!_util.validate(formData.phone,'phone')){
 			result.msg = '手机号码格式不正确'
 			return result;
 		}
-		//邮箱不能为空
-		if(!_util.validate(formData.email,'require')){
-			result.msg = '邮箱不能为空'
-			return result;
-		}
-		//邮箱格式不正确
-		if(!_util.validate(formData.email,'email')){
-			result.msg = '邮箱格式不正确'
-			return result;
-		}						
 		result.status = true;
 		return result;
 
