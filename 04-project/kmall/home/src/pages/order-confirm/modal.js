@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-29 20:21:56
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-30 18:31:42
+* @Last Modified time: 2019-04-30 19:14:13
 */
 
 var _util = require('util')
@@ -24,13 +24,15 @@ var formErr = {
 	}
 }
 var _modal = {
-	show:function(){
+	show:function(shipping){
 		this.$modalBox = $('.modal-box')
+		//编辑时传入需要编辑的地址对象
+		this.shipping = shipping;
 		this.loadModal();
 		this.bindEvent();
 	},
 	loadModal:function(){
-		var html = _util.render(modalTpl);
+		var html = _util.render(modalTpl,this.shipping);
 		this.$modalBox.html(html);
 		this.loadProvinces();
 	},
@@ -39,6 +41,12 @@ var _modal = {
 		var provincesOptions = this.getSelectOptions(provinces);
 		var $provincesSelect = $('.province-select');
 		$provincesSelect.html(provincesOptions)
+		//编辑时回填省份
+		if(this.shipping){
+			$provincesSelect.val(this.shipping.province)
+			this.loadCities(this.shipping.province)
+		}
+
 
 	},
 	loadCities:function(provinceName){
@@ -46,6 +54,11 @@ var _modal = {
 		var citiesOptions = this.getSelectOptions(cities);
 		var $citiesSelect = $('.city-select');
 		$citiesSelect.html(citiesOptions)
+		
+		//编辑时回填城市
+		if(this.shipping){
+			$citiesSelect.val(this.shipping.city)
+		}
 	},
 	getSelectOptions:function(arr){
 		var html = '<option value="">请选择</option>';
@@ -98,14 +111,26 @@ var _modal = {
 		//3.发送请求
 		if(validateResult.status){//验证通过
 			formErr.hide()
+			if(this.shipping){
+			//编辑地址	
+				formData.shippingId = this.shipping._id;
+				_shipping.editShipping(formData,function(shippings){
+					_util.showSuccessMsg('编辑地址成功')
+					$('.shipping-box').trigger('get-shippings',[shippings])
+					_this.hideModal()
+				},function(msg){
+					formErr.show(msg)
+				})
+			}else{
 			//增加地址
-			_shipping.addShipping(formData,function(shippings){
-				_util.showSuccessMsg('添加地址成功')
-				$('.shipping-box').trigger('get-shippings',[shippings])
-				_this.hideModal()
-			},function(msg){
-				formErr.show(msg)
-			})
+				_shipping.addShipping(formData,function(shippings){
+					_util.showSuccessMsg('添加地址成功')
+					$('.shipping-box').trigger('get-shippings',[shippings])
+					_this.hideModal()
+				},function(msg){
+					formErr.show(msg)
+				})
+			}
 		}
 		else{//验证失败
 			formErr.show(validateResult.msg)

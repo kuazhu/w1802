@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-30 18:45:20
+* @Last Modified time: 2019-04-30 19:35:24
 */
 require('pages/common/nav')
 require('pages/common/search')
@@ -18,6 +18,7 @@ var page = {
 	init:function(){
 		this.$shippingBox = $('.shipping-box');
 		this.$productBox = $('.product-box');
+		this.selectedShippingId = '';
 		this.onload();
 		this.bindEvent();
 	},
@@ -35,7 +36,9 @@ var page = {
 			_modal.show()
 		})
 		//2.删除地址
-		this.$shippingBox.on('click','.shipping-delete',function(){
+		this.$shippingBox.on('click','.shipping-delete',function(ev){
+			//阻止冒泡防止点击时选中
+			ev.stopPropagation();
 			if(_util.confirm('你确定要删除这个地址吗?')){
 				var shippingId = $(this).parents('.shipping-item').data('shipping-id')
 				_shipping.deleteShipping({shippingId:shippingId},function(shippings){
@@ -43,6 +46,37 @@ var page = {
 				},function(msg){
 					_util.showErrorMsg(msg)
 				})
+			}
+		})
+		//3.编辑地址
+		this.$shippingBox.on('click','.shipping-edit',function(ev){
+			//阻止冒泡防止点击时选中
+			ev.stopPropagation();
+			var shippingId = $(this).parents('.shipping-item').data('shipping-id')
+			_shipping.getShipping({shippingId:shippingId},function(shipping){
+				_modal.show(shipping)
+			})
+		})
+		//4.选择地址
+		this.$shippingBox.on('click','.shipping-item',function(){
+			var $this = $(this);
+			$this.addClass('active')
+			.siblings('.shipping-item').removeClass('active');
+
+			//保存选中的地址ID
+			_this.selectedShippingId = $this.data('shipping-id')
+
+		})
+		//5.去支付
+		this.$productBox.on('click','.btn-submit',function(){
+			if(_this.selectedShippingId){
+				_order.createOrder({shippingId:_this.selectedShippingId},function(order){
+					window.location.href = "./payment.html?orderNo="+order.orderNo
+				},function(msg){
+					_util.showErrorMsg(msg)
+				})
+			}else{
+				_util.showErrorMsg('请选择地址后再提交!!!')
 			}
 		})									
 	},
@@ -55,6 +89,13 @@ var page = {
 		})
 	},
 	renderShipping:function(shippings){
+		var _this = this;
+		//标注别选中的地址
+		shippings.forEach(function(shipping){
+			if(shipping._id == _this.selectedShippingId){
+				shipping.active = true
+			}
+		})
 		var html = _util.render(shippingTpl,{
 			shippings:shippings
 		})
