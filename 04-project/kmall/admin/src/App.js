@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-09 19:29:30
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-22 18:55:54
+* @Last Modified time: 2019-05-05 10:42:34
 */
 
 import React,{ Component,Fragment } from 'react'
@@ -15,6 +15,7 @@ import Home from 'pages/home'
 import User from 'pages/user'
 import Category from 'pages/category'
 import Product from 'pages/product'
+import Order from 'pages/order'
 import Err from 'common/err'
 
 import { getUserName } from 'util'
@@ -50,6 +51,7 @@ class App extends Component{
 						<ProtectRoute path="/user" component={User} />
 						<ProtectRoute path="/category" component={Category} />
 						<ProtectRoute path="/product" component={Product} />
+						<ProtectRoute path="/order" component={Order} />
 						{
 							//当匹配到路由"/login"后,渲染Login组件
 						}
