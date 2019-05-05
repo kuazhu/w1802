@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-05-05 10:10:24
+* @Last Modified time: 2019-05-05 10:28:34
 */
 require('pages/common/nav')
 require('pages/common/search')
@@ -20,6 +20,7 @@ var page = {
 		this.$elem = $('.order-box');
 		this.onload();
 		this.loadOrderDetail();
+		this.bindEvent();
 	},
 	onload:function(){
 		_side.render('order-list')
@@ -51,6 +52,18 @@ var page = {
 		}else{
 			this.$elem.html('<p class="empty-msg">订单不存在</p>')
 		}
+	},
+	bindEvent:function(){
+		var _this = this;
+		this.$elem.on('click','.btn-cancel',function(){
+			if(_util.confirm('您确定要取消该订单吗?')){
+				_order.cancelOrder(_this.params,function(order){
+					_this.renderOrderDetail(order);
+				},function(msg){
+					_util.showErrorMsg(msg)
+				})
+			}
+		})
 	}
 }
 $(function(){
