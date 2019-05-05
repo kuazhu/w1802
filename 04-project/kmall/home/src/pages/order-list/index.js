@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-23 19:31:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-30 20:53:06
+* @Last Modified time: 2019-05-05 09:11:52
 */
 require('pages/common/nav')
 require('pages/common/search')
@@ -62,7 +62,7 @@ var page = {
 			}
 		},function(msg){
 			_util.showErrorMsg(msg)
-		})		
+		})
 	}
 }
 $(function(){

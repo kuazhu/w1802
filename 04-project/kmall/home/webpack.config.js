@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-08 18:41:12
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-04-30 20:34:48
+* @Last Modified time: 2019-05-05 09:18:20
 */
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin')
@@ -40,6 +40,7 @@ module.exports = {
 		'cart':'./src/pages/cart/index.js',		
 		'order-confirm':'./src/pages/order-confirm/index.js',		
 		'order-list':'./src/pages/order-list/index.js',		
+		'order-detail':'./src/pages/order-detail/index.js',		
 		'payment':'./src/pages/payment/index.js',		
 		'result':'./src/pages/result/index.js',		
 	},
@@ -122,6 +123,7 @@ module.exports = {
 	    new htmlWebpackPlugin(getHtmlConfig('cart','购物车')),	    
 	    new htmlWebpackPlugin(getHtmlConfig('order-confirm','订单确认')),	    
 	    new htmlWebpackPlugin(getHtmlConfig('order-list','订单列表')),	    
+	    new htmlWebpackPlugin(getHtmlConfig('order-detail','订单详情')),	    
 	    new htmlWebpackPlugin(getHtmlConfig('payment','订单支付')),	    
 	    new htmlWebpackPlugin(getHtmlConfig('result','结果提示')),	    
 	    new CleanWebpackPlugin(),
