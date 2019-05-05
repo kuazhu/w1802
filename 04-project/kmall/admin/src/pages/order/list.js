@@ -2,12 +2,12 @@
  * @Author: TomChen
  * @Date:   2019-04-09 19:29:30
  * @Last Modified by:   TomChen
- * @Last Modified time: 2019-05-05 11:03:59
+ * @Last Modified time: 2019-05-05 11:53:40
  */
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Breadcrumb, Button, Table, InputNumber, Divider, Modal, Input,Switch } from 'antd'
+import { Breadcrumb, Button, Table,  Input,Switch } from 'antd'
 const Search = Input.Search;
 import { Link } from "react-router-dom"
 import { actionCreator } from './store'
@@ -34,9 +34,10 @@ class OrderList extends Component {
                 key: order.get('_id'),
                 orderNo: order.get('orderNo'),
                 statusDesc: order.get('statusDesc'),
-                payment: order.get('payment'),
+                payment: "¥"+order.get('payment'),
                 name: order.get('shipping').get('name'),
                 phone: order.get('shipping').get('phone'),
+                createdTime: new Date(order.get('createdAt')).toLocaleString()
             }
         }).toJS()
         const columns = [{
@@ -60,6 +61,10 @@ class OrderList extends Component {
             title: '订单金额',
             dataIndex: 'payment',
             key: 'payment',
+        },{
+            title: '下单时间',
+            dataIndex: 'createdTime',
+            key: 'createdTime',
         },{
             title: '收货人',
             dataIndex: 'name',

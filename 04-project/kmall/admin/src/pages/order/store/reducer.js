@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-11 18:56:06
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-05-05 10:55:38
+* @Last Modified time: 2019-05-05 11:36:00
 */
 import { fromJS } from 'immutable'
 
@@ -16,6 +16,8 @@ const defaultState = fromJS({
 	pageSize:0,
 	total:0,
 	keyword:'',
+
+	order:{}
 })
 export default (state=defaultState,action)=>{
 	if(action.type == types.SET_PAGE){
@@ -32,6 +34,9 @@ export default (state=defaultState,action)=>{
 	}
 	if(action.type == types.PAGE_DONE){
 		return state.set('isPageFetching',false)
-	}						
+	}
+	if(action.type == types.SET_ORDER_DETAIL){
+		return state.set('order',action.payload)
+	}							
 	return state;
 }

@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-11 20:15:26
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-05-05 10:52:22
+* @Last Modified time: 2019-05-05 14:41:16
 */
 import * as types from './actionTypes.js'
 import { message } from 'antd'
@@ -10,7 +10,8 @@ import { request } from 'util'
 import { 
 	GET_ORDERS,
 	GET_ORDER_DETAIL,
-	SEARCH_ORDERS, 
+	SEARCH_ORDERS,
+	UPDATE_ORDER_DELIVER 
 } from 'api'
 
 const getPageRequestAction = ()=>{
@@ -93,6 +94,22 @@ export const getSearchAction = (keyword,page)=>{
 			}
 		})
 	}
+}
+export const getOrderDeliverAction = (orderNo)=>{
+	return (dispatch,getState)=>{
+		request({
+			url:UPDATE_ORDER_DELIVER,
+			method:'put',
+			data:{
+				orderNo:orderNo,
+			}
+		})
+		.then(result=>{
+			if(result.code == 0){
+				dispatch(setOrderDetailAction(result.data))
+			}
+		})
+	}	
 }
 
 

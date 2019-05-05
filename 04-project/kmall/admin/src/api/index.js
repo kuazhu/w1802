@@ -2,7 +2,7 @@
 * @Author: TomChen
 * @Date:   2019-04-16 18:28:31
 * @Last Modified by:   TomChen
-* @Last Modified time: 2019-05-05 10:53:47
+* @Last Modified time: 2019-05-05 14:40:46
 */
 const SERVER = 'http://127.0.0.1:3000/';
 
@@ -25,6 +25,7 @@ export const SEARCH_PRODUCTS = SERVER + 'product/search'
 export const GET_ORDERS = SERVER + 'order'
 export const GET_ORDER_DETAIL = SERVER + 'order/detail'
 export const SEARCH_ORDERS = SERVER + 'order/search'
+export const UPDATE_ORDER_DELIVER = SERVER + 'order/deliver'
 
 
 
