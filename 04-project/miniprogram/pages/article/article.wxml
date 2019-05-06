@@ -1,3 +1,4 @@
+<import src="./article-item-template/article-item-template.wxml" />
 <view class='container'>
   <swiper indicator-dots="true" indicator-color="#ff0" indicator-active-color="#f21" autoplay="true">
     <swiper-item>
@@ -59,6 +60,7 @@
     </block>
     -->
     <block wx:for='{{articles}}' wx:for-item='article' wx:for-index='idx' wx:key="idx">
+    <!--
       <view class='article-item'>
         <view class='article-head'>
           <image class='article-head-avatar' src='{{article.avatar}}'></image>
@@ -73,7 +75,14 @@
           <image class='article-footer-icon' src='../../images/icon/view.png'></image>
           <text class='article-footer-text'>{{article.view}}</text>        
         </view>
-      </view>    
+      </view>
+    -->
+    <!--
+    <template is="articleItem" data="{{article:article}}" />
+    -->
+    <view bindtap='tapArticleItem'>
+    <template is="articleItem" data="{{...article}}" />
+    </view>        
     </block>                
   </view>
 </view>

@@ -1,3 +1,5 @@
+var { articles } = require('../../data/db.js')
+
 Page({
 
   /**
@@ -33,6 +35,7 @@ Page({
    */
   onLoad: function (options) {
     //console.log('article onLoad');
+    /*
     var articles = [
       {
         avatar: '../../images/avatar/u1.jpg',
@@ -53,6 +56,7 @@ Page({
         view: 50
       }
     ];
+    */
     /*
     this.data.articles = articles;
     console.log(this.data)
@@ -117,5 +121,10 @@ Page({
    */
   onShareAppMessage: function () {
     //console.log('article onShareAppMessage');
+  },
+  tapArticleItem:function(){
+    wx.navigateTo({
+      url: './article-detail/article-detail',
+    })
   }
 })

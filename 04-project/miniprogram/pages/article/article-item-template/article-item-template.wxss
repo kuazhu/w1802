@@ -1,20 +1,3 @@
-@import './article-item-template/article-item-template.wxss';
-
-swiper{
-  height: 400rpx;
-  width: 100%;
-}
-swiper-item{
-  height: 100%;
-}
-swiper-item image{
-  width: 100%;
-  height: 100%;
-}
-.article-wrap{
-  width: 100%;
-}
-/*
 .article-item{
   width: 100%;
   margin: 10px 0;
@@ -62,4 +45,3 @@ swiper-item image{
   margin-left: 5px;
   margin-right: 10px;
 }
-*/
