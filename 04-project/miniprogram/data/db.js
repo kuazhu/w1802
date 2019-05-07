@@ -6,7 +6,8 @@ var articles = [
     img: '../../images/article/a1.jpg',
     desc: '我是描述',
     star: 30,
-    view: 40
+    view: 40,
+    articleId: '0',
   },
   {
     avatar: '../../images/avatar/u2.jpg',
@@ -15,7 +16,8 @@ var articles = [
     img: '../../images/article/a2.jpg',
     desc: '我是描述2',
     star: 40,
-    view: 50
+    view: 50,
+    articleId:'1',
   }
 ];
 

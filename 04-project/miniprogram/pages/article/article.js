@@ -122,9 +122,10 @@ Page({
   onShareAppMessage: function () {
     //console.log('article onShareAppMessage');
   },
-  tapArticleItem:function(){
+  tapArticleItem:function(ev){
+    var articleId = ev.currentTarget.dataset.articleId;
     wx.navigateTo({
-      url: './article-detail/article-detail',
+      url: './article-detail/article-detail?articleId='+articleId,
     })
   }
 })

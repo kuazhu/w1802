@@ -80,7 +80,7 @@
     <!--
     <template is="articleItem" data="{{article:article}}" />
     -->
-    <view bindtap='tapArticleItem'>
+    <view bindtap='tapArticleItem' data-article-id='{{article.articleId}}'>
     <template is="articleItem" data="{{...article}}" />
     </view>        
     </block>                
