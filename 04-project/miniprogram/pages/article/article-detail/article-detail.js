@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    isPlaying:false
   },
 
   /**
@@ -32,6 +32,19 @@ Page({
       isCollected = !!articles_collection[articleId]
     }
     this.setData({ ...article,isCollected:isCollected})
+    //监听音乐相关事件
+    var backgroundAudioManager = wx.getBackgroundAudioManager();
+    backgroundAudioManager.onPlay(function(){
+      this.setData({
+        isPlaying:true
+      })
+    }.bind(this))
+    backgroundAudioManager.onPause(function () {
+      this.setData({
+        isPlaying: false
+      })
+    }.bind(this))    
+
   },
   /**
    * 处理收藏
@@ -78,6 +91,27 @@ Page({
         })
       }
     })
+  },
+  /**
+   * 处理播放音乐
+   */
+  tapMusic:function(){
+    var backgroundAudioManager = wx.getBackgroundAudioManager();
+    var isPlaying = this.data.isPlaying;
+    if(isPlaying){
+      backgroundAudioManager.pause();
+      this.setData({
+        isPlaying: false
+      })
+    }else{
+      var music = articles[this.data.articleId].music;
+      backgroundAudioManager.src = music.src;
+      backgroundAudioManager.coverImgUrl = music.coverImgUrl;
+      backgroundAudioManager.title = music.title;
+      this.setData({
+        isPlaying:true
+      })
+    }
   }
 
 })
