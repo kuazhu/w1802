@@ -5,10 +5,10 @@
       <text class='tag'>正在热映</text>
       <text class='more'>更多></text>
     </view>
-    <video class='list'>
-      <template is="movieItemTemplate" />
-      <template is="movieItemTemplate" />
-      <template is="movieItemTemplate" />
-    </video>
+    <view class='list'>
+      <block wx:for="{{movies}}" wx:for-item="movie" wx:key="index">
+      <template is="movieItemTemplate" data="{{...movie}}" />
+      </block>
+    </view>
   </view>
 </template>

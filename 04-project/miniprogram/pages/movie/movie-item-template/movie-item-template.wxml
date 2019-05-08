@@ -1,8 +1,8 @@
 <import src="../star-template/star-template.wxml" />
 <template name="movieItemTemplate">
   <view class='movie-item-wrap'>
-    <image src='/images/article/a1.jpg'></image>
-    <text class='titile'>我是名称</text>
-    <template is="starTemplate" />
+    <image class='cover-img' src='{{coverImg}}'></image>
+    <text class='title'>{{title}}</text>
+    <template is="starTemplate" data="{{score:score,stars:stars}}" />
   </view>
 </template>
