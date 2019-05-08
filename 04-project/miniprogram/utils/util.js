@@ -12,10 +12,25 @@ function formatMovieListData(data){
     return {
       coverImg: item.images.large,
       title: item.title,
-      stars: item.rating.stars,
+      stars: coverStarsToArray(item.rating.stars),
       score: item.rating.average
     }
   })
+}
+
+function coverStarsToArray(stars){
+  //"35"->3颗星 [1,1,1,0,0]
+  var num = stars.toString().substring(0,1);
+  var arr = [];
+  for(var i = 1;i<=5;i++){
+    if(i<=num){
+      arr.push(1)
+    }else{
+      arr.push(0)
+    }
+  }
+  return arr;
+
 }
 
 module.exports = {
