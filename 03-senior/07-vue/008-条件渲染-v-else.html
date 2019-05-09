@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="score" />
+		<p>您的分数是:{{score}}</p>
+		<p v-if="score >= 60">及格</p>
+		<p v-else>不及格</p>
+	</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+	let vm = new Vue({
+		el:'#app',
+		data:{
+			score:0,
+		}
+	});
+</script>
+</html>
