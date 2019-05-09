@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<p ref="p">{{message}}</p>
+	</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+	let vm = new Vue({
+		el:'#app',
+		data:{
+			message:'hello vue'
+		}
+	});
+	console.log(vm);
+	console.log(vm.message);
+	console.log(vm.$data.message);
+	console.log(vm.$el === document.getElementById('app'));
+	console.log(vm.$refs.p);
+	vm.$watch("message",function(){
+		console.log('message has been changed');
+	})
+</script>
+</html>
