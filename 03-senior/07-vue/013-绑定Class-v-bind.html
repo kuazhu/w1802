@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.active{
+			background-color: yellow;
+		}
+		.error{
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p>我是段落</p>
+		<p class="active error">class="active error"</p>
+		<p :class="{active:true}">:class="{active:true}</p>
+		<p :class="{active:isActive,error:hasError}">:class="{active:isActive,error:hasError}"</p>
+		<p :class="classObj">:class="classObj"</p>
+		<p :class="{active:isActive}" class="error">:class="{active:isActive}" class="error"</p>
+		<p :class="['active','error']">:class="['active','error']"</p>
+		<p :class="[isActive ? 'active' : '','error']">:class="[isActive ? 'active' : '','error']"</p>
+		<p :class="classArr">:class="classArr"</p>
+
+	</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+	let vm = new Vue({
+		el:'#app',
+		data:{
+			isActive:false,
+			hasError:true,
+			classObj:{
+				active:true,
+				error:false
+			},
+			classArr:[
+				'active','error'
+			]
+		}
+	});
+</script>
+</html>
