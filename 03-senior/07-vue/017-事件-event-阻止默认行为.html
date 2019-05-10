@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+</head>
+<body>
+	<div id="app">
+		<a @click="goShopping($event)" href="https://www.taobao.com">去购物</a>
+	</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+	let vm = new Vue({
+		el:'#app',
+		data:{
+
+		},
+		methods:{
+			goShopping(event){
+				event.preventDefault();
+				console.log('go shopping...')
+			}
+		}
+	});
+</script>
+</html>

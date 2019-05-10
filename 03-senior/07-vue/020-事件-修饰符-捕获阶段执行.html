@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.large-box{
+			width: 500px;
+			height: 500px;
+			margin: 100px auto;
+			border: 1px solid #000;
+			background: gray;
+		}
+		.big-box{
+			width: 300px;
+			height: 300px;
+			margin: 50px auto;
+			border: 1px solid #000;
+			background: blue;
+		}
+		.small-box{
+			width: 100px;
+			height: 100px;
+			margin: 50px auto;
+			border: 1px solid #000;
+			background: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div class="large-box" @click.capture='clickLargeBox()'>
+			<div class="big-box" @click="clickBigBox()">
+				<div class="small-box" @click="clickSmallBox()">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+	let vm = new Vue({
+		el:'#app',
+		data:{
+
+		},
+		methods:{
+			clickSmallBox(){
+				console.log('clickSmallBox')
+			},
+			clickBigBox(){
+				console.log('clickBigBox')
+			},
+			clickLargeBox(){
+				console.log('clickLargeBox')
+			}
+		}
+	});
+</script>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<button v-on:click="count++">我被点击了{{count}}次</button>
+		<button v-on:click="calculate">我被点击了{{count}}次</button>
+		<button v-on:click="calculate()">我被点击了{{count}}次</button>
+		<button v-on:click="say('hi')">say hi</button>
+		<button v-on:click="say('hello')">say hello</button>
+		<button @click="say('what')">say what</button>
+	</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+	let vm = new Vue({
+		el:'#app',
+		data:{
+			count:0
+		},
+		methods:{
+			calculate(){
+				this.count++
+			},
+			say(msg){
+				console.log(msg)
+			}
+		}
+	});
+</script>
+</html>
