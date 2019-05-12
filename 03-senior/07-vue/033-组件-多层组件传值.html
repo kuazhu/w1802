@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<todo-item 
+				v-for="item in items"
+				:task="item.task"
+				:dateline="item.dateline"
+				:key="item.id"
+			>
+			</todo-item>
+		</ul>
+	</div>
+	<template id="todo-item">
+		<div>
+			<task :task="task" ></task>
+			<dateline :dateline="dateline"></dateline>
+		</div>
+	</template>
+	<template id="task">
+		<span>{{tag}}{{task}}</span>
+	</template>
+	<template id="dateline">
+		<span>{{tag}}{{dateline}}</span>
+	</template>
+</body>
+<script src="js/vue.js"></script>
+<script>
+	const task = Vue.extend( {
+		template:'#task',
+		props:{
+			task:String
+		},
+		data(){
+			return {
+				tag:'任务:'
+			}
+		}
+	})
+	const dateline = Vue.extend({
+		template:'#dateline',
+		props:{
+			dateline:String
+		},		
+		data(){
+			return {
+				tag:'截止时间:'
+			}
+		}				
+	})
+	Vue.component('todo-item',{
+		template:'#todo-item',
+		props:{
+			task:String,
+			dateline:String
+		},
+		components:{
+			task:task,
+			dateline:dateline
+		}
+	});		
+	let vm1 = new Vue({
+		el:'#app',
+		data:{
+			items:[
+				{
+					id:1,
+					task:"学习react",
+					dateline:"今天中午"
+				},
+				{
+					id:2,
+					task:'学习Vue',
+					dateline:'明天'
+				}
+			]
+		},
+	});	
+</script>
+</html>
