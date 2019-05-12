@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<li>吃饭</li>
+			<!--
+			<todo-item task="睡觉"></todo-item>
+			<todo-item task="打豆豆" ></todo-item>
+			-->
+			<todo-item 
+				v-for="(item,index) in items"
+				:task="item.task"
+				:id="item.id"
+				:key="item.id"
+			>
+				
+			</todo-item>
+		</ul>
+	</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+	Vue.component('todo-item',{
+		/*
+		data(){
+			return {
+				task:'睡觉'	
+			}
+		},
+		*/
+		// props:['task'],
+		props:{
+			task:String,
+			id:Number
+		},
+		template:'<li>{{id}}-{{task}}</li>'
+	});		
+	let vm1 = new Vue({
+		el:'#app',
+		data:{
+			items:[
+				{
+					id:99,
+					task:'睡觉'
+				},
+				{
+					id:2,
+					task:'打豆豆'
+				}
+			]
+		},
+	});	
+</script>
+</html>
