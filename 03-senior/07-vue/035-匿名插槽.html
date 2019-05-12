@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<layout>
+			我是页面内容
+		</layout>
+	</div>
+	<template id="layout">
+		<div>
+			<nav>我是顶部导航</nav>
+			<!-- <div class="content">我是内容</div> -->
+			<slot>我是一个匿名插槽,使用时有内容我就让位</slot>
+			<!-- <slot>我是一个匿名插槽,使用时有内容我就让位</slot> -->
+			<footer>我是底部footer</footer>
+		</div>
+	</template>
+</body>
+<script src="js/vue.js"></script>
+<script>
+	Vue.component('layout',{
+		template:'#layout'
+	})
+	let vm = new Vue({
+		el:'#app',
+		data:{
+		}
+	});
+</script>
+</html>

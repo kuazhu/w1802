@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<button @click="currentTab='tab-home'">home</button>
+		<button @click="currentTab='tab-articles'">articles</button>
+		<component :is="currentTab"></component>
+	</div>
+	<template id="tab-home">
+		<div>
+			home page
+		</div>
+	</template>
+	<template id="tab-articles">
+		<div>
+			articles page
+		</div>
+	</template>	
+</body>
+<script src="js/vue.js"></script>
+<script>
+	Vue.component('tab-home',{
+		template:'#tab-home'
+	})
+	Vue.component('tab-articles',{
+		template:'#tab-articles'
+	})	
+	let vm = new Vue({
+		el:'#app',
+		data:{
+			currentTab:'tab-home'
+		}
+	});
+</script>
+</html>
