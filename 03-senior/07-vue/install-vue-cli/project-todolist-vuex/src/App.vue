@@ -3,7 +3,7 @@
 	<div class="App" id='app'>
 		<h3>ToDo List</h3>
 		<!--2.3使用组件-->
-		<Header :addTodo="addTodo" />
+		<Header />
 		<List  :delTodo="delTodo" />
 		<!-- <Footer :todos="todos" :selectAllTodo="selectAllTodo" :delAllDoneTodo="delAllDoneTodo" /> -->
 	</div>

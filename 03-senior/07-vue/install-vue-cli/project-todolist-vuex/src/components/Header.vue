@@ -11,9 +11,6 @@
 <script>
 	export default {
 		name:'Header',
-		props:{
-			addTodo:Function
-		},
 		data(){
 			return {
 				task:''
@@ -33,7 +30,9 @@
 					done:false
 				}
 				//3.插入到数组
-				this.addTodo(todo)
+				// this.addTodo(todo)
+				// console.log(this.$store)
+				this.$store.dispatch('addTodo',todo);
 				//4.情况输入框
 				this.task = '';
 			}
