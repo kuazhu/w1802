@@ -3,7 +3,6 @@
 		<Item
 			v-for="(todo,index) in this.$store.state.todos"
 			:todo="todo"
-			:delTodo="delTodo"
 			:index="index"
 			:key="index"
 		/>
@@ -13,10 +12,6 @@
 	import Item from './Item.vue'
 	export default {
 		name:'List',
-		props:{
-			todos:Array,
-			delTodo:Function
-		},
 		components:{
 			Item
 		}
