@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        <%= title %>
+    </h1>
+    <p>Welcome to
+        <%= title %>
+    </p>
+    <div>
+        <%- xss %>
+    </div>
+    <textarea name="" id="txt" cols="30" rows="10"></textarea>
+    <button id="add">提交评论</button>
+    <button id="get">显示评论</button>
+    <div id="box"></div>
+</body>
+<script src="/javascripts/htmlparser.js"></script>
+<script src="/javascripts/jquery-1.12.4.js"></script>
+<script>
+//<button onclick="alert(11)">点我看美女</button>
+function parese(str) {
+    var results = "";
+    HTMLParser(str, {
+        start: function(tag, attrs, unary) {
+            results += "<" + tag;
+            for (var i = 0; i < attrs.length; i++) {
+            	if(attrs[i].name == 'onclick'){
+            		continue;
+            	}
+                results += " " + attrs[i].name + '="' + attrs[i].escaped + '"';
+            }
+            results += ">";
+        },
+        end: function(tag) {
+            results += "</" + tag + ">";
+        },
+        chars: function(text) {
+            results += text;
+        },
+        comment: function(text) {
+            results += "<!--" + text + "-->";
+        }
+    });
+    return results;
+}
+</script>
+<script>
+$(function() {
+    $('#add').on('click', function() {
+        $.ajax({
+            url: '/add',
+            data: {
+                val: $('#txt').val()
+            },
+            success: function(result) {
+                console.log(result)
+            }
+        })
+    })
+    $('#get').on('click', function() {
+        $.ajax({
+            url: '/get',
+            success: function(result) {
+                var html = parese(result.data);
+                $('#box').html(html)
+            }
+        })
+    })
+})
+</script>
+
+</html>
