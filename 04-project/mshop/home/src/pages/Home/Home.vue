@@ -16,90 +16,30 @@
 			<div class="swiper-pagination"></div>
 		</div>
 		<!--首页商品列表-->
-		<ul class="product-wrap">
-			<!--电器-->
-			<li class="product-floor">
-				<h3 class="floor-title">电器</h3>
+		<ul class="product-wrap" v-if="homeProducts.length > 0">
+			<li class="product-floor" v-for="(floor,floorIndex) in homeProducts" :key="floorIndex">
+				<h3 class="floor-title">{{floor.title}}</h3>
 				<ul class="product-list">
-					<li class="product-item">
-						<img class="product-image" src="../../assets/images/p1.jpg" alt="">
+					<li class="product-item" v-for="(product,productIndex) in floor.products" :key="productIndex">
+						<img class="product-image" :src="product.image" alt="">
 						<div class="product-content">
-							<h4 class="product-name">海尔电视海尔电视海尔电视海尔电视海尔电视海尔电视海尔电视海尔电视海尔电视海尔电视海尔电视海尔电视海尔电视海尔电视海尔电视海尔电视</h4>
-							<p class="product-price">$1111.00</p>
+							<h4 class="product-name">{{product.name}}</h4>
+							<p class="product-price">{{product.price | formatPrice}}</p>
 							<span class="btn-buy">购买</span>
 						</div>
-					</li>
-					<li class="product-item">
-						<img class="product-image" src="../../assets/images/p1.jpg" alt="">
-						<div class="product-content">
-							<h4 class="product-name">海尔电视</h4>
-							<p class="product-price">$1111.00</p>
-							<span class="btn-buy">购买</span>
-						</div>
-					</li>
-					<li class="product-item">
-						<img class="product-image" src="../../assets/images/p1.jpg" alt="">
-						<div class="product-content">
-							<h4 class="product-name">海尔电视</h4>
-							<p class="product-price">$1111.00</p>
-							<span class="btn-buy">购买</span>
-						</div>
-					</li>
-					<li class="product-item">
-						<img class="product-image" src="../../assets/images/p1.jpg" alt="">
-						<div class="product-content">
-							<h4 class="product-name">海尔电视</h4>
-							<p class="product-price">$1111.00</p>
-							<span class="btn-buy">购买</span>
-						</div>
-					</li>															
+					</li>														
 				</ul>
-			</li>
-			<!--服装-->
-			<li class="product-floor">
-				<h3 class="floor-title">服装</h3>
-				<ul class="product-list">
-					<li class="product-item">
-						<img class="product-image" src="../../assets/images/p1.jpg" alt="">
-						<div class="product-content">
-							<h4 class="product-name">海尔电视海尔电视海尔电视海尔电视</h4>
-							<p class="product-price">$1111.00</p>
-							<span class="btn-buy">购买</span>
-						</div>
-					</li>
-					<li class="product-item">
-						<img class="product-image" src="../../assets/images/p1.jpg" alt="">
-						<div class="product-content">
-							<h4 class="product-name">海尔电视</h4>
-							<p class="product-price">$1111.00</p>
-							<span class="btn-buy">购买</span>
-						</div>
-					</li>
-					<li class="product-item">
-						<img class="product-image" src="../../assets/images/p1.jpg" alt="">
-						<div class="product-content">
-							<h4 class="product-name">海尔电视</h4>
-							<p class="product-price">$1111.00</p>
-							<span class="btn-buy">购买</span>
-						</div>
-					</li>
-					<li class="product-item">
-						<img class="product-image" src="../../assets/images/p1.jpg" alt="">
-						<div class="product-content">
-							<h4 class="product-name">海尔电视</h4>
-							<p class="product-price">$1111.00</p>
-							<span class="btn-buy">购买</span>
-						</div>
-					</li>															
-				</ul>
-			</li>			
+			</li>		
 		</ul>		
 	</div>
 </template>
 <script>
 	import Swiper from 'swiper';
 	import 'swiper/dist/css/swiper.min.css';
-
+	import { mapState } from 'vuex'
+	import {
+		GET_HOME_PRODUCTS
+	} from '../../store/types.js'
 	export default {
 		name:'Home',
 		mounted(){
@@ -109,10 +49,14 @@
 				autoplay:true,
 				//分页器
 				pagination: {
-				  el: '.swiper-pagination',
-				  clickable:true
+					el: '.swiper-pagination',
+					clickable:true
 				},
-			})			
+			})
+			this.$store.dispatch(GET_HOME_PRODUCTS)			
+		},
+		computed:{
+			...mapState(['homeProducts'])
 		}
 	}
 </script>
